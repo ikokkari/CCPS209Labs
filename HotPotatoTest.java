@@ -1,0 +1,49 @@
+import static org.junit.Assert.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import java.util.Random;
+
+import java.io.*;
+import java.util.*;
+import java.util.zip.CRC32;
+
+public class HotPotatoTest {
+
+    @Test public void testHotPotatoFifty() {
+        testHotPotato(50, 2745874825L);
+    }
+    
+    @Test public void testHotPotatoFiveHundred() {
+        testHotPotato(500, 1867037834L);
+    }
+    
+    private void testHotPotato(int n, long expected) {
+        CRC32 check = new CRC32();
+        Random rng = new Random(12345);
+        int[] tmp = new int[n];
+        for(int i = 0; i < n; i++) {
+            int nn = 3 + i / 7;
+            int t = 2 + i / 10;
+            int[][] enemies = new int[nn][];
+            for(int j = 0; j < nn; j++) {
+                int count;
+                do {
+                    count = 0;
+                    for(int k = 0; k < nn; k++) {
+                        if(k != j && rng.nextInt(nn) < Math.min(nn - 1, 3)) {
+                            tmp[count++] = k;
+                        }
+                    }
+                } while(count == 0);
+                enemies[j] = Arrays.copyOfRange(tmp, 0, count);
+            }
+            Fraction[] result = HotPotato.hotPotato(enemies, t);
+            check.update(Arrays.deepToString(result).getBytes());
+            //System.out.println("t = " + t + ", n = " + nn + ", neigh = " + Arrays.deepToString(enemies));
+            //System.out.println(Arrays.toString(result));
+        }
+        assertEquals(expected, check.getValue());
+    }
+    
+}
