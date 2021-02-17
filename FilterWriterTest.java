@@ -86,6 +86,5 @@ public class FilterWriterTest {
         //System.out.println(result);
         check.update(result.getBytes());
         assertEquals(1191567916L, check.getValue());
-    }
-    
+    }    
 }

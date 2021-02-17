@@ -8,13 +8,54 @@ import java.util.zip.CRC32;
 
 public class PowerIndexTest {
 
+    // Turn this on to see the answers returned by your methods in mass tests.
     private static final boolean VERBOSE = false;
     
     @Test public void testBanzhaf() {
-        testPower(100, 1287582719L, true);
+        int[] w1 = {4, 6, 10, 12};
+        int[] r1 = new int[4];
+        int[] e1 = {1, 3, 3, 5};
+        PowerIndex.banzhaf(17, w1, r1);
+        assertArrayEquals(e1, r1);
+        
+        int[] w2 = {20, 2, 5, 8, 19};
+        int[] r2 = new int[5];
+        int[] e2 = {9, 1, 1, 7, 7};
+        PowerIndex.banzhaf(28, w2, r2);
+        assertArrayEquals(e2, r2);
+        
+        int[] w3 = {3, 5, 16, 17, 26};
+        int[] r3 = new int[5];
+        int[] e3 = {2, 2, 6, 6, 10};
+        PowerIndex.banzhaf(34, w3, r3);
+        assertArrayEquals(e3, r3);
     }
     
     @Test public void testShapleyShubik() {
+        int[] w1 = {1, 2, 2, 5};
+        int[] r1 = new int[4];
+        int[] e1 = {2, 2, 2, 18};
+        PowerIndex.shapleyShubik(6, w1, r1);
+        assertArrayEquals(e1, r1);
+        
+        int[] w2 = {20, 19, 8, 5, 2};
+        int[] r2 = new int[5];
+        int[] e2 = {44, 34, 34, 4, 4};
+        PowerIndex.shapleyShubik(28, w2, r2);
+        assertArrayEquals(e2, r2);
+        
+        int[] w3 = {1, 10, 15, 20, 27};
+        int[] r3 = new int[5];
+        int[] e3 = {0, 20, 20, 20, 60};
+        PowerIndex.shapleyShubik(37, w3, r3);
+        assertArrayEquals(e3, r3);
+    }
+    
+    @Test public void massTestBanzhaf() {
+        testPower(100, 3437155411L, true);
+    }
+    
+    @Test public void massTestShapleyShubik() {
         testPower(100, 1214504174L, false);
     }
     
@@ -47,6 +88,5 @@ public class PowerIndexTest {
             check.update(Arrays.toString(out).getBytes());
         }
         assertEquals(expected, check.getValue());
-    }
-    
+    }   
 }

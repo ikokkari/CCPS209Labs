@@ -10,8 +10,21 @@ import java.util.zip.CRC32;
 
 public class TripleFreeTest {
 
-    @Test public void testFirstTen() {
-        massTest(10, 2533123764L);
+    @Test public void testTripleFree() {
+        assertEquals(TripleFree.tripleFree(1).toString(), "[1]");
+        assertEquals(TripleFree.tripleFree(2).toString(), "[1, 2]");
+        assertEquals(TripleFree.tripleFree(3).toString(), "[2, 3]");
+        assertEquals(TripleFree.tripleFree(4).toString(), "[1, 3, 4]");
+        assertEquals(TripleFree.tripleFree(5).toString(), "[1, 2, 4, 5]");
+        assertEquals(TripleFree.tripleFree(6).toString(), "[2, 3, 5, 6]");
+        assertEquals(TripleFree.tripleFree(7).toString(), "[3, 4, 6, 7]");
+        assertEquals(TripleFree.tripleFree(8).toString(), "[4, 5, 7, 8]");
+        assertEquals(TripleFree.tripleFree(9).toString(), "[1, 2, 6, 8, 9]");
+        assertEquals(TripleFree.tripleFree(10).toString(), "[1, 6, 7, 9, 10]");
+    }
+    
+    @Test public void testFirstTwenty() {
+        massTest(20, 3937650381L);
     }
 
     @Test public void testFirstFifty() {
@@ -36,5 +49,4 @@ public class TripleFreeTest {
         }
         assertEquals(expected, check.getValue());
     }
-
 }

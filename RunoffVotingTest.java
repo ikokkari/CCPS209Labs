@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.zip.CRC32;
 
 public class RunoffVotingTest {
-
+    
     @Test public void testCondorcetMethodTen() {
         testInstantRunoff(10, 877767557L, true);
     }
@@ -45,6 +45,5 @@ public class RunoffVotingTest {
             check.update(result);
         }
         assertEquals(expected, check.getValue());
-    }
-    
+    }    
 }

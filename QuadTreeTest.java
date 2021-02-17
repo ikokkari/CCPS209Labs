@@ -37,11 +37,12 @@ public class QuadTreeTest {
         // So that we don't need to create two helper arrays all the time.
         int[] childIds = new int[4];
         QuadTree[] children = new QuadTree[4];
-        
-        for(int i = 0; i < n; i++) {
-            // The index to use to the array.
-            int ii = Math.min(i, CUTOFF);
-            QuadTree tree;
+        // Statistics for the end.
+        int maxHeight = 0;
+        long maxArea = 0;
+        for(int i = 0; i < n; i++) {            
+            int ii = Math.min(i, CUTOFF); // The index to use to the array.
+            QuadTree tree; // The quadtree constructed this round from the existing trees.
             if(ii == 0) { tree = WhiteQuad.get(); }
             else if(ii == 1) { tree = BlackQuad.get(); }
             else {
@@ -49,12 +50,14 @@ public class QuadTreeTest {
                     int c = rng.nextInt(Math.min(CUTOFF, i));
                     childIds[j] = c;
                     height[ii] = Math.max(height[ii], 1 + height[c]);
+                    maxHeight = Math.max(maxHeight, height[ii]);
                     children[j] = trees[c];
                 }   
                 tree = QuadNode.of(children);
             }
             trees[ii] = tree;
             long area = tree.computeArea(height[ii]);
+            maxArea = Math.max(maxArea, area);
             assertTrue(area >= 0);
             check.update((int)(area & 0xFFFF)); // lowest 32 bits of long value
             check.update((int)((area >> 32) & 0xFFFF)); // highest 32 bits of long value
@@ -72,7 +75,7 @@ public class QuadTreeTest {
                 System.out.println("Its height is " + height[ii] + ", and its area is " + area + ".");
             }
         }
+        //System.out.println("Max height was " + maxHeight + " and max area was " + maxArea + ".");
         assertEquals(expected, check.getValue());
-    }
-    
+    }   
 }

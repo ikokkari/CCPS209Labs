@@ -17,7 +17,9 @@ public class PolynomialTestThree {
         Polynomial p2 = new Polynomial(c2);
         Polynomial p3 = new Polynomial(c1);
         assertTrue(p1.equals(p1));
+        assertTrue(p2.equals(p2));
         assertTrue(p1.equals(p3));
+        assertTrue(p3.equals(p1));
         assertFalse(p1.equals(p2));
         assertFalse(p2.equals(p1));
         // The equals method must work between two objects of any type.
@@ -26,8 +28,9 @@ public class PolynomialTestThree {
     }
 
     @Test public void testCompareTo() {
-        int[] c1 = {-10, 99, 11, 12};
-        int[] c2 = {-10, -99, 11, 12};
+        // Remember to perform elementwise comparison down from the highest coefficient.
+        int[] c1 = {-6, 99, 11, 12};
+        int[] c2 = {6, -99, 11, 12};
         int[] c3 = {42, 10000000};
         Polynomial p1 = new Polynomial(c1);
         Polynomial p2 = new Polynomial(c2);
@@ -35,8 +38,12 @@ public class PolynomialTestThree {
         assertEquals(+1, p1.compareTo(p2));
         assertEquals(-1, p2.compareTo(p1));
         assertEquals(+1, p1.compareTo(p3));
+        assertEquals(-1, p3.compareTo(p1));
+        assertEquals(+1, p2.compareTo(p3));
         assertEquals(-1, p3.compareTo(p2));
         assertEquals(0, p1.compareTo(p1));
+        assertEquals(0, p2.compareTo(p2));
+        assertEquals(0, p3.compareTo(p3));
     }
 
     private static final int SEED = 12345;
@@ -52,8 +59,8 @@ public class PolynomialTestThree {
 
     @Test public void massTest() {
         Random rng = new Random(SEED);
-        // Two different collections that are supposed to stay in lockstep so
-        // that at all times, both tree and hash contain the same polynomials.
+        // These different collections are supposed to stay in lockstep so that
+        // at all times, both tree and hash contain the exact same polynomials.
         TreeSet<Polynomial> tree = new TreeSet<Polynomial>();
         HashSet<Polynomial> hash = new HashSet<Polynomial>();
         CRC32 check = new CRC32();
@@ -87,9 +94,9 @@ public class PolynomialTestThree {
         for(Polynomial p: hash) {
             assertTrue(tree.contains(p));
         }
-        // So far, so good. Without this final hurdle with the checksum, all
+        // So far, so good. Without this final hurdle using the checksum, all
         // previous tests could be trivially passed by defining your equals and
-        // compareTo methods to consider all polynomials to be equal...
+        // compareTo methods to simply consider all polynomials to be equal...
         assertEquals(28339163L, check.getValue());
     }
 }

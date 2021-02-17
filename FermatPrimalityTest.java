@@ -9,6 +9,18 @@ import java.util.zip.CRC32;
 public class FermatPrimalityTest {
 
     @Test public void testPowerMod() {
+        // Explicit test cases
+        assertEquals(10, FermatPrimality.powerMod(11, 10, 13));
+        assertEquals(1, FermatPrimality.powerMod(15, 12, 7));
+        assertEquals(0, FermatPrimality.powerMod(2, 29, 8));
+        assertEquals(2, FermatPrimality.powerMod(33, 541, 31));
+        assertEquals(2, FermatPrimality.powerMod(33, 541, 31));
+        assertEquals(2, FermatPrimality.powerMod(13, 347, 5));
+        assertEquals(57, FermatPrimality.powerMod(45, 2326, 64));
+        assertEquals(33, FermatPrimality.powerMod(44, 5958, 97));
+        assertEquals(1, FermatPrimality.powerMod(83, 3960, 106));
+        
+        // Pseudorandom fuzz tests
         CRC32 check = new CRC32();
         Random rng = new Random(1234567);
         for(int i = 0; i < 2000; i++) {
@@ -40,5 +52,4 @@ public class FermatPrimalityTest {
         }
         assertEquals(2241861074L, check.getValue());
     }
- 
 }

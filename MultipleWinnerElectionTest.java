@@ -8,6 +8,42 @@ import java.util.zip.CRC32;
 
 public class MultipleWinnerElectionTest {
 
+    @Test public void testDHondt() {
+        int[] v1 = {6, 26, 33};
+        int[] r1 = {1, 5, 6};
+        assertArrayEquals(r1, MultipleWinnerElection.DHondt(v1, 12));
+        int[] v2 = {44, 46, 86};
+        int[] r2 = {2, 3, 5};
+        assertArrayEquals(r2, MultipleWinnerElection.DHondt(v2, 10));
+        int[] v3 = {130, 19, 31, 77};
+        int[] r3 = {12, 1, 3, 7};
+        assertArrayEquals(r3, MultipleWinnerElection.DHondt(v3, 23));
+    }
+    
+    @Test public void testWebster() {
+        int[] v1 = {6, 26, 33};
+        int[] r1 = {1, 5, 6};
+        assertArrayEquals(r1, MultipleWinnerElection.webster(v1, 12));
+        int[] v2 = {44, 46, 86};
+        int[] r2 = {2, 3, 5};
+        assertArrayEquals(r2, MultipleWinnerElection.webster(v2, 10));
+        int[] v3 = {130, 19, 31, 77};
+        int[] r3 = {11, 2, 3, 7};
+        assertArrayEquals(r3, MultipleWinnerElection.webster(v3, 23));
+    }
+    
+    @Test public void testImperiali() {
+        int[] v1 = {6, 26, 33};
+        int[] r1 = {0, 5, 7};
+        assertArrayEquals(r1, MultipleWinnerElection.imperiali(v1, 12));
+        int[] v2 = {44, 46, 86};
+        int[] r2 = {2, 2, 6};
+        assertArrayEquals(r2, MultipleWinnerElection.imperiali(v2, 10));
+        int[] v3 = {130, 19, 31, 77};
+        int[] r3 = {13, 1, 2, 7};
+        assertArrayEquals(r3, MultipleWinnerElection.imperiali(v3, 23));
+    }
+    
     @Test public void testDHondtHundred() {
         test(100, 3816530178L, 0);
     }
@@ -90,6 +126,5 @@ public class MultipleWinnerElectionTest {
             assertEquals(981, diffCount);
         }
         assertEquals(expected, check.getValue());
-    }
-    
+    }   
 }

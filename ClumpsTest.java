@@ -34,9 +34,10 @@ public class ClumpsTest {
                     assertEquals(as, bs);
                 }
                 else {
-                    // New clump is as big as the two clumps together.
+                    // After melding, two separate clumps are the same clump.
                     assertTrue(c.meld(a, b));
                     assertTrue(c.sameClump(a, b));
+                    // New clump is as big as the two old clumps together.
                     assertEquals(as + bs, c.clumpSize(a));
                     assertEquals(as + bs, c.clumpSize(b));
                 }

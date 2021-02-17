@@ -33,23 +33,42 @@ public class PolynomialTestTwo {
     }
     
     @Test public void testAdd() {
-        int[] c1 = {0, 5, -3, 1, 99, -5};
-        int[] c2 = {-4, 2, 3, 0, -99, 5};
-        Polynomial p1 = new Polynomial(c1);
-        Polynomial p2 = new Polynomial(c2);
-        Polynomial p3 = p1.add(p2);
-        Polynomial p4 = p2.add(p1);
+        int[] t01 = {0};
+        int[] t02 = {-42, 99, 17, 101};
+        int[] e0 = {-42, 99, 17, 101};
+        Polynomial p01 = new Polynomial(t01);
+        Polynomial p02 = new Polynomial(t02);
+        Polynomial r0 = p01.add(p02);
+        Polynomial p0e = new Polynomial(e0);
+        assertTrue(polyEq(r0, p0e, null));
         
-        assertEquals(3, p3.getDegree());
-        assertEquals(3, p4.getDegree());
-        assertEquals(-4, p3.getCoefficient(0));
-        assertEquals(-4, p4.getCoefficient(0));
-        assertEquals(7, p3.getCoefficient(1));
-        assertEquals(7, p4.getCoefficient(1));
-        assertEquals(0, p3.getCoefficient(2));
-        assertEquals(0, p4.getCoefficient(2));
-        assertEquals(1, p3.getCoefficient(3));
-        assertEquals(1, p4.getCoefficient(3));
+        // Highest terms may cancel each other out in addition.
+        int[] t11 = {5, -5, 2, -2, 4};
+        int[] t12 = {3, 5, -2, 2, -4};
+        int[] e1 = {8};
+        Polynomial p11 = new Polynomial(t11);
+        Polynomial p12 = new Polynomial(t12);
+        Polynomial r1 = p11.add(p12);
+        Polynomial p1e = new Polynomial(e1);
+        assertTrue(polyEq(r1, p1e, null));
+        
+        int[] t21 = {-3, 9, -2, 0, 0, 4};
+        int[] t22 = {5, -7, 0, 1, 0, 0, 5};
+        int[] e2 = {2, 2, -2, 1, 0, 4, 5};
+        Polynomial p21 = new Polynomial(t21);
+        Polynomial p22 = new Polynomial(t22);
+        Polynomial r2 = p21.add(p22);
+        Polynomial p2e = new Polynomial(e2);
+        assertTrue(polyEq(r2, p2e, null));
+        
+        int[] t31 = {-1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12345};
+        int[] t32 = {-9, 1, 2, 3, 4, 5, 6};
+        int[] e3 = {-10, 1, 2, 3, 4, 5, 6, 0, 0, 0, 12345};
+        Polynomial p31 = new Polynomial(t31);
+        Polynomial p32 = new Polynomial(t32);
+        Polynomial r3 = p31.add(p32);
+        Polynomial p3e = new Polynomial(e3);
+        assertTrue(polyEq(r3, p3e, null));
     }
     
     @Test public void testMultiply() {
@@ -83,15 +102,18 @@ public class PolynomialTestTwo {
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
         for(int i = 0; i < TRIALS; i++) {
-            Polynomial p1 = createRandom(rng.nextInt(10), rng);
-            Polynomial p2 = createRandom(rng.nextInt(10), rng);
+            Polynomial p1 = createRandom(rng.nextInt(10 + i / 1000), rng);
+            Polynomial p2 = createRandom(rng.nextInt(10 + i / 1000), rng);
             Polynomial p3 = p1.add(p2);
             Polynomial p4 = p2.add(p1);
+            // If this assert fails, your add gives different results for p1+p2 and p2+p1.
             assertTrue(polyEq(p3, p4, check));
             Polynomial p5 = p1.multiply(p2);
             Polynomial p6 = p2.multiply(p1);
+            // If this assert fails, your multiply gives different results for p1*p2 and p2*p1.
             assertTrue(polyEq(p5, p6, check));
         }
-        assertEquals(2427324440L, check.getValue());
+        // Checksum computed from the coefficients of all returned polynomials.
+        assertEquals(529848787L, check.getValue());
     }
 }
