@@ -100,6 +100,16 @@ public class P2J11Test {
         for(int i = 0; i < text.length(); i++) {
             check.update(text.charAt(i));
         }
-        assertEquals(1871502809L, check.getValue());
+        
+        Random rng = new Random(12345);
+        for(int i = 0; i < 100; i++) {
+            int pos = rng.nextInt(1000000);
+            int len = rng.nextInt(20) + 5;
+            String pat = text.substring(pos, pos + len);
+            List<Integer> find = P2J11.find(pat, text, suffix);
+            //System.out.println("<" + pat + ">: " + find.size());
+            for(int j: find) { check.update(j); }
+        }
+        assertEquals(3893756230L, check.getValue());
     }
 }
