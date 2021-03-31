@@ -13,14 +13,14 @@ public class DistanceTestOne {
 
     @Test public void testExtractSquares() {
         CRC32 check = new CRC32();
-        for(int n = 0; n < 1_000_000; n++) {
+        for(int n = 0; n < 100_000; n++) {
             int sp = Distance.extractSquares(n);
             assertEquals(0, n % (sp*sp));
             int a = n / (sp*sp); // Integer division truncates
             assertEquals(n, sp*sp*a);
             check.update(sp);
         }
-        assertEquals(2907073306L, check.getValue());
+        assertEquals(4222950952L, check.getValue());
     }
 
     // To clarify the expected behaviour of toString, here are some test cases
@@ -71,7 +71,6 @@ public class DistanceTestOne {
             assertEquals(expected[i], d.toString());
             i++;
         }
-        
     }
     
     @Test public void testConstruction() {
