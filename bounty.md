@@ -106,7 +106,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
    <td>32. Triplefree sequences
    </td>
-   <td>
+   <td>Mark Lee, April 15, 2021
    </td>
   </tr>
   <tr>
