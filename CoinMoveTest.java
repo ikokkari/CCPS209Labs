@@ -22,7 +22,7 @@ public class CoinMoveTest {
             // Create random neighbours for each position
             for(int j = 0; j < n; j++) {
                 ArrayList<Integer> nb = new ArrayList<>();
-                while(rng.nextDouble() < .7) {
+                while(rng.nextInt(100) < 70) {
                     int nn = rng.nextInt(n);
                     if(nn == j) { nn = (nn + 1) % n; }
                     nb.add(nn);
@@ -40,7 +40,7 @@ public class CoinMoveTest {
             //System.out.println("");
             check.update(Arrays.toString(next).getBytes());
         }
-        assertEquals(2310893907L, check.getValue());
+        assertEquals(538741678L, check.getValue());
     }
     
     @Test public void testPeriod() {
@@ -55,7 +55,7 @@ public class CoinMoveTest {
             // Create random neighbours for each position
             for(int j = 0; j < n; j++) {
                 ArrayList<Integer> nb = new ArrayList<>();
-                while(nb.size() == 0 || rng.nextDouble() < .7) {
+                while(nb.size() == 0 || rng.nextInt(100) < 70) {
                     int nn = rng.nextInt(n);
                     if(nn == j) { nn = (nn + 1) % n; }
                     nb.add(nn);
@@ -72,6 +72,6 @@ public class CoinMoveTest {
             //System.out.println(result);
             check.update(result);
         }
-        assertEquals(1281024593L, check.getValue());
+        assertEquals(3003526382L, check.getValue());
     }
 }

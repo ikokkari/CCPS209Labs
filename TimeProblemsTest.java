@@ -21,8 +21,8 @@ public class TimeProblemsTest {
             int y2 = y1 + rng.nextInt(i + 3);
             int m1 = rng.nextInt(12) + 1;
             int m2 = rng.nextInt(12) + 1;
-            int d1 = rng.nextDouble() < .2 ? 13 : rng.nextInt(daysInMonth[m1]) + 1;
-            int d2 = rng.nextDouble() < .2 ? 13 : rng.nextInt(daysInMonth[m2]) + 1;
+            int d1 = rng.nextInt(100) < 20 ? 13 : rng.nextInt(daysInMonth[m1]) + 1;
+            int d2 = rng.nextInt(100) < 20 ? 13 : rng.nextInt(daysInMonth[m2]) + 1;
             LocalDate startDate = LocalDate.of(y1, m1, d1);
             LocalDate endDate = LocalDate.of(y2, m2, d2);
             if(startDate.compareTo(endDate) > 0) {
@@ -32,7 +32,7 @@ public class TimeProblemsTest {
             //System.out.println(startDate + " " + endDate + " " + result);
             check.update(result);
         }
-        assertEquals(737343005L, check.getValue());
+        assertEquals(2411428835L, check.getValue());
     }
 
     @Test public void testDayAfterSeconds() {

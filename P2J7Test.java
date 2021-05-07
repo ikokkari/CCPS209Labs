@@ -51,7 +51,7 @@ public class P2J7Test {
                 int p;
                 int count = 0;
                 do {
-                    if(j > 0 && rng.nextDouble() < .2) {
+                    if(j > 0 && rng.nextInt(100) < 20) {
                         p = pops[j-1] + 1;
                     }
                     else {
@@ -67,7 +67,7 @@ public class P2J7Test {
             int[] result = P2J7.huntingtonHill(pops, seats);
             check.update(Arrays.toString(result).getBytes());
         }
-        assertEquals(811873173L, check.getValue());
+        assertEquals(325067613L, check.getValue());
     }
 
     @Test public void testJosephus() {
@@ -110,5 +110,4 @@ public class P2J7Test {
         }
         assertEquals(3746131365L, check.getValue());
     }
-
 }
