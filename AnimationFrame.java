@@ -9,7 +9,7 @@ public interface AnimationFrame {
      * @param height Height of the frame in pixels.
      * @param t The moment in time that this frame is a snapshot of.
      */
-    public void render(Graphics2D g, int width, int height, double t);
+    void render(Graphics2D g, int width, int height, double t);
     
     /**
      * In circular motion around the center {@code (cx, cy)} with radius
@@ -18,7 +18,7 @@ public interface AnimationFrame {
      * @param t The current time.
      * @return The x-coordinate of circular motion at time {@code t}.
      */
-    default public double circleX(double cx, double r, double t) {
+    default double circleX(double cx, double r, double t) {
         return cx + r * Math.cos(2 * Math.PI * t);
     }
     
@@ -29,7 +29,7 @@ public interface AnimationFrame {
      * @param t The current time.
      * @return The y-coordinate of circular motion at time {@code t}.
      */
-    default public double circleY(double cy, double r, double t) {
+    default double circleY(double cy, double r, double t) {
         return cy + r * Math.sin(2 * Math.PI * t);
     }
     
@@ -39,7 +39,7 @@ public interface AnimationFrame {
      * @param t The time value to smoothe.
      * @return The smoothed version of t.
      */
-    default public double smooth(double t) {
+    default double smooth(double t) {
         return smooth(t, 1);
     }
     
@@ -50,7 +50,7 @@ public interface AnimationFrame {
      * @param w The weight of smoothing.
      * @return The smoothed version of t.
      */
-    default public double smooth(double t, double w) { 
+    default double smooth(double t, double w) {
         double tf = Math.floor(t);
         double tt = t - Math.floor(t);
         double ts = (1 - Math.cos(tt * Math.PI)) / 2;

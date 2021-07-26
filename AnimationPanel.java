@@ -10,16 +10,16 @@ public class AnimationPanel extends JPanel {
     private static final int FRAME_TIME = 50;
 
     // The AnimationFrame object that renders itself in this panel.
-    private AnimationFrame af;
+    private final AnimationFrame af;
     // How much time advances in each step.
-    private double step;
+    private final double step;
     // The animation frame timer. Such "metronomes" are often a lighter
     // alternative to threads and concurrency in animations.
-    private javax.swing.Timer timer;
+    private final javax.swing.Timer timer;
     // The current time inside this animation.
     private double t;
     // Whether this animation is running or paused.
-    private boolean running = true;
+    private volatile boolean running = true;
     
     public AnimationPanel(AnimationFrame af, double step) {
         this.setBackground(Color.WHITE);
@@ -41,10 +41,6 @@ public class AnimationPanel extends JPanel {
         af.render(g2, getWidth(), getHeight(), t);
     }
     
-    private class MyMouseListener extends MouseAdapter {
-        public void mousePressed(MouseEvent me) { running = !running; }
-    }
-    
     private class MyTimerListener implements ActionListener {
         public void actionPerformed(ActionEvent ae) {
             if(running) {
@@ -61,8 +57,8 @@ public class AnimationPanel extends JPanel {
         AnimationPanel[] panels = {
             new AnimationPanel(new Tircle(5), 1 / 150.0),
             new AnimationPanel(new Tircle(6), 1 / 400.0),
-            //new AnimationPanel(new Breathe(8), 1 / 50.0),
-            //new AnimationPanel(new Breathe(16), 1 / 100.0)
+            //new AnimationPanel(new Breathe(5), 1 / 50.0),
+            //new AnimationPanel(new Breathe(4), 1 / 100.0)
         };
         
         JFrame f = new JFrame("Animation Demo");
