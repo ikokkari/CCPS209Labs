@@ -88,6 +88,6 @@ public class TimeProblemsTest {
             //System.out.println(hereTime + " " + hereZone + " " + thereZone + " " + result);
             check.update(result);
         }
-        assertEquals(3627001304L, check.getValue());
+        assertEquals(3443549537L, check.getValue());
     }
 }
