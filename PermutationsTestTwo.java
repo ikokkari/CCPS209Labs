@@ -1,11 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
-import java.util.zip.CRC32;
+import java.util.List;
 import java.util.Random;
+import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class PermutationsTestTwo {
 
@@ -17,11 +15,11 @@ public class PermutationsTestTwo {
     }
     
     @Test public void testCyclesHundred() {
-        testCycles(100, 2576563183L, false);
+        testCycles(100, 2576563183L);
     }
     
     @Test public void testCyclesTenThousand() {
-        testCycles(10_000, 3190148641L, false);
+        testCycles(10_000, 3190148641L);
     }
     
     // Greatest common divisor
@@ -38,7 +36,7 @@ public class PermutationsTestTwo {
         return a * (b / g);
     }
     
-    private void testCycles(int n, long expected, boolean verbose) {
+    private void testCycles(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         int goal = 2, nn = 2;
@@ -69,10 +67,6 @@ public class PermutationsTestTwo {
             assertTrue(order == 1 || !identity);
             String pretty = Permutations.cycles(cycles, alpha);
             check.update(pretty.getBytes());
-            if(verbose) {
-                //System.out.println(Arrays.toString(perm) + " " + cycles);
-                System.out.println(Arrays.toString(perm) + "( " + (parity == -1 ? "-1" : "+1") + ") -> " + pretty);
-            }
             int[] back = Permutations.fromCycles(cycles);
             assertArrayEquals(perm, back);
         }

@@ -1,8 +1,5 @@
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
 import java.util.*;
 import java.util.zip.CRC32;
 import java.util.Random;
@@ -18,14 +15,14 @@ public class CompGeomTestTwo {
     }
     
     @Test public void testIsPolygonHundred() {
-        testIsPolygon(100, 2359285126L, false);
+        testIsPolygon(100, 2359285126L);
     }
     
     @Test public void testIsPolygonTenThousand() {
-        testIsPolygon(10_000, 2764570742L, false);
+        testIsPolygon(10_000, 2764570742L);
     }
     
-    private void testIsPolygon(int n, long expected, boolean verbose) {
+    private void testIsPolygon(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         for(int i = 0; i < n; i++) {
@@ -41,11 +38,6 @@ public class CompGeomTestTwo {
                 pys = Arrays.copyOfRange(ys, 0, count);
             } while(CompGeom.isSimplePolygon(pxs, pys) && ++count < nn);
             check.update(count);
-            if(verbose) {
-                System.out.println(Arrays.toString(xs));
-                System.out.println(Arrays.toString(ys));
-                System.out.println(nn + " : " + count + "\n");
-            }
             if(--count > 2) {
                 // Cyclic rotation of points cannot turn a polygon into a non-polygon.
                 int[] xxs = new int[count], yys = new int[count];
@@ -69,14 +61,14 @@ public class CompGeomTestTwo {
     }
     
     @Test public void testShoelaceAreaHundred() {
-        testShoelaceArea(100, 3417267926L, false);
+        testShoelaceArea(100, 3417267926L);
     }
     
     @Test public void testShoelaceAreaTenThousand() {
-        testShoelaceArea(10_000, 2580355296L, false);
+        testShoelaceArea(10_000, 2580355296L);
     }
     
-    private void testShoelaceArea(int n, long expected, boolean verbose) {
+    private void testShoelaceArea(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         for(int i = 0; i < n; i++) {
@@ -92,11 +84,6 @@ public class CompGeomTestTwo {
                 assertEquals(result, cr);
             }
             check.update(result);
-            if(verbose) {
-                System.out.println(Arrays.toString(xs));
-                System.out.println(Arrays.toString(ys));
-                System.out.println(result);
-            }
         }
         assertEquals(expected, check.getValue());        
     }

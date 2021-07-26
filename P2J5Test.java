@@ -1,13 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
-import java.util.zip.CRC32;
 import java.math.BigInteger;
+import java.util.List;
+import java.util.Random;
+import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class P2J5Test {
 
@@ -63,7 +59,7 @@ public class P2J5Test {
           P2J5.sevenZero(513)
         );
         
-        // Pseudorandom fuzz tester 
+        // Systematic checksum tester 
         CRC32 check = new CRC32();
         for(int i = 2; i < 300; i++) {
             BigInteger result = P2J5.sevenZero(i);

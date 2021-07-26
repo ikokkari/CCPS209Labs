@@ -1,10 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
+import java.util.Random;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class LinusSequenceTest {
 
@@ -25,22 +22,16 @@ public class LinusSequenceTest {
                     bits[q + k] = bits[q + p + k] = b;
                 }
                 int result = LinusSequence.maximalRepeatedSuffix(bits, nn);
-                // if(nn < 20) {
-                    // for(int k = 0; k < nn; k++) {
-                        // System.out.print(bits[k] ? '2' : '1');
-                    // }
-                    // System.out.println(": " + result);
-                // }
                 check.update(result);
             }
         }
         assertEquals(2544580030L, check.getValue());
     }
 
-    private static String toStr(boolean[] seq, int n) {
+    private static String toStr(boolean[] seq) {
         StringBuilder result = new StringBuilder();
-        for(int i = 0; i < seq.length; i++) {
-            result.append(seq[i] ? '2': '1');
+        for (boolean b : seq) {
+            result.append(b ? '2' : '1');
         }
         return result.toString();
     }
@@ -59,7 +50,7 @@ public class LinusSequenceTest {
         + "121112212112211121122121121221121112212221121221122212211212212112212221121221122212212"
         + "112212221121221121112212112211121122121121221121112212112211121122212211212212112212221"
         + "1212211222122112122121122122211211122121122";
-        String result = toStr(LinusSequence.linusSequence(1000), 1000);
+        String result = toStr(LinusSequence.linusSequence(1000));
         assertEquals(expected, result);
     }
     
@@ -70,6 +61,5 @@ public class LinusSequenceTest {
             check.update(result[i] ? i : -i);
         }
         assertEquals(1764336421L, check.getValue());
-    }
-    
+    }    
 }

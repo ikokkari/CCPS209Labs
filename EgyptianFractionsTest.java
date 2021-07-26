@@ -1,13 +1,10 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
-import java.util.zip.CRC32;
 import java.math.BigInteger;
+import java.util.List;
+import java.util.Random;
+import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class EgyptianFractionsTest {
     

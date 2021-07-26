@@ -1,11 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
-import java.util.zip.CRC32;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class CompGeomTestThree {
     
@@ -18,14 +16,14 @@ public class CompGeomTestThree {
     }
     
     @Test public void testPointInConvexHundred() {
-        testPointInConvex(100, 3409262577L, false);
+        testPointInConvex(100, 3409262577L);
     }
     
     @Test public void testPointInConvexMillion() {
-        testPointInConvex(1_000_000, 625739499L, false);
+        testPointInConvex(1_000_000, 625739499L);
     }
     
-    private void testPointInConvex(int n, long expected, boolean verbose) {
+    private void testPointInConvex(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         int[] xs = new int[3], ys = new int[3];
@@ -53,23 +51,19 @@ public class CompGeomTestThree {
             }
             int result = CompGeom.pointInConvex(xs, ys, x, y);
             check.update(result);
-            if(verbose) {
-                System.out.println(Arrays.toString(xs) + " " + Arrays.toString(ys)
-                + " (" + x + ", " + y + ") : " + result);
-            }
         }
         assertEquals(expected, check.getValue());
     }
     
     @Test public void testPointInPolygonHundred() {
-        testPointInPolygon(100, 1295708785L, false);
+        testPointInPolygon(100, 1295708785L);
     }
     
     @Test public void testPointInPolygonTenThousand() {
-        testPointInPolygon(10_000, 3132411435L, false);
+        testPointInPolygon(10_000, 3132411435L);
     }
     
-    private void testPointInPolygon(int n, long expected, boolean verbose) {
+    private void testPointInPolygon(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         for(int i = 0; i < n; i++) {
@@ -90,10 +84,6 @@ public class CompGeomTestThree {
             }
             int result = CompGeom.pointInPolygon(xs, ys, x, y);
             check.update(result);
-            if(verbose) {
-                System.out.println(Arrays.toString(xs) + " " + Arrays.toString(ys)
-                + " (" + x + ", " + y + ") " + result);
-            }
         }
         assertEquals(expected, check.getValue());
     }

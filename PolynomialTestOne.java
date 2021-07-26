@@ -1,29 +1,28 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class PolynomialTestOne {
     
-    @Test public void testPolynomial() { // Explicit test cases                
+    @Test public void testPolynomial() {
+        // Explicit test cases
         int[] c1 = {5, 0, -2, 3};
         Polynomial p1 = new Polynomial(c1);
         assertEquals(3, p1.getDegree());
         assertEquals(-2, p1.getCoefficient(2));
         assertEquals(5, p1.evaluate(0));
         assertEquals(21, p1.evaluate(2));
+
         // Your Polynomial is supposed to create a defensive copy
         // of the coefficient array given to it, so modifying that
         // argument array later should not affect the contents of
         // your Polynomial object.
         c1[3] = 5555;
         assertEquals(3, p1.getCoefficient(3)); // still 3, not 5555
-        
+
+        // Another explicit polynomial.
         int[] c2 = {42, 99, -3, -10, -4};
         Polynomial p2 = new Polynomial(c2);
         assertEquals(4, p2.getDegree());

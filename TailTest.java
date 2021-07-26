@@ -1,12 +1,13 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class TailTest {
     
@@ -17,7 +18,7 @@ public class TailTest {
         for(int k = 10; k <= 100000; k = k * 10) {
             Tail tail = new Tail(k);
             BufferedReader fr = new BufferedReader(
-                new InputStreamReader(new FileInputStream("warandpeace.txt"), "UTF-8")
+                new InputStreamReader(new FileInputStream("warandpeace.txt"), StandardCharsets.UTF_8)
                 );
             List<String> result = tail.processFile(fr);
             totalLines += result.size();

@@ -1,16 +1,15 @@
-import java.awt.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import java.util.*;
-import java.util.function.*;
-import java.io.*; // file
-import javax.imageio.ImageIO; 
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.function.DoubleBinaryOperator;
 
 public class ShadesMain {
     
     private static class ImagePanel extends JPanel {
-        private Image img;
+        private final Image img;
         public ImagePanel(Image img, String toolTip) {
             this.img = img; 
             int w = img.getWidth(this);

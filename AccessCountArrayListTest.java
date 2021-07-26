@@ -1,16 +1,12 @@
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import java.util.Random;
-
-import java.util.*;
 import java.util.zip.CRC32;
 
 public strictfp class AccessCountArrayListTest {
 
-    private static int TRIALS = 10000;
-    private static int SEED = 87654;
+    private static final int TRIALS = 10000;
+    private static final int SEED = 87654;
     
     private void updateCheck(double x, CRC32 check) {
         long y = Double.doubleToRawLongBits(x);
@@ -20,7 +16,7 @@ public strictfp class AccessCountArrayListTest {
     
     @Test
     public void massTest() {
-        AccessCountArrayList<Double> acad = new AccessCountArrayList<Double>();
+        AccessCountArrayList<Double> acad = new AccessCountArrayList<>();
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
         int idx;

@@ -1,41 +1,35 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class QuadTreeTest {
 
     @Test public void massTestTwenty() {
         // Change the third parameter to true to see the results computed using your code.
-        massTest(20, 2434345592L, false);
+        massTest(20, 2434345592L);
     }
     
     @Test public void massTestThousand() {
-        massTest(1000, 2434099640L, false);
+        massTest(1000, 2434099640L);
     }
     
     @Test public void massTestMillion() {
-        massTest(1_000_000, 1206476339L, false);
+        massTest(1_000_000, 1206476339L);
     }
     
     // How many first randomly generated trees are used as building blocks
     // for the trees generated later in the mass test.
     private static final int CUTOFF = 1000;
     
-    private void massTest(int n, long expected, boolean verbose) {
+    private void massTest(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         // Randomly generated trees in this masstest.
         QuadTree[] trees = new QuadTree[CUTOFF + 1];
         // The height of each tree.
         int[] height = new int[CUTOFF + 1];
-        // So that we don't need to create two helper arrays all the time.
-        int[] childIds = new int[4];
         QuadTree[] children = new QuadTree[4];
         // Statistics for the end.
         int maxHeight = 0;
@@ -48,7 +42,6 @@ public class QuadTreeTest {
             else {
                 for(int j = 0; j < 4; j++) {
                     int c = rng.nextInt(Math.min(CUTOFF, i));
-                    childIds[j] = c;
                     height[ii] = Math.max(height[ii], 1 + height[c]);
                     maxHeight = Math.max(maxHeight, height[ii]);
                     children[j] = trees[c];
@@ -61,21 +54,7 @@ public class QuadTreeTest {
             assertTrue(area >= 0);
             check.update((int)(area & 0xFFFF)); // lowest 32 bits of long value
             check.update((int)((area >> 32) & 0xFFFF)); // highest 32 bits of long value
-            if(verbose) {
-                if(ii == 0) {
-                    System.out.println("Tree 0 is a white leaf.");
-                }
-                else if(ii == 1) {
-                    System.out.println("Tree 1 is a black leaf.");
-                }
-                else {
-                    System.out.println("Tree " + ii + " is made of trees "
-                    + Arrays.toString(childIds) + ".");
-                }
-                System.out.println("Its height is " + height[ii] + ", and its area is " + area + ".");
-            }
         }
-        //System.out.println("Max height was " + maxHeight + " and max area was " + maxArea + ".");
         assertEquals(expected, check.getValue());
     }   
 }

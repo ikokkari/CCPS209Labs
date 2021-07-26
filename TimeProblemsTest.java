@@ -1,11 +1,10 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.time.*;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Random;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class TimeProblemsTest {
 
@@ -59,7 +58,7 @@ public class TimeProblemsTest {
 
     // Since the set of Zone Ids might change in future versions of Java, here is
     // a random sampler that will remain fixed in this tester.
-    private static String[] ourZones = {
+    private static final String[] ourZones = {
         "America/Fort_Nelson", "Arctic/Longyearbyen", "Africa/Casablanca", "Europe/Kirov",
         "Atlantic/Canary", "Asia/Chongqing", "Europe/Amsterdam", "America/Indiana/Knox",
         "Atlantic/Faroe", "Pacific/Marquesas", "Africa/Douala", "America/Hermosillo",
@@ -85,7 +84,6 @@ public class TimeProblemsTest {
             int s = rng.nextInt(60);
             LocalDateTime hereTime = LocalDateTime.of(y, mo, d, h, mi, s);
             int result = TimeProblems.whatHourIsItThere(hereTime, hereZone, thereZone);
-            //System.out.println(hereTime + " " + hereZone + " " + thereZone + " " + result);
             check.update(result);
         }
         assertEquals(3443549537L, check.getValue());

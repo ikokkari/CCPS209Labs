@@ -1,28 +1,25 @@
-import java.util.*;
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.nio.file.*;
-import java.io.*;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class StreamExercisesTest {
         
     @Test public void testCountLines() {
-        StreamExercises se = new StreamExercises();
         try {
-            assertEquals(se.countLines(Paths.get("warandpeace.txt"), 70), 21079);
+            assertEquals(StreamExercises.countLines(Paths.get("warandpeace.txt"), 70), 21079);
         }
         catch(IOException e) {
             System.out.println("Unable to read warandpeace.txt!");
-            assertTrue(false);
+            fail();
         }
     }    
     
     @Test public void testCollectWords() {
-        StreamExercises se = new StreamExercises();
         try {
-            List<String> words = se.collectWords(Paths.get("warandpeace.txt"));
+            List<String> words = StreamExercises.collectWords(Paths.get("warandpeace.txt"));
             assertEquals(17465, words.size());
             assertEquals("a", words.get(0));
             assertEquals("accomplished", words.get(100));
@@ -35,7 +32,7 @@ public class StreamExercisesTest {
         }
         catch(IOException e) {
             System.out.println("Unable to read warandpeace.txt!");
-            assertTrue(false);
+            fail();
         }        
     }
 }

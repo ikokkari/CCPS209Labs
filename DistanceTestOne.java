@@ -1,11 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.math.BigInteger;
-import java.util.*;
+import java.util.Random;
+import java.util.TreeMap;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class DistanceTestOne {
 
@@ -15,7 +13,7 @@ public class DistanceTestOne {
         CRC32 check = new CRC32();
         for(int n = 0; n < 100_000; n++) {
             int sp = Distance.extractSquares(n);
-            assertEquals(0, n % (sp*sp));
+            assertEquals(0, n % ((long) sp *sp));
             int a = n / (sp*sp); // Integer division truncates
             assertEquals(n, sp*sp*a);
             check.update(sp);
@@ -26,7 +24,7 @@ public class DistanceTestOne {
     // To clarify the expected behaviour of toString, here are some test cases
     // that demonstrate how the toString method is supposed to behave.
     
-    private static int[][][] testCases = {
+    private static final int[][][] testCases = {
         { {61, 3} }, // each term is {root, coefficient}, so this means 3Sqrt[61]
         { {5, 0} },
         { {1003, -42} },
@@ -43,7 +41,7 @@ public class DistanceTestOne {
         { {11, 4}, {23, 4}, {11*4, -2}, {23*4, -2} }
     };
     
-    private static String[] expected = {
+    private static final String[] expected = {
         "3Sqrt[61]",
         "0",
         "-42Sqrt[1003]",
@@ -82,9 +80,6 @@ public class DistanceTestOne {
             int base = rng.nextInt(3 * (i + 2)) + 1;
             Distance d = new Distance(whole, base);
             String rep = d.toString();
-            // if(i % 50 == 0 && i < 1000) { 
-                // System.out.println(whole + " " + base + " : <" + rep + ">"); 
-            // }
             check.update(rep.getBytes());
         }
         assertEquals(4065287689L, check.getValue());

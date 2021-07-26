@@ -1,14 +1,10 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.math.BigInteger;
-import java.util.*;
+import javax.swing.*;
+import java.awt.*;
+import java.util.Random;
 import java.util.zip.CRC32;
 
-import java.awt.*;
-import javax.swing.*;
+import static org.junit.Assert.assertEquals;
 
 public class UlamTest {
 

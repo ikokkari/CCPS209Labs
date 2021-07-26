@@ -1,10 +1,8 @@
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 public class WordCountTest {
@@ -13,7 +11,7 @@ public class WordCountTest {
     public void scanWarAndPeace() throws IOException {
         WordCount wc = new WordCount();
         BufferedReader fr = new BufferedReader(
-            new InputStreamReader(new FileInputStream("warandpeace.txt"), "UTF-8")
+            new InputStreamReader(new FileInputStream("warandpeace.txt"), StandardCharsets.UTF_8)
         );
         List<Integer> result = wc.processFile(fr);
         fr.close();

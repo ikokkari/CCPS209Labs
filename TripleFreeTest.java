@@ -1,12 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
+import java.util.List;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class TripleFreeTest {
 
@@ -31,7 +26,7 @@ public class TripleFreeTest {
         massTest(50, 3173595071L);
     }
 
-    // Only the most hardcore of students will dare uncomment this test.
+    // Only the most hardcore students will dare uncomment this test.
     /*
     @Test public void testFirstHundred() {
         massTest(100, 1174711062L);

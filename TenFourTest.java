@@ -1,19 +1,11 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.time.*;
-import java.util.*;
+import java.util.List;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class TenFourTest {
 
-    @Test public void testShortestPathThousand() {
-        testShortestPath(500, 1154212991L);
-    }
-    
-    private void testShortestPath(int n, long expected) {
+    @Test public void testShortestPath() {
         /* Explicit test cases */
         assertEquals("[4, 2, 24, 12, 6]", TenFour.shortestPath(6, 100).toString());
         assertEquals("[4, 2, 24, 12, 6, 3, 34, 17]", TenFour.shortestPath(17, 100).toString());
@@ -25,8 +17,8 @@ public class TenFourTest {
         
         /* Pseudorandom fuzz tester */
         CRC32 check = new CRC32();
-        for(int i = 1; i < n; i++) {
-            int limit = 100 * n + 1;
+        for(int i = 1; i < 500; i++) {
+            int limit = 100 * 500 + 1;
             List<Integer> result;
             do {
                 result = TenFour.shortestPath(i, limit);
@@ -35,6 +27,6 @@ public class TenFourTest {
             // System.out.println(i + ": " + result);
             check.update(result.toString().getBytes());
         }
-        assertEquals(expected, check.getValue());
+        assertEquals(1154212991, check.getValue());
     }  
 }

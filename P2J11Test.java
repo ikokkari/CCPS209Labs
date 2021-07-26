@@ -1,12 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
+import java.io.File;
 import java.util.*;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class P2J11Test {
     
@@ -39,7 +36,7 @@ public class P2J11Test {
         List<Integer> f2 = Arrays.asList(0, 1, 2, 3, 4, 5);
         assertEquals(f2, P2J11.find("aaa", t2, s2));
         
-        List<Integer> f3 = Arrays.asList();
+        List<Integer> f3 = Collections.emptyList();
         assertEquals(f3, P2J11.find("ea", t3, s3));
         
         List<Integer> f4 = Arrays.asList(1, 8, 30);
@@ -60,7 +57,7 @@ public class P2J11Test {
         }
         catch(Exception e) {
             System.out.println("Unable to read file warandpeace.txt.");
-            assertTrue(false);
+            fail();
         }
         
         String text = sb.toString();
@@ -71,20 +68,20 @@ public class P2J11Test {
             "when the butler with a bottle"
         };
         List<List<Integer>> expected = Arrays.asList(
-            // hairpin
-            Arrays.asList(),
-            // dearest
-            Arrays.asList(401455, 589251, 673175, 756728, 762806, 824448, 824892,
-            876326, 1874525, 2097431, 2824422, 2824638, 3001502, 3069811, 3070789),
-            // chicken
-            Arrays.asList(1000200, 1322792, 1323345, 1709728, 1858789, 2112805),
-            // germany
-            Arrays.asList(149169, 1625813, 2387228, 2621602),
-            // soup
-            Arrays.asList(147783, 546991, 772564, 1954975, 2370800, 2534921,
-            2667437, 2751268, 3010037, 3010169),
-            // when the butler with a bottle
-            Arrays.asList(149207)
+                // hairpin
+                Collections.emptyList(),
+                // dearest
+                Arrays.asList(401455, 589251, 673175, 756728, 762806, 824448, 824892,
+                876326, 1874525, 2097431, 2824422, 2824638, 3001502, 3069811, 3070789),
+                // chicken
+                Arrays.asList(1000200, 1322792, 1323345, 1709728, 1858789, 2112805),
+                // germany
+                Arrays.asList(149169, 1625813, 2387228, 2621602),
+                // soup
+                Arrays.asList(147783, 546991, 772564, 1954975, 2370800, 2534921,
+                2667437, 2751268, 3010037, 3010169),
+                // when the butler with a bottle
+                Collections.singletonList(149207)
         );
         for(int i = 0; i < pats.length; i++) {
             String pat = pats[i];

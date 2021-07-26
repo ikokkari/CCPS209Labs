@@ -1,12 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
 import java.util.*;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class P2J4Test {
 
@@ -56,8 +51,8 @@ public class P2J4Test {
         List<Integer> b2 = Arrays.asList(99, -10, 0, -5, -5, -5);
         assertEquals(b2, P2J4.runningMedianOfThree(a2));
         
-        List<Integer> a3 = Arrays.asList(13);
-        List<Integer> b3 = Arrays.asList(13);
+        List<Integer> a3 = Collections.singletonList(13);
+        List<Integer> b3 = Collections.singletonList(13);
         assertEquals(b3, P2J4.runningMedianOfThree(a3));
         
         List<Integer> a4 = Arrays.asList(13, 98);
@@ -130,16 +125,16 @@ public class P2J4Test {
     @Test public void testFactorFactorial() {
         // Expected answers for factorials from 0 to 9.
         List<List<Integer>> expected = Arrays.asList(
-            Arrays.asList(), // 0!
-            Arrays.asList(), // 1!
-            Arrays.asList(2), // 2!
-            Arrays.asList(2, 3), // 3!
-            Arrays.asList(2, 2, 2, 3), // 4!
-            Arrays.asList(2, 2, 2, 3, 5), // 5!
-            Arrays.asList(2, 2, 2, 2, 3, 3, 5), // 6!
-            Arrays.asList(2, 2, 2, 2, 3, 3, 5, 7), // 7!
-            Arrays.asList(2, 2, 2, 2, 2, 2, 2, 3, 3, 5, 7), // 8!
-            Arrays.asList(2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 7) // 9!
+                Collections.emptyList(), // 0!
+                Collections.emptyList(), // 1!
+                Collections.singletonList(2), // 2!
+                Arrays.asList(2, 3), // 3!
+                Arrays.asList(2, 2, 2, 3), // 4!
+                Arrays.asList(2, 2, 2, 3, 5), // 5!
+                Arrays.asList(2, 2, 2, 2, 3, 3, 5), // 6!
+                Arrays.asList(2, 2, 2, 2, 3, 3, 5, 7), // 7!
+                Arrays.asList(2, 2, 2, 2, 2, 2, 2, 3, 3, 5, 7), // 8!
+                Arrays.asList(2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 5, 7) // 9!
         );
         
         CRC32 check = new CRC32();

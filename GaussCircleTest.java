@@ -1,12 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class GaussCircleTest {
 
@@ -35,9 +30,8 @@ public class GaussCircleTest {
             check.update(Long.toHexString(out[2]).getBytes());
             r += rng.nextInt(step) + 1;
             if(r > goal) { goal = 8 * goal; step = step * 2; }
-            assert r > 0; // make sure our values don't overflow
+            assert r > 0; // make sure our r-values don't overflow
         }
         assertEquals(expected, check.getValue());
-    }
-    
+    }    
 }

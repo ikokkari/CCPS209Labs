@@ -1,55 +1,31 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.zip.CRC32;
 
+import static org.junit.Assert.assertEquals;
+
 public class DiamondSequenceTest {
-      
-    private void outputSequence() {
-        Iterator<Integer> it = new DiamondSequence();
-        int[] a = new int[20];
-        int[] b = new int[20];
-        for(int i = 0; i < 20; i++) {
-            a[i] = it.next();
-            b[i] = a[i] + (i > 0 ? b[i-1]: 0);
-        }
-        System.out.printf("k:");
-        for(int i = 0; i < 20; i++) {
-            System.out.printf("%6d", i+1);
-        }
-        System.out.printf("\nf:");
-        for(int i = 0; i < 20; i++) {
-            System.out.printf("%6d", a[i]);
-        }
-        System.out.printf("\nF:");
-        for(int i = 0; i < 20; i++) {
-            System.out.printf("%6d", b[i]);
-        }
-    }
     
     @Test
     public void knownInitialPrefix() {
         Iterator<Integer> it = new DiamondSequence();
-        assertEquals(new Integer(1), it.next());
-        assertEquals(new Integer(3), it.next());
-        assertEquals(new Integer(2), it.next());
-        assertEquals(new Integer(6), it.next());
-        assertEquals(new Integer(8), it.next());
-        assertEquals(new Integer(4), it.next());
-        assertEquals(new Integer(11), it.next());
-        assertEquals(new Integer(5), it.next());
-        assertEquals(new Integer(14), it.next());
-        assertEquals(new Integer(16), it.next());
-        assertEquals(new Integer(7), it.next());
-        assertEquals(new Integer(19), it.next());
-        assertEquals(new Integer(21), it.next());
-        assertEquals(new Integer(9), it.next());
-        assertEquals(new Integer(24), it.next());
+        assertEquals(Integer.valueOf(1), it.next());
+        assertEquals(Integer.valueOf(3), it.next());
+        assertEquals(Integer.valueOf(2), it.next());
+        assertEquals(Integer.valueOf(6), it.next());
+        assertEquals(Integer.valueOf(8), it.next());
+        assertEquals(Integer.valueOf(4), it.next());
+        assertEquals(Integer.valueOf(11), it.next());
+        assertEquals(Integer.valueOf(5), it.next());
+        assertEquals(Integer.valueOf(14), it.next());
+        assertEquals(Integer.valueOf(16), it.next());
+        assertEquals(Integer.valueOf(7), it.next());
+        assertEquals(Integer.valueOf(19), it.next());
+        assertEquals(Integer.valueOf(21), it.next());
+        assertEquals(Integer.valueOf(9), it.next());
+        assertEquals(Integer.valueOf(24), it.next());
     }
     
     @Test
@@ -60,7 +36,7 @@ public class DiamondSequenceTest {
             int v = it.next();
             if(mustBe.containsKey(k)) {
                 // Cast to long is necessary to disambiguate between assertEquals overloadings.
-                assertEquals((long)v, (long)mustBe.get(k));
+                assertEquals(v, (long)mustBe.get(k));
                 mustBe.remove(k);
             }
             if(v > k) {

@@ -23,5 +23,5 @@ public final class BlackQuad implements QuadTree {
      * @param scale The scale of the region represented by this tree.
      * @return The black area of the region represented by this tree.
      */
-    public long computeArea(int scale) { return 1 << scale; }
+    public long computeArea(int scale) { return (long)(1 << scale); }
 }

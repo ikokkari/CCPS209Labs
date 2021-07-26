@@ -1,12 +1,13 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.math.BigInteger;
-import java.util.*;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.TreeSet;
 import java.util.zip.CRC32;
-import java.math.*;
+
+import static org.junit.Assert.*;
 
 public class DistanceTestThree {
 
@@ -17,7 +18,6 @@ public class DistanceTestThree {
     @Test public void testApproximate() {
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
-        MathContext mc = new MathContext(PREC, RoundingMode.HALF_UP);
         MathContext mc2 = new MathContext(PREC + 2, RoundingMode.HALF_UP);
         BigDecimal epsilon = new BigDecimal(1).scaleByPowerOfTen(PREC);
         for(int i = 1; i < 100; i++) {
@@ -34,9 +34,7 @@ public class DistanceTestThree {
                 BigDecimal curr = d.approximate(mc2);
                 //System.out.println(d + " is approximately " + curr);
                 check.update(curr.toString().getBytes());
-                BigDecimal dc = dd.approximate(mc2);
                 BigDecimal diff = curr.subtract(prev);
-
                 assertTrue(diff.abs().compareTo(epsilon) < 0);
                 prev = curr;
             }
@@ -46,7 +44,7 @@ public class DistanceTestThree {
     @Test public void massTestCollections() {
         int N = 1000;
         Random rng = new Random(SEED);
-        // Two collections of different types that are supposed to contains
+        // Two collections of different general types that are supposed to contain
         // the exact same distances at all times.
         HashSet<Distance> hs = new HashSet<>();
         TreeSet<Distance> ts = new TreeSet<>();
@@ -80,7 +78,6 @@ public class DistanceTestThree {
     }
     
     @Test public void testCompareTo() {
-        MathContext mc = new MathContext(10);
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
         int N = 40;
@@ -104,7 +101,7 @@ public class DistanceTestThree {
         for(int i = 0; i < 3 * N; i++) {
             for(int j = i + 1; j < 3 * N; j++) {
                 int comp = ds[i].compareTo(ds[j]);
-                comp = (comp > 0) ? +1 : ((comp < 0) ? -1 : 0);
+                comp = Integer.compare(comp, 0);
                 check.update(comp);
             }
         }

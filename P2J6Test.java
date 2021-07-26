@@ -1,12 +1,11 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class P2J6Test {
 
@@ -49,11 +48,11 @@ public class P2J6Test {
     }
     
     private String createString(String alphabet, Random rng, int n) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for(int i = 0; i < n; i++) {
-            result += alphabet.charAt(rng.nextInt(alphabet.length()));
+            result.append(alphabet.charAt(rng.nextInt(alphabet.length())));
         }
-        return result;
+        return result.toString();
     }
     
     @Test public void testForbiddenSubstrings() {

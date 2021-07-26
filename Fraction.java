@@ -122,7 +122,7 @@ public class Fraction implements Comparable<Fraction> {
     
     /**
      * Check the equality of this fraction and the {@code other} fraction.
-     * @param other The other fraction of the equality comparison.
+     * @param o The other fraction of the equality comparison.
      * @return {@code true} if the fractions are equal, {@code false} otherwise.
      */
     public boolean equals(Object o) {

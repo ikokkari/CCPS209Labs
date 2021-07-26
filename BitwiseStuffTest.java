@@ -1,10 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.Random;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class BitwiseStuffTest {
 
@@ -12,7 +11,7 @@ public class BitwiseStuffTest {
         Random rng = new Random(12345);
         for(int i = 0; i < 10000; i++) {
             long n = 0;
-            int prev = 0, curr = 0, count = 0;
+            int prev = 0, curr, count = 0;
             for(int j = 0; j < 64; j++) {
                 curr = (rng.nextInt(100) < 25) ? 1 - prev : prev;
                 if(curr == 1 && prev == 0) { count++; }
@@ -34,9 +33,6 @@ public class BitwiseStuffTest {
                 n = (n << 1) + ((rng.nextInt(100) < 75) ? 0 : 1);
             }
             int result = BitwiseStuff.bestRotateFill(n);
-            long m = n | Long.rotateLeft(n, result);
-            //System.out.println(Long.toHexString(n) + " " + Long.bitCount(n) + " " + result + 
-            //Long.toHexString(m) + " " + Long.bitCount(m));
             check.update(result);
         }
         assertEquals(505332074L, check.getValue());

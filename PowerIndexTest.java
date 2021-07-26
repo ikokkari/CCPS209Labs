@@ -1,10 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class PowerIndexTest {
 
@@ -52,17 +51,17 @@ public class PowerIndexTest {
     }
     
     @Test public void massTestBanzhaf() {
-        testPower(100, 3437155411L, true);
+        testPower(3437155411L, true);
     }
     
     @Test public void massTestShapleyShubik() {
-        testPower(100, 1214504174L, false);
+        testPower(1214504174L, false);
     }
     
-    private void testPower(int n, long expected, boolean banzhaf) {
+    private void testPower(long expected, boolean banzhaf) {
         Random rng = new Random(12345);
         CRC32 check = new CRC32();
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < 100; i++) {
             int nn = 4 + (i / 20);
             int[] weights = new int[nn];
             int[] out = new int[nn];

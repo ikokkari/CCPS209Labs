@@ -1,11 +1,10 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
-import java.util.zip.CRC32;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class PermutationsTestThree {
 
@@ -32,9 +31,6 @@ public class PermutationsTestThree {
             Permutations.toFactoradic(curr, coeff);
             check.update(Arrays.toString(coeff).getBytes());
             long back = Permutations.fromFactoradic(coeff);
-            // if(i > n - 10) {
-                // System.out.println(curr + " " + Arrays.toString(coeff) + " " + back);
-            // }
             assertEquals(curr, back);
             curr += 1 + rng.nextInt(step);
             if(i == goal) { goal = 2 * goal; step = 3 * step; }
@@ -57,7 +53,6 @@ public class PermutationsTestThree {
         for(int i = 0; i < n; i++) {
             if(i == goal) { nn++; goal = 2 * goal; }
             int[] perm = new int[nn];
-            int[] back = new int[nn];
             for(int j = 0; j < nn; j++) { perm[j] = j; }
             for(int k = 0; k < nn; k++) {
                 int s = rng.nextInt(nn - k) + k;
@@ -65,7 +60,7 @@ public class PermutationsTestThree {
             }
             //System.out.println("perm is " + Arrays.toString(perm));
             long key = Permutations.toKey(perm);
-            back = Permutations.fromKey(key, nn);
+            int[] back = Permutations.fromKey(key, nn);
             //System.out.println("back is " + Arrays.toString(back) + "\n");
             assertArrayEquals(perm, back);
         }
@@ -97,35 +92,23 @@ public class PermutationsTestThree {
             }
             int[] inv = Permutations.toLehmer(perm);
             check.update(Arrays.toString(inv).getBytes());
-            //long key = Permutations.toKey(perm);
-            // if(i > n - 10) {
-                // System.out.println(Arrays.toString(perm) + " " + Arrays.toString(inv) + " " + key);
-            // }
             int[] back = Permutations.fromLehmer(inv);
-            //int[] keyBack = Permutations.fromKey(key, nn);
-            //System.out.println(Arrays.toString(back) + " " + Arrays.toString(keyBack) + "\n");
             assertArrayEquals(perm, back);
-            //assertArrayEquals(perm, keyBack);
         }
         assertEquals(expected, check.getValue());
     }
-    
-    @Test public void testKeyConversionNine() {
-        testKeyConversion(9);
-    }
-    
-    private void testKeyConversion(int n) {
+
+    @Test public void testKeyConversion() {
         long f = 1;
-        for(int i = 2; i <= n; i++) { f = f * i; }
+        for(int i = 2; i <= 9; i++) { f = f * i; }
         int[] perm, prev = null;
         for(long key = 0; key < f; key++) {
-            perm = Permutations.fromKey(key, n);
-            //System.out.println(key + "\t" + Arrays.toString(perm));
-            // Each permutation must be lexigraphically greater than the previous one.
-            for(int p = 0; key > 0 && p <= n; p++) {
-                assertTrue(p < n); // This loop must terminate before reaching p == n.
+            perm = Permutations.fromKey(key, 9);
+            // Each permutation must be lexicographically greater than the previous one.
+            for(int p = 0; key > 0 && p <= 9; p++) {
+                assertTrue(p < 9); // This loop must terminate before reaching p == n.
                 if(perm[p] > prev[p]) { break; }
-                assertTrue(perm[p] == prev[p]);
+                assertEquals(perm[p], prev[p]);
             }
             prev = perm;
         }

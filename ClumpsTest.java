@@ -1,9 +1,5 @@
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
 import java.util.zip.CRC32;
 import java.util.Random;
 

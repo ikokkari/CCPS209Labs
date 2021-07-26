@@ -1,10 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class MultipleWinnerElectionTest {
 
@@ -115,10 +114,6 @@ public class MultipleWinnerElectionTest {
             if(mode == 3) { // For examining how the methods produce different results.
                 if(!(Arrays.equals(result0, result1) && Arrays.equals(result1, result2))) {
                     diffCount++;
-                    // System.out.print(Arrays.toString(votes) + " " + seats + ": ");
-                    // System.out.print(Arrays.toString(result0));
-                    // System.out.print(Arrays.toString(result1));
-                    // System.out.println(Arrays.toString(result2));
                 }
             }
         }

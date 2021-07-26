@@ -1,10 +1,8 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class RationalRootsTest {
     
@@ -30,7 +28,7 @@ public class RationalRootsTest {
 
     // Created with the aid of trusty old Wolfram Mathematica. All these problems
     // would be so much easier when solved in that language.
-    private static int[][] rationalTestCases = {
+    private static final int[][] rationalTestCases = {
         {42, -73, -94, 165},
         {1503067, -3015954, 1512899},
         {-85, 170, 22, -44, -1, 2},
@@ -46,7 +44,7 @@ public class RationalRootsTest {
     
     // The expected correct answers to the previous rational test cases.
     
-    private static String[] rationalExpected = {
+    private static final String[] rationalExpected = {
         "[-2/3, 3/5, 7/11]",
         "[1223/1229, 1229/1231]",
         "[1/2]",
@@ -95,9 +93,6 @@ public class RationalRootsTest {
             }
             List<Fraction> result = RationalRoots.rationalRoots(coeffs);
             check.update(result.toString().getBytes());
-            if(result.size() > 1) {
-                //System.out.println(Arrays.toString(coeffs) + ": " + result);
-            }
         }
         assertEquals(2380363903L, check.getValue());
     }

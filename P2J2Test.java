@@ -1,12 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import java.util.LinkedList;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class P2J2Test {
 
@@ -116,8 +113,8 @@ public class P2J2Test {
         Random rng = new Random(SEED);
         CRC32 check = new CRC32(); 
         int total = 0, answer;
-        LinkedList<Integer> qxl = new LinkedList<Integer>();
-        LinkedList<Integer> qyl = new LinkedList<Integer>();
+        LinkedList<Integer> qxl = new LinkedList<>();
+        LinkedList<Integer> qyl = new LinkedList<>();
         for(int n = 3; n < 100; n++) {
             boolean[][] board = new boolean[n][n];
             int count = 1;

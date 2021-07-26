@@ -1,9 +1,5 @@
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.math.BigInteger;
 import java.util.*;
 import java.util.zip.CRC32;
 
@@ -33,11 +29,7 @@ public class CoinMoveTest {
             for(int j = 0; j < c; j++) {
                 curr[rng.nextInt(n)]++;
             }
-            //System.out.println(nbs);
-            //System.out.println(Arrays.toString(curr));
             CoinMove.coinStep(curr, next, nbs);
-            //System.out.println(Arrays.toString(next));
-            //System.out.println("");
             check.update(Arrays.toString(next).getBytes());
         }
         assertEquals(538741678L, check.getValue());
@@ -66,10 +58,7 @@ public class CoinMoveTest {
             for(int j = 0; j < c; j++) {
                 curr[rng.nextInt(n)]++;
             }
-            //System.out.println(nbs);
-            //System.out.println(Arrays.toString(curr));
             int result = CoinMove.period(curr, nbs);
-            //System.out.println(result);
             check.update(result);
         }
         assertEquals(3003526382L, check.getValue());

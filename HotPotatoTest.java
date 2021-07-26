@@ -1,12 +1,8 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import java.util.Arrays;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class HotPotatoTest {
 
@@ -40,8 +36,6 @@ public class HotPotatoTest {
             }
             Fraction[] result = HotPotato.hotPotato(enemies, t);
             check.update(Arrays.deepToString(result).getBytes());
-            //System.out.println("t = " + t + ", n = " + nn + ", neigh = " + Arrays.deepToString(enemies));
-            //System.out.println(Arrays.toString(result));
         }
         assertEquals(expected, check.getValue());
     }

@@ -1,11 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.io.*;
-import java.util.*;
+import java.util.Iterator;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class PrimeGensTest {
 

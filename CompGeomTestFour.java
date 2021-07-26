@@ -1,8 +1,5 @@
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
 import java.util.*;
 import java.util.zip.CRC32;
 import java.util.Random;
@@ -18,25 +15,25 @@ public class CompGeomTestFour {
     }
     
     @Test public void testSortCCWFifty() {
-        testSortCCW(50, 1958535028L, false);
+        testSortCCW(50, 1958535028L);
     }
     
     @Test public void testSortCCWThousand() {
-        testSortCCW(1000, 131492039L, false);
+        testSortCCW(1000, 131492039L);
     }
     
     @Test public void testSortCCWTenThousand() {
-        testSortCCW(10_000, 2954539111L, false);
+        testSortCCW(10_000, 2954539111L);
     }
     
-    private void testSortCCW(int n, long expected, boolean verbose) {
+    private void testSortCCW(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         for(int i = 0; i < n; i++) {
             int nn = 3 + (i / 5);
             int[] xs = new int[nn], ys = new int[nn];
             boolean[][] taken = new boolean[nn][nn];
-            int x = 0, y = 0;
+            int x, y;
             for(int j = 0; j < nn; j++) {
                 do {
                     x = rng.nextInt(nn);
@@ -45,12 +42,7 @@ public class CompGeomTestFour {
                 xs[j] = x - (nn/2); ys[j] = y - (nn/2); taken[x][y] = true;
             }
             int[] result = CompGeom.sortCCW(xs, ys);
-            if(verbose) {
-                System.out.println(Arrays.toString(xs));
-                System.out.println(Arrays.toString(ys));
-                System.out.println(Arrays.toString(result) + "\n");
-            }
-            for(int j = 0; j < nn; j++) { 
+            for(int j = 0; j < nn; j++) {
                 check.update(result[j]);
             }
         }
@@ -58,21 +50,21 @@ public class CompGeomTestFour {
     }
     
     @Test public void testGrahamScanTen() {
-        testGrahamScan(10, 3999836108L, false);
+        testGrahamScan(10, 3999836108L);
     }
     
     @Test public void testGrahamScanThousand() {
-        testGrahamScan(1000, 364144433L, false);
+        testGrahamScan(1000, 364144433L);
     }
     
-    private void testGrahamScan(int n, long expected, boolean verbose) {
+    private void testGrahamScan(int n, long expected) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         for(int i = 0; i < n; i++) {
             int nn = 5 + (i / 5);
             int[] xs = new int[nn], ys = new int[nn];
             boolean[][] taken = new boolean[nn][nn];
-            int x = 0, y = 0;
+            int x, y;
             for(int j = 0; j < nn; j++) {
                 do {
                     x = rng.nextInt(nn);
@@ -81,11 +73,6 @@ public class CompGeomTestFour {
                 xs[j] = x - (nn/2); ys[j] = y - (nn/2); taken[x][y] = true;
             }
             int[] result = CompGeom.grahamScan(xs, ys);
-            if(verbose) {
-                System.out.println(Arrays.toString(xs));
-                System.out.println(Arrays.toString(ys));
-                System.out.println(Arrays.toString(result) + "\n");
-            }
             nn = result.length;
             for(int j = 0; j < nn; j++) { 
                 check.update(result[j]);
@@ -143,7 +130,6 @@ public class CompGeomTestFour {
     }
     
     @Test public void verifyPicksTheorem() {
-        CRC32 check = new CRC32();
         Random rng = new Random(12345);
         for(int i = 0; i < 500; i++) {
             int n = 6 + (i / 5), m = 3 + 2 * i;
@@ -172,12 +158,8 @@ public class CompGeomTestFour {
                     assertEquals(r, rr);
                 }
             }
-            //System.out.println("Inside = " + inside + ", edges = " + edges);
             int areaPick = 2 * inside + edges - 2;
             int areaShoe = CompGeom.shoelaceArea(xxs, yys);
-            //System.out.println(Arrays.toString(xxs));
-            //System.out.println(Arrays.toString(yys));
-            //System.out.println("Pick: " + areaPick + ", Shoe: " + areaShoe + "\n");
             assertEquals(areaPick, areaShoe);
         }
     }

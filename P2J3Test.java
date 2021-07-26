@@ -1,12 +1,15 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Random;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class P2J3Test {
 
@@ -24,7 +27,7 @@ public class P2J3Test {
         // Testing with War and Peace
         CRC32 check = new CRC32();
         BufferedReader fr = new BufferedReader(
-            new InputStreamReader(new FileInputStream("warandpeace.txt"), "UTF-8")
+            new InputStreamReader(new FileInputStream("warandpeace.txt"), StandardCharsets.UTF_8)
         );
         String line = fr.readLine();
         while(line != null) {
@@ -53,7 +56,7 @@ public class P2J3Test {
         // Testing with War and Peace
         CRC32 check = new CRC32();
         BufferedReader fr = new BufferedReader(
-            new InputStreamReader(new FileInputStream("warandpeace.txt"), "UTF-8")
+            new InputStreamReader(new FileInputStream("warandpeace.txt"), StandardCharsets.UTF_8)
         );
         String line = fr.readLine();
         while(line != null) {

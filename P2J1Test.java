@@ -1,12 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import java.util.Arrays;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class P2J1Test {
 
@@ -22,10 +19,9 @@ public class P2J1Test {
         assertEquals(0, P2J1.fallingPower(3, 6));
         assertEquals(1, P2J1.fallingPower(42, 0));
         assertEquals(1, P2J1.fallingPower(-98765432, 0));
-        assertEquals(-990, P2J1.fallingPower(-9, 3));
+        assertEquals(-990, P2J1.fallingPower(-9, 3));        
         
-        // Pseudorandom fuzz tester
-        Random rng = new Random(SEED);
+        // Mass tester
         CRC32 check = new CRC32();
         for(int b = -10; b < 10; b++) {
             for(int e = 0; e < 10; e++) {
@@ -35,6 +31,7 @@ public class P2J1Test {
             }
         }
         assertEquals(4140005098L, check.getValue());
+        // Test was a success!
     }
     
     @Test public void testEveryOther() {

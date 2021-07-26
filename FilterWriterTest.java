@@ -1,26 +1,28 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
-import java.util.*;
-import java.util.function.*;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.function.BiPredicate;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class FilterWriterTest {
 
     // Unicode blocks for combining characters.
-    private static int[][] combining = {
+    private static final int[][] combining = {
         {0x0300, 0x036f}, {0x1ab0, 0x1aff}, {0x1dc0, 0x1dff},
         {0x20d0, 0x20ff}, {0xfe20, 0xfe2f}
     };
     
-    private static String vowels = "AEIOUYaeiouy";
-    private static String consonants = "BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz";
+    private static final String vowels = "AEIOUYaeiouy";
+    private static final String consonants = "BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz";
     
     
-    private static BiPredicate<Character, Character> mustSwitch = (c1, c2) -> {
+    private static final BiPredicate<Character, Character> mustSwitch = (c1, c2) -> {
         boolean c1vowel = vowels.indexOf(c1) > -1;
         boolean c2vowel = vowels.indexOf(c2) > -1;
         boolean c1consonant = consonants.indexOf(c1) > -1;
@@ -49,7 +51,7 @@ public class FilterWriterTest {
     }
     
     // Predicate that rejects all Unicode combining characters.
-    private static BiPredicate<Character, Character> dezalgo = (c1, c2) -> {
+    private static final BiPredicate<Character, Character> dezalgo = (c1, c2) -> {
         for(int[] tabu: combining) {
             if(tabu[0] <= c2 && c2 <= tabu[1]) { return false; }
         }

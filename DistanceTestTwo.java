@@ -1,11 +1,7 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.math.BigInteger;
-import java.util.*;
+import java.util.Random;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class DistanceTestTwo {
 
@@ -25,7 +21,6 @@ public class DistanceTestTwo {
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
         int N = 10_000;
-        int[] c = new int[4];
         Distance[] ds = new Distance[3 * N];
         for(int i = 0; i < ds.length; i++) {
             if(i < N) { // First N distances are just randomly created.
@@ -40,18 +35,14 @@ public class DistanceTestTwo {
                 int j1 = rng.nextInt(i);
                 int j2 = rng.nextInt(i);
                 ds[i] = add ? ds[j1].add(ds[j2]) : ds[j1].subtract(ds[j2]);
-                String verb = add ? "added" : "subtracted";
                 // Subtracting any distance from itself must give zero result.
                 Distance sub = ds[i].subtract(ds[i]);
                 assertEquals(ZERO.toString(), sub.toString());
                 // Adding a distance and then subtracting it right away must
                 // produce the original distance.
-                if(i > 0) {
-                    String si = ds[i].toString();
-                    String sii = ds[i].add(ds[i-1]).subtract(ds[i-1]).toString();
-                    assertEquals(si, sii);
-                }
-                // Each distance must 
+                String si = ds[i].toString();
+                String sii = ds[i].add(ds[i-1]).subtract(ds[i-1]).toString();
+                assertEquals(si, sii);
                 check.update(ds[i].toString().getBytes());
             }
         }
@@ -62,7 +53,6 @@ public class DistanceTestTwo {
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
         int N = 100;
-        int[] c = new int[4];
         Distance[] ds = new Distance[3 * N];
         for(int i = 0; i < 3 * N; i++) {
             if(i < N) { // For first N, just create some random distances.

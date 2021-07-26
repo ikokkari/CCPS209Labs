@@ -1,10 +1,12 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TchoukaillonTest {
 
@@ -61,11 +63,10 @@ public class TchoukaillonTest {
             int sum = 0;
             for(int j = board.size() - 1; j > 0; j--) {
                 sum += board.get(j);
-                //System.out.print(board.get(j) + " ");
             }
             sum += board.get(0);
             assertEquals(sum, i);
-            //System.out.println("for " + i);
+            //System.out.println(i + " " + board);
             check.update(board.toString().getBytes());
             Tchoukaillon.previousSolvable(board);
         }

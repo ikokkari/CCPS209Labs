@@ -1,20 +1,20 @@
-import java.awt.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.geom.*;
-import java.awt.image.*;
-import java.util.*;
-import java.io.*; // file
-import javax.imageio.ImageIO; 
-
+import java.awt.*;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
+import java.awt.image.ImageProducer;
+import java.io.File;
+import java.io.IOException;
 
 public class ImageAlgebraMain {
     
     // A little utility class to display images as Swing components.
     private static class ImagePanel extends JPanel {
-        private Image img;
-        private String toolTip;
+        private final Image img;
         public ImagePanel(Image img, String toolTip) {
-            this.img = img; this.toolTip = toolTip;
+            this.img = img;
             this.setToolTipText(toolTip);
             this.setPreferredSize(new Dimension(img.getWidth(this), img.getHeight(this)));
             this.setBorder(BorderFactory.createEtchedBorder());

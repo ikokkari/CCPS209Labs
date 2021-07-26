@@ -1,12 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
 import java.util.*;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class P2J7Test {
 
@@ -49,7 +46,6 @@ public class P2J7Test {
             seen.clear();
             for(int j = 0; j < pops.length; j++) {
                 int p;
-                int count = 0;
                 do {
                     if(j > 0 && rng.nextInt(100) < 20) {
                         p = pops[j-1] + 1;
@@ -80,7 +76,7 @@ public class P2J7Test {
         String b2 = "[moe, rob, joe, tom, bob]";
         assertEquals(b2, P2J7.josephus(a2, 2).toString());
         
-        List<Double> a3 = Arrays.asList(123.456);
+        List<Double> a3 = Collections.singletonList(123.456);
         String b3 = "[123.456]";
         assertEquals(b3, P2J7.josephus(a3, 99).toString());
         
@@ -99,7 +95,7 @@ public class P2J7Test {
                 "phoebe", "chandler", "monica",
                 "charlie", "alan", "walden"
             );
-        List<String> items = new ArrayList<String>();
+        List<String> items = new ArrayList<>();
         for(int i = 0; i < 1000; i++) {
             String next = people.get(i % people.size());
             if(i >= people.size()) { next += i; }

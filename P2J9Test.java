@@ -1,22 +1,8 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertEquals;
 
 public class P2J9Test {
-
-    // You can use this utility method to print true positions of the boolean[].
-    private void printTrues(boolean[] a) {
-        for(int i = 0; i < a.length; i++) {
-            if(a[i]) { System.out.print(i + " "); }
-        }
-        System.out.println("");
-    }
     
     @Test public void testSubtractSquareExplicit() {
         int[] coldStates = {0, 2, 5, 7, 10, 12, 15, 17, 20, 22, 34, 39};

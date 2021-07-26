@@ -1,11 +1,8 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.*;
-import java.util.zip.CRC32;
 import java.util.Random;
+import java.util.zip.CRC32;
+
+import static org.junit.Assert.assertEquals;
 
 public class P2J10Test {
     
@@ -19,17 +16,17 @@ public class P2J10Test {
     
     private static final int N = 1000;
     
-    @Test public void testJaccard() { testDissimilarity(N, 619021331L, 0); }
-    @Test public void testMatching() { testDissimilarity(N, 2582992579L, 1); }
-    @Test public void testDice() { testDissimilarity(N, 864445653L, 2); }
-    @Test public void testRogersTanimono() { testDissimilarity(N, 2631246168L, 3); }
-    @Test public void testRussellRao() { testDissimilarity(N, 3219060315L, 4); }
-    @Test public void testSokalSneath() { testDissimilarity(N, 737788739L, 5); }
+    @Test public void testJaccard() { testDissimilarity(619021331L, 0); }
+    @Test public void testMatching() { testDissimilarity(2582992579L, 1); }
+    @Test public void testDice() { testDissimilarity(864445653L, 2); }
+    @Test public void testRogersTanimono() { testDissimilarity(2631246168L, 3); }
+    @Test public void testRussellRao() { testDissimilarity(3219060315L, 4); }
+    @Test public void testSokalSneath() { testDissimilarity(737788739L, 5); }
     
-    private void testDissimilarity(int n, long expected, int mode) {
+    private void testDissimilarity(long expected, int mode) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < P2J10Test.N; i++) {
             int nn = 5 + i / 20;
             boolean[] v1 = new boolean[nn], v2 = new boolean[nn];
             fill(v1, rng); fill(v2, rng);
@@ -42,12 +39,7 @@ public class P2J10Test {
             else { result = P2J10.sokalSneathDissimilarity(v1, v2); }
             check.update(result.getNum().intValue());
             check.update(result.getDen().intValue());
-            // if(i < 10) {
-                // System.out.println(mode + " " + 
-                // Arrays.toString(v1) + " " + Arrays.toString(v2) + " " + result);
-            // }
         }
         assertEquals(expected, check.getValue());
     }
-    
 }

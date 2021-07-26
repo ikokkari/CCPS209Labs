@@ -1,12 +1,10 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import java.util.HashSet;
 import java.util.Random;
-
-import java.io.*;
-import java.util.*;
+import java.util.TreeSet;
 import java.util.zip.CRC32;
+
+import static org.junit.Assert.*;
 
 public class PolynomialTestThree {
 
@@ -16,15 +14,15 @@ public class PolynomialTestThree {
         Polynomial p1 = new Polynomial(c1);
         Polynomial p2 = new Polynomial(c2);
         Polynomial p3 = new Polynomial(c1);
-        assertTrue(p1.equals(p1));
-        assertTrue(p2.equals(p2));
-        assertTrue(p1.equals(p3));
-        assertTrue(p3.equals(p1));
-        assertFalse(p1.equals(p2));
-        assertFalse(p2.equals(p1));
+        assertEquals(p1, p1);
+        assertEquals(p2, p2);
+        assertEquals(p1, p3);
+        assertEquals(p3, p1);
+        assertNotEquals(p1, p2);
+        assertNotEquals(p2, p1);
         // The equals method must work between two objects of any type.
-        assertFalse(p1.equals("hello world"));
-        assertFalse(p1.equals(c1));
+        assertNotEquals("hello world", p1);
+        assertNotEquals(p1, c1);
     }
 
     @Test public void testCompareTo() {
@@ -61,8 +59,8 @@ public class PolynomialTestThree {
         Random rng = new Random(SEED);
         // These different collections are supposed to stay in lockstep so that
         // at all times, both tree and hash contain the exact same polynomials.
-        TreeSet<Polynomial> tree = new TreeSet<Polynomial>();
-        HashSet<Polynomial> hash = new HashSet<Polynomial>();
+        TreeSet<Polynomial> tree = new TreeSet<>();
+        HashSet<Polynomial> hash = new HashSet<>();
         CRC32 check = new CRC32();
         for(int i = 0; i < TRIALS; i++) {
             Polynomial p1 = createRandom(rng.nextInt(10), rng);

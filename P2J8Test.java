@@ -1,13 +1,9 @@
-import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import java.util.Random;
-
-import java.io.*;
-import java.util.*;
-import java.util.zip.CRC32;
 import java.math.BigInteger;
+import java.util.Random;
+import java.util.zip.CRC32;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 public class P2J8Test {
     
@@ -78,7 +74,6 @@ public class P2J8Test {
         BigInteger curr = new BigInteger("1");
         final BigInteger TWO = new BigInteger("2");
         int[] tens = {1, 10, 100, 1000, 10000};
-        int scale = 2;
         for(int i = 0; i < 1000; i++) {
             if(i % 5 == 0) { curr = curr.multiply(TWO); }
             int s = rng.nextInt(100) + 2;
