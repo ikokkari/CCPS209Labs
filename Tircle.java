@@ -20,7 +20,7 @@ public class Tircle implements AnimationFrame {
     }
     
     // The colours that the recursion cycles through.
-    private static Color[] colors = { 
+    private static final Color[] colors = {
         new Color(.9f, .9f, .95f), 
         new Color(.87f, .8f, .75f), 
         new Color(.75f, .71f, .69f), 
@@ -30,7 +30,7 @@ public class Tircle implements AnimationFrame {
     };
     
     // How many breathing circles are rendered.
-    private int k; 
+    private final int k;
     
     public Tircle(int k) { this.k = k; }
     
