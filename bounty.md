@@ -50,6 +50,12 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
   <tr>
+  <td>0(L). I can, therefore I must
+  </td>
+  <td>
+  </td>
+  </tr>
+  <tr>
    <td>18. Working scale
    </td>
    <td>Zhengchao Gou, Oct 24, 2020
