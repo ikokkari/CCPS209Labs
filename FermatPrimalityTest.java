@@ -43,6 +43,6 @@ public class FermatPrimalityTest {
             if(p % 10 == 5) { p += 2; }
             assert p > 0;
         }
-        assertEquals(2241861074L, check.getValue());
+        assertEquals(997979152L, check.getValue());
     }
 }
