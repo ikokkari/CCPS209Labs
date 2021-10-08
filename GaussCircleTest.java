@@ -5,6 +5,30 @@ import static org.junit.Assert.assertEquals;
 
 public class GaussCircleTest {
 
+    private static final int[][] expected = {
+        // r, inside, border, edge
+        {3, 13, 12, 4}, 
+        {5, 53, 16, 12},
+        {6, 81, 28, 4},
+        {7, 113, 32, 4},
+        {10, 261, 44, 12},
+        {11, 317, 56, 4},
+        {20, 1145, 100, 12},
+        {21, 1257, 112, 4},
+        {33, 3225, 180, 4},
+        {37, 4085, 196, 12}
+    };
+    
+    @Test public void testExpected() {
+        long[] out = new long[3];
+        for(int[] test: expected) {
+            GaussCircle.classifyPoints(test[0], out);
+            assertEquals(test[1], out[0]);
+            assertEquals(test[2], out[1]);
+            assertEquals(test[3], out[2]);
+        }
+    }
+    
     @Test public void testClassifyPointsTen() {
         testClassifyPoints(10, 3659121734L);
     }
@@ -13,9 +37,9 @@ public class GaussCircleTest {
         testClassifyPoints(1000, 3685844941L);
     }
     
-    @Test public void testClassifyPointsTenThousand() {
-        testClassifyPoints(10_000, 2358886060L);
-    }
+    // @Test public void testClassifyPointsTenThousand() {
+        // testClassifyPoints(10_000, 2358886060L);
+    // }
     
     private void testClassifyPoints(int n, long expected) {
         CRC32 check = new CRC32();

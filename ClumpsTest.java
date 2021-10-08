@@ -25,12 +25,12 @@ public class ClumpsTest {
                 check.update(as);
                 check.update(bs);
                 if(c.sameClump(a, b)) {
+                    assertEquals(as, bs);
                     // Clumping should do nothing if already in same clump.
                     assertFalse(c.meld(a, b));
-                    assertEquals(as, bs);
                 }
                 else {
-                    // After melding, two separate clumps are the same clump.
+                    // After melding, two separate clumps become a new clump.
                     assertTrue(c.meld(a, b));
                     assertTrue(c.sameClump(a, b));
                     // New clump is as big as the two old clumps together.

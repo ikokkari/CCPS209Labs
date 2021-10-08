@@ -94,10 +94,6 @@ public class CompGeomTestFour {
         testBox(50);
     }
     
-    @Test public void testBoxFiveHundred() {
-        testBox(500);
-    }
-    
     private void testBox(int n) {
         Random rng = new Random(12345);
         List<Integer> indices = new ArrayList<>();
@@ -131,7 +127,7 @@ public class CompGeomTestFour {
     
     @Test public void verifyPicksTheorem() {
         Random rng = new Random(12345);
-        for(int i = 0; i < 500; i++) {
+        for(int i = 0; i < 100; i++) {
             int n = 6 + (i / 5), m = 3 + 2 * i;
             int[] xs = new int[n], ys = new int[n];
             boolean[][] taken = new boolean[m][m];
