@@ -44,6 +44,12 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
   <tr>
+  <td>0(G). ...Or We Shall All Crash Separately
+  </td>
+  <td>
+  </td>
+  </tr>
+  <tr>
   <td>0(K). Suffix arrays
   </td>
   <td>
