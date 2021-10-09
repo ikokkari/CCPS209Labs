@@ -11,6 +11,7 @@ public class P2J7Test {
 
     @Test public void testHuntingtonHill() {
         // Explicit test cases
+        
         int[] a1 = {42};
         int[] b1 = {5};
         assertArrayEquals(b1, P2J7.huntingtonHill(a1, 5));
@@ -33,8 +34,17 @@ public class P2J7Test {
         
         int[] a6 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         int[] b6 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        assertArrayEquals(b6, P2J7.huntingtonHill(a6, 55)); 
+        assertArrayEquals(b6, P2J7.huntingtonHill(a6, 55));
         
+        // Making sure that your code doesn't silently do int overflows.
+        int[] a7 = {1000000, 999999, 999998};
+        int[] b7 = {34, 33, 33};
+        assertArrayEquals(b7, P2J7.huntingtonHill(a7, 100));
+        
+        int[] a8 = {1000000000, 999999999, 999999998};
+        int[] b8 = {334, 333, 333};
+        assertArrayEquals(b8, P2J7.huntingtonHill(a8, 1000));        
+       
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
