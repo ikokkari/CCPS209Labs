@@ -205,5 +205,11 @@ All these bounty points will be added to the lab marks of those students all in 
    <td>Karl Bustamante, Nov 14, 2020
    </td>
   </tr>
+   <tr>
+   <td>54. All Hail The Mighty Xor
+   </td>
+   <td>
+   </td>
+  </tr>
 </table>
 
