@@ -52,7 +52,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
   <td>0(K). Suffix arrays
   </td>
-  <td>
+  <td>Mohammed Waqas, Oct 17, 2021
   </td>
   </tr>
   <tr>
