@@ -43,7 +43,7 @@ public class P2J11Test {
         assertEquals(f4, P2J11.find("oe", t4, s4));
     }
     
-    @Test public void testWarAndPeace() {
+    @Test public void testUsingWarAndPeaceAsData() {
         // Construct a version of War and Peace with everything in lowercase,
         // with newlines converted into single whitespaces.
         StringBuilder sb = new StringBuilder();
