@@ -44,7 +44,7 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
   <tr>
-  <td>0(G). ...Or we shall all crash separately
+  <td>0(G). ...or we shall all crash separately
   </td>
   <td>Mohammed Waqas, Oct 9, 2021
   </td>
@@ -206,7 +206,7 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
    <tr>
-   <td>54. All Hail The Mighty Xor
+   <td>54. All hail the mighty Xor
    </td>
    <td>
    </td>
