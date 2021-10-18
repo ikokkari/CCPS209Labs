@@ -38,9 +38,9 @@ All these bounty points will be added to the lab marks of those students all in 
 
 <table>
   <tr>
-   <td><strong>Problem</strong>😕
+   <td><strong>Problem </strong>😕
    </td>
-   <td><strong>Bounty claimed</strong>👍
+   <td><strong>Bounty claimed </strong>👍
    </td>
   </tr>
   <tr>
