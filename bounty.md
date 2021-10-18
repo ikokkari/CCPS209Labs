@@ -33,7 +33,7 @@ Each bounty is given to the student to first send their source code to the instr
 
 I will update this document as submissions arrive, so please check from this list if the bounty for the solution you would like to submit is still unclaimed. Finding errors in a specification for a lab is also worth a bounty between one and three points for the first finder. Please submit any such error reports to this same email address.
 
-All these bounty points will be added to the lab marks of those students all in one bunch at the end of the semester, along with the proud sense of achievement of protecting all future students from banging their head against the wall trying to solve something impossible. The names of the students solving these problems will be posted below. If you do not wish to see your name in this list, please mention that in the submission email.
+All these bounty points will be added to the lab marks of those students all in one bunch at the end of the semester, along with the proud sense of achievement of protecting all future students from banging their head against the wall trying to solve something impossible. The names of the students solving these problems will be posted below. If you do not wish to see your name in this list, please mention that in the submission email, and I will credit your bounty below as "Anonymous".
 
 
 <table>
