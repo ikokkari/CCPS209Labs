@@ -25,11 +25,11 @@ Conversion notes:
 
 # Bug Bounty List for CCPS 209
 
-The following lab problems were among the big bunch that was added to the set during the pandemic isolation of Spring and Summer of 2020. As of this writing, the listed problems have not yet been solved and submitted by any students. To ensure that these problems and their automated testers do not contain any errors that would make them impossible for students to solve, the author Ilkka Kokkarinen offers a bounty of **three extra lab marks** to the first solver of each problem in the list below.
+To ensure that these problems and their automated testers do not contain any errors that would make them impossible for students to solve, the author Ilkka Kokkarinen offers a bounty of **three extra lab marks** to the first solver of each problem in the list below.
 
-Knowing the rate that the existing lab problems for 109 and 209 have contained errors in their model solutions and therefore in their automated mass testers, the following list may still contain problems whose testers are currently impossible to pass even with a 100% correct working solution. Students who are reasonably sure that their solution is correct should submit their solution for the instructor for comparison. Any such solution that reveals a bug in the automated tester or in the problem specification will receive a double bounty of **six extra lab marks**.  
+Knowing the rate that the existing lab problems for 109 and 209 have contained errors in their model solutions and therefore in their automated mass testers, the following list may still contain problems whose testers are currently impossible to pass even with a 100% correct working solution. Students who are reasonably sure that their solution is correct should submit their solution for the instructor for comparison. Any such solution that reveals a catastrophic bug in the private model solution, the automated tester or in the problem specification will receive a double bounty of **six extra lab marks**.  
 
-Each bounty is given to the student to first send their source code to the instructor's email address `ilkka.kokkarinen@gmail.com`. The student receiving the bounty will, along with all other students who solve that lab problem during this semester, of course also receive the normal lab mark of three points for that lab, effectively scoring double points for being the trailblazer to clear the way for the main army that follows.
+Each bounty is given to the student to first send their source code to the instructor's email address `ilkka.kokkarinen@gmail.com`. The student receiving the bounty will, same as all the other students who independently solve that lab problem during this semester, also receive the normal lab mark of three points for that lab. Being the trailblazer to clear the way for the main army that follows effectively comes with the reward of double points for that lab.
 
 I will update this document as submissions arrive, so please check from this list if the bounty for the solution you would like to submit is still unclaimed. Finding errors in a specification for a lab is also worth a bounty between one and three points for the first finder. Please submit any such error reports to this same email address.
 
@@ -38,9 +38,9 @@ All these bounty points will be added to the lab marks of those students all in 
 
 <table>
   <tr>
-   <td><strong>Problem </strong>😕
+   <td><strong>Problem</strong>😕
    </td>
-   <td><strong>Bounty claimed </strong>👍
+   <td><strong>Bounty claimed</strong>👍
    </td>
   </tr>
   <tr>
