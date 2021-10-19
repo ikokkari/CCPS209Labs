@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.zip.CRC32;
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -45,16 +46,18 @@ public class ZeckendorfTest {
         // Pseudorandom fuzz tester
         Random rng = new Random(12345);
         BigInteger two = new BigInteger("2");
-        CRC32 check = new CRC32(); 
-        for(int i = 1; i <= 300; i++) {
+        CRC32 check = new CRC32();
+        int count = 0, goal = 5, n = 2;
+        for(int i = 1; i <= 3000; i++) {
             List<BigInteger> orig = new ArrayList<>();
             BigInteger b = new BigInteger("" + (1 + rng.nextInt(i*i)));
             orig.add(b);
-            for(int j = 0; j < i; j++) {
+            for(int j = 0; j < n; j++) {
                 b = b.multiply(two);
                 b = b.add(new BigInteger("" + rng.nextInt(100)));
                 orig.add(b);
             }
+            Collections.shuffle(orig, rng);
             String zits = Zeckendorf.encode(orig);
             check.update(zits.length());
             for(int k = 0; k < zits.length(); k++) {
@@ -62,7 +65,12 @@ public class ZeckendorfTest {
             }
             List<BigInteger> back = Zeckendorf.decode(zits);
             assertEquals(orig, back);
+            if(++count == goal) {
+                count = 0;
+                goal = goal + 3;
+                n += 1;
+            }
         }
-        assertEquals(278965465L, check.getValue());
+        assertEquals(61550952L, check.getValue());
     }
 }
