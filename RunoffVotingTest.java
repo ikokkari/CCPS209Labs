@@ -7,19 +7,19 @@ import static org.junit.Assert.assertEquals;
 public class RunoffVotingTest {
     
     @Test public void testCondorcetMethodTen() {
-        testInstantRunoff(10, 877767557L, true);
+        testInstantRunoff(10, 346452728L, true);
     }
     
     @Test public void testCondorcetMethodHundred() {
-        testInstantRunoff(100, 4279680524L, true);
+        testInstantRunoff(100, 3227340083L, true);
     }
     
     @Test public void testInstantRunoffTen() {
-        testInstantRunoff(10, 1206957385L, false);
+        testInstantRunoff(10, 346452728L, false);
     }
     
     @Test public void testInstantRunoffHundred() {
-        testInstantRunoff(100, 926962316L, false);
+        testInstantRunoff(100, 1110314995L, false);
     }
     
     private void testInstantRunoff(int n, long expected, boolean condorcet) {
@@ -27,7 +27,7 @@ public class RunoffVotingTest {
         CRC32 check = new CRC32();
         for(int i = 0; i < n; i++) {
             int V = 10 * i * i + 1; // number of voters
-            int C = 2 * i + 2; // number of candidates
+            int C = 2 * i/10 + 2; // number of candidates
             int[][] ballots = new int[V][C];
             int[] cands = new int[C];
             for(int c = 0; c < C; c++) { cands[c] = c; }
