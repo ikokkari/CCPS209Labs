@@ -46,19 +46,19 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
   <td>0(G). ...or we shall all crash separately
   </td>
-  <td>Mohammed Waqas, Oct 9, 2021
+  <td>Mohammad Waqas, Oct 9, 2021
   </td>
   </tr>
   <tr>
   <td>0(K). Suffix arrays
   </td>
-  <td>Mohammed Waqas, Oct 17, 2021
+  <td>Mohammad Waqas, Oct 17, 2021
   </td>
   </tr>
   <tr>
   <td>0(L). I can, therefore I must
   </td>
-  <td>Mohammed Waqas, Oct 18, 2021
+  <td>Mohammad Waqas, Oct 18, 2021
   </td>
   </tr>
   <tr>
