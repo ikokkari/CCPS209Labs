@@ -130,7 +130,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
    <td>35. Multiple winner elections
    </td>
-   <td>
+   <td>Mohammad Waqas, Oct 23, 2021
    </td>
   </tr>
   <tr>
