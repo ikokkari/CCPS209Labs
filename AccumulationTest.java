@@ -28,7 +28,7 @@ public class AccumulationTest {
             }
             // Make all possible subarray sum queries.
             for(int j = 0; j < n; j++) {
-                for(int k = j; k < n; k++) {
+                for(int k = j; k <= n; k++) {
                     int result = Accumulation.subarraySum(accum, j, k);
                     check.update(result);
                 }
@@ -40,7 +40,7 @@ public class AccumulationTest {
                 a = new int[++n];
             }
         }
-        assertEquals(1298073251L, check.getValue());
+        assertEquals(2829421892L, check.getValue());
     }
 
     @Test public void test2D() {
