@@ -1,6 +1,7 @@
 import org.junit.Test;
 import java.util.Random;
 import java.util.zip.CRC32;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
 import java.util.Arrays;
@@ -12,12 +13,20 @@ public class AccumulationTest {
         int[] orig1 = {4, -1, 3, 7};
         int[] acc1 = {4, 3, 6, 13};
         assertArrayEquals(acc1, Accumulation.accumulate1D(orig1));
-        System.out.println(Arrays.toString(Accumulation.accumulate1D(orig1)));
         assertEquals(3, Accumulation.subarraySum(acc1, 0, 2));
         assertEquals(2, Accumulation.subarraySum(acc1, 1, 3));
         assertEquals(13, Accumulation.subarraySum(acc1, 0, 4));
         assertEquals(0, Accumulation.subarraySum(acc1, 2, 2));
         
+        int[] orig2 = {3, 2, -5, 4};
+        int[] acc2 = {3, 5, 0, 4};
+        assertArrayEquals(acc2, Accumulation.accumulate1D(orig2));
+        assertEquals(4, Accumulation.subarraySum(acc2, 0, 4));
+        assertEquals(0, Accumulation.subarraySum(acc2, 0, 3));
+        assertEquals(-3, Accumulation.subarraySum(acc2, 1, 3));
+        assertEquals(0, Accumulation.subarraySum(acc2, 3, 3));
+        
+        // Pseudorandom fuzz testing
         Random rng = new Random(12345);
         CRC32 check = new CRC32();
         int count = 0, goal = 5, n = 3;
@@ -56,6 +65,24 @@ public class AccumulationTest {
     }
 
     @Test public void test2D() {
+        // Explicit test cases
+        int[][] orig1 =  {{1, 2, 3}, {4, 5, 6}};
+        int[][] accum1 = {{1, 3, 6}, {5, 12, 21}};
+        assertTrue(Arrays.deepEquals(accum1, Accumulation.accumulate2D(orig1)));
+        assertEquals(5, Accumulation.subrectangleSum(accum1, 0, 0, 2, 1));
+        assertEquals(21, Accumulation.subrectangleSum(accum1, 0, 0, 2, 3));
+        assertEquals(9, Accumulation.subrectangleSum(accum1, 0, 2, 2, 1));
+        assertEquals(16, Accumulation.subrectangleSum(accum1, 0, 1, 2, 2));
+        assertEquals(0, Accumulation.subrectangleSum(accum1, 1, 0, 0, 2));
+        
+        int[][] orig2 =  {{1, -1}, {-2, 2}, {3, -3}, {-4, 4}, {5, -5}};
+        int[][] accum2 = {{1, 0}, {-1, 0}, {2, 0}, {-2, 0}, {3, 0}};
+        assertTrue(Arrays.deepEquals(accum2, Accumulation.accumulate2D(orig2)));
+        assertEquals(0, Accumulation.subrectangleSum(accum2, 0, 0, 5, 2));
+        assertEquals(1, Accumulation.subrectangleSum(accum2, 0, 1, 2, 1));
+        assertEquals(3, Accumulation.subrectangleSum(accum2, 1, 1, 3, 1));
+        
+        // Pseudorandom fuzz testing
         Random rng = new Random(12345);
         CRC32 check = new CRC32();
         int count = 0, goal = 5, n = 3;
