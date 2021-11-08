@@ -2,10 +2,22 @@ import org.junit.Test;
 import java.util.Random;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
+import java.util.Arrays;
 
 public class AccumulationTest {
 
     @Test public void test1D() {
+        // Explicit test cases
+        int[] orig1 = {4, -1, 3, 7};
+        int[] acc1 = {4, 3, 6, 13};
+        assertArrayEquals(acc1, Accumulation.accumulate1D(orig1));
+        System.out.println(Arrays.toString(Accumulation.accumulate1D(orig1)));
+        assertEquals(3, Accumulation.subarraySum(acc1, 0, 2));
+        assertEquals(2, Accumulation.subarraySum(acc1, 1, 3));
+        assertEquals(13, Accumulation.subarraySum(acc1, 0, 4));
+        assertEquals(0, Accumulation.subarraySum(acc1, 2, 2));
+        
         Random rng = new Random(12345);
         CRC32 check = new CRC32();
         int count = 0, goal = 5, n = 3;
@@ -40,7 +52,7 @@ public class AccumulationTest {
                 a = new int[++n];
             }
         }
-        assertEquals(2829421892L, check.getValue());
+        assertEquals(160402440L, check.getValue());
     }
 
     @Test public void test2D() {
