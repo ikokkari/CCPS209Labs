@@ -46,13 +46,14 @@ public class Java5Demo {
         assert a == b;      // Wrapper vs. wrapper, memory address comparison.
         assert a.equals(b); // Wrapper vs. wrapper, object content comparison.
         
-        Integer d = 99;     // Boxing primitive to wrapper, small enough to be in cache.
-        Integer e = new Integer(99); // new always creates a new object, no matter what
+        Integer d = 84;     // Boxing primitive to wrapper, small enough to be in cache.
+        Integer e = new Integer(84); // new always creates a new object, no matter what
         assert d != e;      // Memory address comparison, guaranteed different here.
         assert d.equals(e); // Wrapper vs. wrapper, object content comparison.
+        assert a + b == e;  // Arithmetic automatically unboxes before the operation.
         
-        Integer f = 9999;   // Boxing primitive to wrapper, outside the cache.
-        Integer g = 9999;   // Boxing primitive to wrapper, outside the cache.
+        Integer f = 9999;   // Boxing primitive to wrapper, outside the cache range.
+        Integer g = 9999;   // Boxing primitive to wrapper, outside the cache range.
         assert f != g;      // Memory address comparison, guaranteed different here.
         assert f.equals(g); // Wrapper vs. wrapper, object content comparison.
         
