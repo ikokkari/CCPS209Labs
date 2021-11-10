@@ -21,13 +21,25 @@ public class MatchmakerTest {
         }
     }
     
-    @Test public void testGaleShapley() {
-        Random rng = new Random(12345);
+    @Test public void testGaleShapleyTen() {
+        testGaleShapley(10, 827861309L);
+    }
+    
+    @Test public void testGaleShapleyHundred() {
+        testGaleShapley(100, 843398654L);
+    }
+    
+    @Test public void testGaleShapleyTwoThousand() {
+        testGaleShapley(2000, 908980302L);
+    }
+    
+    private void testGaleShapley(int rounds, long expected) {
+        Random rng = new Random(rounds);
         CRC32 check = new CRC32();
         int count = 1, goal = 1, n = 1;
         int[][] boysPref = new int[n][n], girlsPref = new int[n][n];
         
-        for(int i = 0; i < 2000; i++) {
+        for(int i = 0; i < rounds; i++) {
             for(int j = 0; j < n; j++) {
                 fillRandomPermutation(rng, boysPref[j]);
                 fillRandomPermutation(rng, girlsPref[j]);
@@ -42,6 +54,6 @@ public class MatchmakerTest {
                 girlsPref = new int[n][n];
             }
         }
-        assertEquals(2009604739L, check.getValue());
+        assertEquals(expected, check.getValue());
     }
 }
