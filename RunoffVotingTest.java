@@ -1,25 +1,83 @@
 import org.junit.Test;
 import java.util.Random;
 import java.util.zip.CRC32;
-
 import static org.junit.Assert.assertEquals;
 
 public class RunoffVotingTest {
     
+    @Test public void testCondorcetMethodExplicit() {
+        // Some made up test cases
+        
+        int[][] b0 = { // Two candidates, two ballots
+            {0, 1}, {1, 0}
+        };
+        assertEquals(1, RunoffVoting.condorcetMethod(b0));
+        int[][] b1 = { // Three candidates, six ballots
+            {0, 1, 2}, {0, 2, 1}, {1, 2, 0}, {2, 0, 1}, {1, 0, 2}, {2, 1, 0}
+        };
+        assertEquals(2, RunoffVoting.condorcetMethod(b1));
+        int[][] b2 = { // Four candidates, six ballots
+            {3, 2, 1, 0}, {0, 1, 2, 3}, {2, 1, 3, 0}, {0, 3, 1, 2}, {2, 1, 0, 3}, {3, 2, 1, 0}
+        };
+        assertEquals(3, RunoffVoting.condorcetMethod(b2));
+        int[][] b3 = { // Three candidates, six ballots
+            {2, 1, 0}, {2, 0, 1}, {0, 2, 1}, {0, 2, 1}, {1, 0, 2}, {1, 2, 0}
+        };
+        assertEquals(2, RunoffVoting.condorcetMethod(b3));
+        
+        // From Wikipedia page on Condorcet: voting for the capital of Tennessee
+        int[][] tn = new int[100][4];
+        // 0 = Chattanooga, 1 = Knoxville, 2 = Memphis, 3 = Nashville
+        for(int b = 0; b < 42; b++) { // voters close to Memphis
+            tn[b][0] = 2; tn[b][1] = 3; tn[b][2] = 0; tn[b][3] = 1;
+        }
+        for(int b = 42; b < 68; b++) { // voters close to Nashville
+            tn[b][0] = 3; tn[b][1] = 0; tn[b][2] = 1; tn[b][3] = 2;
+        }
+        for(int b = 68; b < 83; b++) { // voters close to Chattanooga
+             tn[b][0] = 0; tn[b][1] = 1; tn[b][2] = 3; tn[b][3] = 2;   
+        }
+        for(int b = 83; b < 100; b++) { // voters close to Knoxville
+             tn[b][0] = 1; tn[b][1] = 0; tn[b][2] = 3; tn[b][3] = 2;   
+        }
+        assertEquals(3, RunoffVoting.condorcetMethod(tn));
+    }
+    
+    @Test public void testInstantRunoffExplicit() {
+        // Some made up test cases
+        
+        int[][] b0 = { // Two candidates, two ballots
+            {0, 1}, {1, 0}
+        };
+        assertEquals(1, RunoffVoting.instantRunoff(b0));
+        int[][] b1 = { // Three candidates, six ballots
+            {0, 1, 2}, {0, 2, 1}, {1, 2, 0}, {2, 0, 1}, {1, 0, 2}, {2, 1, 0}
+        };
+        assertEquals(2, RunoffVoting.instantRunoff(b1));
+        int[][] b2 = { // Four candidates, six ballots
+            {3, 2, 1, 0}, {0, 1, 2, 3}, {2, 1, 3, 0}, {0, 3, 1, 2}, {2, 1, 0, 3}, {3, 2, 1, 0}
+        };
+        assertEquals(3, RunoffVoting.instantRunoff(b2));
+        int[][] b3 = { // Three candidates, six ballots
+            {2, 1, 0}, {2, 0, 1}, {0, 2, 1}, {0, 2, 1}, {1, 0, 2}, {1, 2, 0}
+        };
+        assertEquals(2, RunoffVoting.instantRunoff(b3));
+    }
+    
     @Test public void testCondorcetMethodTen() {
-        testInstantRunoff(10, 346452728L, true);
+        testInstantRunoff(10, 4097995165L, true);
     }
     
     @Test public void testCondorcetMethodHundred() {
-        testInstantRunoff(100, 3227340083L, true);
+        testInstantRunoff(100, 3790711128L, true);
     }
     
     @Test public void testInstantRunoffTen() {
-        testInstantRunoff(10, 346452728L, false);
+        testInstantRunoff(10, 4097995165L, false);
     }
     
     @Test public void testInstantRunoffHundred() {
-        testInstantRunoff(100, 1110314995L, false);
+        testInstantRunoff(100, 1657217758L, false);
     }
     
     private void testInstantRunoff(int n, long expected, boolean condorcet) {
@@ -32,6 +90,7 @@ public class RunoffVotingTest {
             int[] cands = new int[C];
             for(int c = 0; c < C; c++) { cands[c] = c; }
             for(int v = 0; v < V; v++) {
+                // Create the ballots so that voters tend to have similar preferences.
                 System.arraycopy(cands, 0, ballots[v], 0, C);
                 for(int k = 0; k < 3; k++) {
                     int p1 = rng.nextInt(C);
@@ -40,6 +99,13 @@ public class RunoffVotingTest {
                 }
             }
             int result = condorcet? RunoffVoting.condorcetMethod(ballots) : RunoffVoting.instantRunoff(ballots);
+            // Shuffling the ballots before recounting surely can't change anything, yes?
+            for(int v = 1; v < V; v++) {
+                int vv = rng.nextInt(v + 1);
+                int[] tmp = ballots[v]; ballots[v] = ballots[vv]; ballots[vv] = tmp;
+            }
+            int result2 = condorcet? RunoffVoting.condorcetMethod(ballots) : RunoffVoting.instantRunoff(ballots);
+            assertEquals(result, result2); 
             check.update(result);
         }
         assertEquals(expected, check.getValue());
