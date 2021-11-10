@@ -214,6 +214,12 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>55. Accumulated wisdom
    </td>
+   <td>Mohammad Waqas, Nov 10, 2021
+   </td>
+  </tr>
+   <tr>
+   <td>56. Find me a find, catch me a catch
+   </td>
    <td>
    </td>
   </tr>
