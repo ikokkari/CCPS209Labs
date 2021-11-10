@@ -24,6 +24,10 @@ public class RunoffVotingTest {
             {2, 1, 0}, {2, 0, 1}, {0, 2, 1}, {0, 2, 1}, {1, 0, 2}, {1, 2, 0}
         };
         assertEquals(2, RunoffVoting.condorcetMethod(b3));
+        int[][] b4 = { // Four candidates, 2 being everyone's second choice
+            {0, 2, 1, 3}, {1, 2, 3, 0}, {3, 2, 1, 0}, {1, 2, 0, 3}, {0, 2, 1, 3}, {3, 2, 0, 1}  
+        };
+        assertEquals(1, RunoffVoting.instantRunoff(b4)); // Apple pie loses
         
         // From Wikipedia page on Condorcet: voting for the capital of Tennessee
         int[][] tn = new int[100][4];
@@ -62,6 +66,10 @@ public class RunoffVotingTest {
             {2, 1, 0}, {2, 0, 1}, {0, 2, 1}, {0, 2, 1}, {1, 0, 2}, {1, 2, 0}
         };
         assertEquals(2, RunoffVoting.instantRunoff(b3));
+        int[][] b4 = { // Four candidates, 2 being everyone's second choice
+            {0, 2, 1, 3}, {1, 2, 3, 0}, {3, 2, 1, 0}, {1, 2, 0, 3}, {0, 2, 1, 3}, {3, 2, 0, 1}  
+        };
+        assertEquals(1, RunoffVoting.instantRunoff(b4)); // Apple pie loses
     }
     
     @Test public void testCondorcetMethodTen() {
