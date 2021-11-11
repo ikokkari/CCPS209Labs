@@ -8,6 +8,25 @@ import java.util.Arrays;
 
 public class MatchmakerTest {
 
+    @Test public void explicitTestCases() {
+        int[][] boys0 = { // all boys have same preferences
+            {0, 1, 2}, {0, 1, 2}, {0, 1, 2}
+        };
+        int[][] girls0 = { // as do girls
+            {2, 0, 1}, {2, 0, 1}, {2, 0, 1}
+        };
+        int[] exp0 = {0, 1, 2};
+        assertArrayEquals(exp0, Matchmaker.galeShapley(boys0, girls0));
+        int[][] boys1 = { // some diversity of opinion
+            {1, 2, 3, 0}, {2, 3, 0, 1}, {3, 0, 1, 2}, {0, 1, 2, 3}
+        };
+        int[][] girls1 = {
+            {3, 1, 2, 0}, {1, 2, 0, 3}, {2, 0, 3, 1}, {0, 3, 1, 2}
+        };
+        int[] exp1 = {1, 2, 3, 0};
+        assertArrayEquals(exp1, Matchmaker.galeShapley(boys1, girls1));
+    }
+    
     private void fillRandomPermutation(Random rng, int[] a) {
         int n = a.length;
         // Fill the array with 0, ..., n-1
