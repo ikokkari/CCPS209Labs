@@ -7,3 +7,5 @@ The specifications for the lab problems are given in the PDF document [CCPS 209 
 Text of `warandpeace.txt` taken from [Project Gutenberg](http://www.gutenberg.org/ebooks/2600).
 
 Image files `coffee.jpg` and `ilkka.jpg` by Ilkka Kokkarinen, released in public domain by the author.
+
+All teachers and students of computer science and Java are welcome to adapt and use these problems and their JUnit testers, with proper attribution.
