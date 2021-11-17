@@ -61,6 +61,7 @@ public class P2J2Test {
         assertEquals("ilka orne", P2J2.uniqueCharacters("ilkka kokkarinen"));
         assertEquals("", P2J2.uniqueCharacters(""));
         assertEquals("\u4444", P2J2.uniqueCharacters("\u4444"));
+        assertEquals("aABbcCDd", P2J2.uniqueCharacters("aABbcCDd"));
         
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
