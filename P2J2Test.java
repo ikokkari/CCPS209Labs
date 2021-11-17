@@ -18,6 +18,8 @@ public class P2J2Test {
         assertEquals("x", P2J2.removeDuplicates("x"));
         assertEquals("x", P2J2.removeDuplicates("xxxxxxxxxxxxx"));
         assertEquals("abcdefgh", P2J2.removeDuplicates("abcdefgh"));
+        // Uppercase and lowercase versions of the same character are different.
+        assertEquals("AabBCcdD", P2J2.removeDuplicates("AabBCcdD"));
         assertEquals("\u1234\u5678\u6666", P2J2.removeDuplicates(
         "\u1234\u5678\u5678\u5678\u5678\u5678\u5678\u6666"
         ));
@@ -29,7 +31,7 @@ public class P2J2Test {
             StringBuilder sb = new StringBuilder();
             int len = rng.nextInt(500);
             for(int j = 0; j < len; j++) {
-                char c = (char)(1 + rng.nextInt(50000));
+                char c = (char)(1 + rng.nextInt(10000));
                 int rep = rng.nextInt(10) + 1;
                 for(int k = 0; k < rep; k++) {
                     sb.append(c);
@@ -37,7 +39,7 @@ public class P2J2Test {
             }
             check.update(P2J2.removeDuplicates(sb.toString()).getBytes());
         }
-        assertEquals(1098912702L, check.getValue());
+        assertEquals(2596651304L, check.getValue());
     }
     
     private char randomChar(Random rng) {
