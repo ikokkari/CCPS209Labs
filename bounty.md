@@ -152,7 +152,7 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
   <tr>
-   <td>45. Permutations I: Algebraic Operations
+   <td>45. Permutations I: Algebraic operations
    </td>
    <td>Wendelle So, Nov 1, 2020
    </td>
@@ -170,7 +170,7 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
   <tr>
-   <td>48. Disjoint clumps
+   <td>48. The Curse of the Clumpino
    </td>
    <td>Karl Bustamante, Dec 6, 2020
    </td>
