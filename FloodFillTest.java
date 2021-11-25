@@ -6,7 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.QuadCurve2D;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
@@ -15,7 +15,9 @@ import static org.junit.Assert.assertEquals;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class FloodFillTest {
+// Ensure that the floating point arithmetic works the same in all environments.
+// We finally get to use this rarest of the rare Java keywords.
+public strictfp class FloodFillTest {
     
     private static final Color[] colors = {
         Color.RED, Color.BLUE, Color.GREEN, Color.MAGENTA
@@ -30,27 +32,26 @@ public class FloodFillTest {
         return new Color(Color.HSBtoRGB(hue, saturation, brightness));
     }
 
-    private static BufferedImage createRandomLines(int w, int h, int lines, Random rng) {
+    // For the main method, create some fancier curves.
+    private static strictfp BufferedImage createRandomCurves(int w, int h, int lines, Random rng) {
         BufferedImage img = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) img.getGraphics();
         g2.setColor(Color.WHITE);
         g2.fill(new Rectangle2D.Double(0, 0, w, h));
         g2.setColor(Color.BLACK);
+        g2.setStroke(new BasicStroke(3.0f));
         g2.drawLine(0, 0, w-1, 0);
         g2.drawLine(0, 0, 0, h-1);
         g2.drawLine(w-1, 0, w-1, h-1);
         g2.drawLine(0, h-1, w-1, h-1);
-        int budge = Math.max(w, h) / 2;
         for(int i = 0; i < lines; i++) {
-            int sx = rng.nextInt(2 * w) - w/2;
-            int sy = rng.nextInt(2 * h) - h/2;
-            int ex = rng.nextInt(2 * w) - w/2;
-            int ey = rng.nextInt(2 * h) - h/2;
-            int mx = (sx + ex)/2 + rng.nextInt(budge) - budge/2;
-            int my = (sy + ey)/2 + rng.nextInt(budge) - budge/2;
-            int lw = rng.nextInt(4) + 2;
-            g2.setStroke(new BasicStroke((float)lw));
-            g2.draw(new QuadCurve2D.Double(sx, sy, mx, my, ex, ey));
+            int width = rng.nextInt(w/2) + w/8;
+            int height = rng.nextInt(h/2) + h/8;
+            int x = rng.nextInt(w) - w/4;
+            int y = rng.nextInt(h) - h/4;
+            double start = rng.nextInt(360);
+            double extent = 180 + rng.nextInt(180);
+            g2.draw(new Arc2D.Double(x, y, width, height, start, extent, Arc2D.OPEN));
         }
         return img;
     }
@@ -77,7 +78,7 @@ public class FloodFillTest {
             int w = 50 + rng.nextInt(30 * i + 1);
             int h = 50 + rng.nextInt(30 * i + 1);
             int lines = 3 * i;
-            BufferedImage img = createRandomLines(w, h, lines, rng);
+            BufferedImage img = createRandomCurves(w, h, lines, rng);
 
             // Flood fill all the white nooks of current image
             int colIdx = 0;
@@ -97,13 +98,13 @@ public class FloodFillTest {
                 }
             }
         }
-        assertEquals(2747513707L, check.getValue());
+        assertEquals(2800237690L, check.getValue());
     }
 
     public static void main(String[] args) {
-        Random rng = new Random(444);
+        Random rng = new Random(5555);
         final int WIDTH = 500, HEIGHT = 600;
-        BufferedImage original = createRandomLines(WIDTH, HEIGHT, 30, rng);
+        BufferedImage original = createRandomCurves(WIDTH, HEIGHT, 16, rng);
         BufferedImage floodFilled = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         floodFilled.getGraphics().drawImage(original, 0, 0, new JPanel());
         for(int y = 0; y < HEIGHT; y++) {
