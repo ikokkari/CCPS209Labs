@@ -61,6 +61,12 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>Mohammad Waqas, Oct 18, 2021
   </td>
   </tr>
+   <tr>
+  <td>0(M). Tower blocks
+  </td>
+  <td>
+  </td>
+  </tr>
   <tr>
    <td>18. Working scale
    </td>
