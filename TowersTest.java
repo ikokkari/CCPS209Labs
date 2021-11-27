@@ -27,15 +27,15 @@ public class TowersTest {
     }
 
     @Test public void testTowersHundred() {
-        massTestTowers(100, 3706310906L);
+        massTestTowers(100, 960593078L);
     }
 
     @Test public void testTowersTenThousand() {
-        massTestTowers(10_000, 2821774497L);
+        massTestTowers(10_000, 608085326L);
     }
 
     @Test public void testTowersThirtyThousand() {
-        massTestTowers(30_000, 141835131L);
+        massTestTowers(30_000, 3780361811L);
     }
 
     private void massTestTowers(int n, long expected) {
@@ -49,7 +49,7 @@ public class TowersTest {
                 int curr = 1;
                 for(int j = 0; j < m; j++) {
                     blocks[j] = curr;
-                    curr += rng.nextInt(3) + 1;
+                    curr += rng.nextInt(3);
                 }
                 count = 0;
                 goal = goal + (m < 3 ? 0: 1);
