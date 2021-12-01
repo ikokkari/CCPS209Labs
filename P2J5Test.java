@@ -55,16 +55,19 @@ public class P2J5Test {
         assertEquals(new BigInteger("70000"), P2J5.sevenZero(16));
         assertEquals(new BigInteger("7770"), P2J5.sevenZero(42));
         assertEquals(new BigInteger("700"), P2J5.sevenZero(100));
+        assertEquals(new BigInteger("7000"), P2J5.sevenZero(125));
         assertEquals(new BigInteger("7000"), P2J5.sevenZero(200));
         assertEquals(new BigInteger("77700"), P2J5.sevenZero(300));
         assertEquals(new BigInteger("70000"), P2J5.sevenZero(400));
         assertEquals(new BigInteger("7000"), P2J5.sevenZero(500));
-        assertEquals(new BigInteger("7777777770"), P2J5.sevenZero(666)); 
-        assertEquals(new BigInteger("777700"), P2J5.sevenZero(2020));
+        assertEquals(new BigInteger("70000"), P2J5.sevenZero(625));
         assertEquals(
           new BigInteger("777777777777777777777777777777777777777777777777777777"),
           P2J5.sevenZero(513)
         );
+        assertEquals(new BigInteger("7777777770"), P2J5.sevenZero(666));
+        assertEquals(new BigInteger("777700"), P2J5.sevenZero(2020));
+        assertEquals(new BigInteger("70000000"), P2J5.sevenZero(625000));
         
         // Systematic checksum tester 
         CRC32 check = new CRC32();
