@@ -49,9 +49,16 @@ public class P2J5Test {
         // Explicit test cases
         assertEquals(new BigInteger("7"), P2J5.sevenZero(1));
         assertEquals(new BigInteger("7"), P2J5.sevenZero(7));
+        assertEquals(new BigInteger("7770"), P2J5.sevenZero(42));
+        assertEquals(new BigInteger("70"), P2J5.sevenZero(70));
         assertEquals(new BigInteger("77"), P2J5.sevenZero(77));
         assertEquals(new BigInteger("70000"), P2J5.sevenZero(16));
         assertEquals(new BigInteger("7770"), P2J5.sevenZero(42));
+        assertEquals(new BigInteger("700"), P2J5.sevenZero(100));
+        assertEquals(new BigInteger("7000"), P2J5.sevenZero(200));
+        assertEquals(new BigInteger("77700"), P2J5.sevenZero(300));
+        assertEquals(new BigInteger("70000"), P2J5.sevenZero(400));
+        assertEquals(new BigInteger("7000"), P2J5.sevenZero(500));
         assertEquals(new BigInteger("7777777770"), P2J5.sevenZero(666)); 
         assertEquals(new BigInteger("777700"), P2J5.sevenZero(2020));
         assertEquals(
@@ -61,10 +68,13 @@ public class P2J5Test {
         
         // Systematic checksum tester 
         CRC32 check = new CRC32();
-        for(int i = 2; i < 300; i++) {
-            BigInteger result = P2J5.sevenZero(i);
+        Random rng = new Random(12345);
+        int curr = 2;
+        for(int i = 2; i < 400; i++) {
+            BigInteger result = P2J5.sevenZero(curr);
             check.update(result.toString().getBytes());
+            curr += rng.nextInt(5) + 1;
         }
-        assertEquals(3791754529L, check.getValue());
+        assertEquals(916368163L, check.getValue());
     }
 }
