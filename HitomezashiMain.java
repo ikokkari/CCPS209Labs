@@ -29,9 +29,9 @@ public class HitomezashiMain {
     }
 
     public static void main(String[] args) {
-        Random rng = new Random(5555);
+        Random rng = new Random(4242);
         final int W = 21, H = 20, SQUARE = 20, ROWS = 2, COLS = 3;
-        final int[] PROB = { 25, 30, 35, 40, 45, 50 };
+        final int[] PROB = { 30, 40, 50, 60, 70, 80 };
         JFrame f = new JFrame("Hitomezashi Demo");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setLayout(new GridLayout(ROWS, COLS));
@@ -40,11 +40,12 @@ public class HitomezashiMain {
             for(int j = 0; j < COLS; j++) {
                 boolean[] horizontal = new boolean[W];
                 boolean[] vertical = new boolean[H];
-                for(int x = 0; x < W; x++) {
-                    horizontal[x] = rng.nextInt(100) < PROB[imageCount];
+                horizontal[0] = vertical[0] = rng.nextBoolean();
+                for(int x = 1; x < W; x++) {
+                    horizontal[x] = rng.nextInt(100) < PROB[imageCount] ? horizontal[x-1] : !horizontal[x-1];
                 }
-                for(int y = 0; y < H; y++) {
-                    vertical[y] = rng.nextInt(100) < PROB[imageCount];
+                for(int y = 1; y < H; y++) {
+                    vertical[y] = rng.nextInt(100) < PROB[imageCount] ? vertical[y-1] : !vertical[y-1];
                 }
                 BufferedImage pattern = Hitomezashi.createPattern(W, H, SQUARE, horizontal, vertical);
                 f.add(new ImagePanel(pattern, PROB[imageCount] + "%"));
