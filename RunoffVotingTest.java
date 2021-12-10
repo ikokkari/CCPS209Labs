@@ -44,6 +44,7 @@ public class RunoffVotingTest {
         for(int b = 83; b < 100; b++) { // voters close to Knoxville
              tn[b][0] = 1; tn[b][1] = 0; tn[b][2] = 3; tn[b][3] = 2;   
         }
+        // Nashville is chosen as the capital city of Tennessee.
         assertEquals(3, RunoffVoting.condorcetMethod(tn));
     }
     
@@ -73,22 +74,23 @@ public class RunoffVotingTest {
     }
     
     @Test public void testCondorcetMethodTen() {
-        testInstantRunoff(10, 4097995165L, true);
+        test(10, 4097995165L, true);
     }
     
     @Test public void testCondorcetMethodHundred() {
-        testInstantRunoff(100, 3790711128L, true);
+        test(100, 3790711128L, true);
     }
     
     @Test public void testInstantRunoffTen() {
-        testInstantRunoff(10, 4097995165L, false);
+        test(10, 4097995165L, false);
     }
     
     @Test public void testInstantRunoffHundred() {
-        testInstantRunoff(100, 1657217758L, false);
+        test(100, 1657217758L, false);
     }
-    
-    private void testInstantRunoff(int n, long expected, boolean condorcet) {
+
+    // Private test method used to test n pseudorandom items of Condorcet or Instant Runoff methods.
+    private void test(int n, long expected, boolean condorcet) {
         Random rng = new Random(12345);
         CRC32 check = new CRC32();
         for(int i = 0; i < n; i++) {
