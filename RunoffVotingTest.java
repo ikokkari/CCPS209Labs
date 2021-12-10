@@ -74,24 +74,24 @@ public class RunoffVotingTest {
     }
     
     @Test public void testCondorcetMethodTen() {
-        test(10, 4097995165L, true);
+        test(10, 3430738225L, true);
     }
     
     @Test public void testCondorcetMethodHundred() {
-        test(100, 3790711128L, true);
+        test(100, 1823942237L, true);
     }
     
     @Test public void testInstantRunoffTen() {
-        test(10, 4097995165L, false);
+        test(10, 540292676L, false);
     }
     
     @Test public void testInstantRunoffHundred() {
-        test(100, 1657217758L, false);
+        test(100, 2562966533L, false);
     }
 
     // Private test method used to test n pseudorandom items of Condorcet or Instant Runoff methods.
     private void test(int n, long expected, boolean condorcet) {
-        Random rng = new Random(12345);
+        Random rng = new Random(12345 + n);
         CRC32 check = new CRC32();
         for(int i = 0; i < n; i++) {
             int V = 10 * i * i + 1; // number of voters
