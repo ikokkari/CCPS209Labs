@@ -30,16 +30,23 @@ public class P2J6Test {
         
         String b6 = "[]";
         assertEquals(b6, P2J6.sumOfDistinctCubes(2020).toString());
-        
+
+        String b7 = "[107, 19, 13, 7, 5]";
+        assertEquals(b7, P2J6.sumOfDistinctCubes(1234567).toString());
+
+        String b8 = "[995, 137, 18, 13, 4]";
+        assertEquals(b8, P2J6.sumOfDistinctCubes(987654321).toString());
+
         // Pseudorandom fuzz tester
         CRC32 check = new CRC32();
         Random rng = new Random(SEED);
-        int c = 1, step = 2, next = 10;
-        while(c > 0) {
-            List<Integer> result = P2J6.sumOfDistinctCubes(c);
+        int n = 1, step = 2, next = 10;
+        while(n > 0) { // Keep going until n overflows and rolls back to negatives
+            List<Integer> result = P2J6.sumOfDistinctCubes(n);
             check.update(result.toString().getBytes());
-            c += rng.nextInt(step) + 1;
-            if(c > next) { 
+            // Increment n with regularly increasing steps
+            n += rng.nextInt(step) + 1;
+            if(n > next) {
                 next = 2 * next;
                 step = 2 * step;
             }
