@@ -241,5 +241,17 @@ All these bounty points will be added to the lab marks of those students all in 
    <td>
    </td>
   </tr>
+   <tr>
+   <td>59. Hitomezashi golygons
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>60. Bit deque
+   </td>
+   <td>
+   </td>
+  </tr>
 </table>
 
