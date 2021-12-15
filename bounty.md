@@ -253,5 +253,11 @@ All these bounty points will be added to the lab marks of those students all in 
    <td>
    </td>
   </tr>
+   <tr>
+   <td>61. Some machine's doin' that for you
+   </td>
+   <td>
+   </td>
+  </tr>
 </table>
 
