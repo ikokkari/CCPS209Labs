@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import java.util.Random;
 import java.util.PriorityQueue;
@@ -9,6 +8,31 @@ public class CalendarQueueTest {
     private static final String[] MESSAGES = {
             "Joe", "Moe", "Tom", "Dick", "Harry", "Larry", "Barry", "Zeppo"
     };
+
+    @Test public void testExplicit() {
+        // Create a new calendar queue and some events to be pushed in there.
+        CalendarQueue queue = new CalendarQueue(0, 4);
+        CalendarEvent e1 = new CalendarEvent(3, 5, "Joe");
+        CalendarEvent e2 = new CalendarEvent(1, 5, "Moe");
+        CalendarEvent e3 = new CalendarEvent(0, 4, "Larry");
+        CalendarEvent e4 = new CalendarEvent(0, 4, "Curly");
+        CalendarEvent e5 = new CalendarEvent(2, 5, "Tom");
+        CalendarEvent e6 = new CalendarEvent(10, 7, "Dick");
+        // Push the events into the calendar queue.
+        queue.push(e1);
+        queue.push(e2);
+        queue.push(e3);
+        queue.push(e4);
+        queue.push(e5);
+        queue.push(e6);
+        // These events need to come out in this order.
+        assertEquals(e4, queue.pop());
+        assertEquals(e3, queue.pop());
+        assertEquals(e2, queue.pop());
+        assertEquals(e5, queue.pop());
+        assertEquals(e1, queue.pop());
+        assertEquals(e6, queue.pop());
+    }
 
     @Test public void testOneHundred() { fuzzTest(100); }
 
@@ -27,7 +51,7 @@ public class CalendarQueueTest {
             if(goldQueue.size() > 0) {
                 CalendarEvent first = goldQueue.poll();
                 goldQueue.offer(first);
-                CalendarEvent current = new CalendarEvent(currentYear, currentDay, "Zzz");
+                CalendarEvent current = new CalendarEvent(currentYear, currentDay, "\uffff");
                 if (first.compareTo(current) >= 0) {
                     currentYear = first.getYear();
                     currentDay = first.getDay();
