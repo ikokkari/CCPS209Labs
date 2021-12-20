@@ -106,7 +106,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
    <td>28. All the pretty hues
    </td>
-   <td>
+   <td>Karel Tutsu, Dec 20, 2021
    </td>
   </tr>
   <tr>
