@@ -1,9 +1,9 @@
 import org.junit.Test;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CompGeomTestOne {
 
@@ -17,7 +17,7 @@ public class CompGeomTestOne {
     
     // Explicit test cases
     @Test public void testSegmentIntersect() {
-        // First four arguments are segment (x0, y0)-(x1, y1), the last four are (x2, y2)-(x3, y3) 
+        // First four arguments are segment (x0, y0)-(x1, y1), the last four are segment (x2, y2)-(x3, y3)
         assertTrue(CompGeom.segmentIntersect(0, 1, 2, 0, -1, -1, 3, 1));
         assertTrue(CompGeom.segmentIntersect(0, 1, 2, 0, 0, 0, 0, 4));
         assertTrue(CompGeom.segmentIntersect(0, 1, 2, 0, 0, 0, 0, 4));

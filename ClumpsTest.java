@@ -4,8 +4,33 @@ import java.util.zip.CRC32;
 import java.util.Random;
 
 public class ClumpsTest {
-    
-    @Test public void testClumps() {
+
+    @Test public void testClumpsExplicit() {
+        Clumps c1 = new Clumps(5);
+        // All five items are initially singleton clumps.
+        assertEquals(1, c1.clumpSize(3));
+        assertFalse(c1.sameClump(0, 3));
+        // Meld 0 and 3 into same clump.
+        c1.meld(0, 3);
+        assertTrue(c1.sameClump(0, 3));
+        assertEquals(2, c1.clumpSize(3));
+        // Meld 3 and 4 into same clump.
+        c1.meld(3, 4);
+        assertTrue(c1.sameClump(0, 4));
+        assertEquals(3, c1.clumpSize(3));
+        // Meld 1 and 2 into same clump.
+        c1.meld(1, 2);
+        assertEquals(2, c1.clumpSize(1));
+        assertEquals(2, c1.clumpSize(2));
+        assertTrue(c1.sameClump(2, 1));
+        assertFalse(c1.sameClump(2, 0));
+        // Meld the two clumps into one big clump.
+        c1.meld(2, 4);
+        assertEquals(5, c1.clumpSize(1));
+        assertEquals(5, c1.clumpSize(4));
+    }
+
+    @Test public void testClumpsFuzz() {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
         int n = 2, trials = 22;

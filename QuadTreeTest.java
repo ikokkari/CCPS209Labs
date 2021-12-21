@@ -3,8 +3,29 @@ import java.util.Random;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class QuadTreeTest {
+
+    private static final QuadTree BLACK = BlackQuad.get();
+    private static final QuadTree WHITE = WhiteQuad.get();
+
+    @Test public void testExplicit() {
+        QuadTree q1 = QuadNode.of(WHITE, BLACK, WHITE, BLACK);
+        assertEquals(2, q1.computeArea(1));
+        assertEquals(4, q1.computeArea(2));
+        assertEquals(32, q1.computeArea(5));
+        assertFalse(q1.isOneColour());
+        QuadTree q2 = QuadNode.of(BLACK, BLACK, BLACK, BLACK);
+        assertEquals(2, q2.computeArea(1));
+        assertTrue(q2.isOneColour());
+        QuadTree q3 = QuadNode.of(q1, q2, q1, q2);
+        assertFalse(q3.isOneColour());
+        assertEquals(32, q3.computeArea(4));
+        assertEquals(128, q3.computeArea(6));
+        QuadTree q4 = QuadNode.of(q1, q2, q3, BLACK);
+        assertEquals(160, q4.computeArea(6));
+    }
 
     @Test public void massTestTwenty() {
         // Change the third parameter to true to see the results computed using your code.
@@ -37,8 +58,8 @@ public class QuadTreeTest {
         for(int i = 0; i < n; i++) {            
             int ii = Math.min(i, CUTOFF); // The index to use to the array.
             QuadTree tree; // The quadtree constructed this round from the existing trees.
-            if(ii == 0) { tree = WhiteQuad.get(); }
-            else if(ii == 1) { tree = BlackQuad.get(); }
+            if(ii == 0) { tree = WHITE; }
+            else if(ii == 1) { tree = BLACK; }
             else {
                 for(int j = 0; j < 4; j++) {
                     int c = rng.nextInt(Math.min(CUTOFF, i));
