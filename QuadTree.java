@@ -3,6 +3,7 @@ public interface QuadTree {
 
     /**
      * Determines if this tree represents a square of uniform colour.
+     * @return True if the entire area is of uniform colour.
      */
     boolean isOneColour();
     
