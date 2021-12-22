@@ -254,7 +254,13 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
    <tr>
-   <td>61. Some machine's doin' that for you
+   <td>61. Save the date
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>62. Worley noise
    </td>
    <td>
    </td>
