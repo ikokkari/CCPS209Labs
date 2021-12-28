@@ -11,8 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TailTest {
     
-    @Test
-    public void scanWarAndPeace() throws IOException {
+    @Test public void scanWarAndPeace() throws IOException {
         CRC32 check = new CRC32();
         int totalLines = 0;
         for(int k = 10; k <= 100000; k = k * 10) {

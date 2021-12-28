@@ -1,9 +1,15 @@
 import org.junit.Test;
 import java.io.File;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 import java.util.zip.CRC32;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class P2J11Test {
     
@@ -47,8 +53,7 @@ public class P2J11Test {
         // Construct a version of War and Peace with everything in lowercase,
         // with newlines converted into single whitespaces.
         StringBuilder sb = new StringBuilder();
-        try {
-            Scanner scan = new Scanner(new File("warandpeace.txt"));
+        try(Scanner scan = new Scanner(new File("warandpeace.txt"))) {
             while(scan.hasNext()) {
                 String line = scan.next();
                 sb.append(line.toLowerCase());

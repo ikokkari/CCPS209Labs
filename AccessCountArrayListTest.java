@@ -1,7 +1,9 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import java.util.Random;
 import java.util.zip.CRC32;
+
+// Just to get to use the most exotic of all the Java speficier keywords.
 
 public strictfp class AccessCountArrayListTest {
 

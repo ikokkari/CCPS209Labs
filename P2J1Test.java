@@ -3,13 +3,15 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class P2J1Test {
 
     private static final int SEED = 12345;
     private static final int TRIALS = 10000;
-    
+
     @Test public void testFallingPower() {
         // Explicit test cases
         assertEquals(720, P2J1.fallingPower(10, 3));
@@ -19,8 +21,8 @@ public class P2J1Test {
         assertEquals(0, P2J1.fallingPower(3, 6));
         assertEquals(1, P2J1.fallingPower(42, 0));
         assertEquals(1, P2J1.fallingPower(-98765432, 0));
-        assertEquals(-990, P2J1.fallingPower(-9, 3));        
-        
+        assertEquals(-990, P2J1.fallingPower(-9, 3));
+
         // Mass tester
         CRC32 check = new CRC32();
         for(int b = -10; b < 10; b++) {
@@ -33,25 +35,25 @@ public class P2J1Test {
         assertEquals(4140005098L, check.getValue());
         // Test was a success!
     }
-    
+
     @Test public void testEveryOther() {
         // Explicit test cases 
         int[] a1 = {42, 99, 17, 33};
         int[] b1 = {42, 17};
         assertArrayEquals(b1, P2J1.everyOther(a1));
-        
+
         int[] a2 = {42, 99, 17};
         int[] b2 = {42, 17};
         assertArrayEquals(b2, P2J1.everyOther(a2));
-        
+
         int[] a3 = {99};
         int[] b3 = {99};
         assertArrayEquals(b3, P2J1.everyOther(a3));
-        
+
         int[] a4 = {11, 22, 33, 44, 55, 66, 77, 88, 99};
         int[] b4 = {11, 33, 55, 77, 99};
         assertArrayEquals(b4, P2J1.everyOther(a4));
-        
+
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
@@ -63,28 +65,28 @@ public class P2J1Test {
             }
             int[] b = P2J1.everyOther(a);
             check.update(b.length);
-            for(int e: b) { check.update(e); }            
+            for(int e: b) { check.update(e); }
         }
         assertEquals(3861208241L, check.getValue());
     }
-    
+
     @Test public void testCreateZigZag() {
         // Explicit test cases
         int[][] a1 = {{4, 5, 6, 7}, {11, 10, 9, 8}, {12, 13, 14, 15}};
         assertTrue(Arrays.deepEquals(a1, P2J1.createZigZag(3, 4, 4)));
-        
+
         int[][] a2 = {{1, 2}, {4, 3}, {5, 6}, {8, 7}, {9, 10}};
         assertTrue(Arrays.deepEquals(a2, P2J1.createZigZag(5, 2, 1)));
-        
+
         int[][] a3 = {{42}, {43}, {44}, {45}};
         assertTrue(Arrays.deepEquals(a3, P2J1.createZigZag(4, 1, 42)));
-        
+
         int[][] a4 = {{77, 78, 79, 80, 81, 82}};
         assertTrue(Arrays.deepEquals(a4, P2J1.createZigZag(1, 6, 77)));
-        
+
         int[][] a5 = {{42}};
         assertTrue(Arrays.deepEquals(a5, P2J1.createZigZag(1, 1, 42)));
-        
+
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
@@ -101,24 +103,24 @@ public class P2J1Test {
         }
         assertEquals(3465650385L, check.getValue());
     }
-    
+
     @Test public void testCountInversions() {
         // Explicit test cases
         int[] a1 = {42, 17, 99, 5};
         assertEquals(4, P2J1.countInversions(a1));
-        
+
         int[] a2 = {999};
         assertEquals(0, P2J1.countInversions(a2));
-        
+
         int[] a3 = {77, 44, 33, 22, 0, -11, -12345678};
         assertEquals(21, P2J1.countInversions(a3));
-        
+
         int[] a4 = {-12345678, -11, 0, 22, 33, 44, 77};
         assertEquals(0, P2J1.countInversions(a4));
-        
+
         int[] a5 = {3, 5, 1, 7, 0, 9};
         assertEquals(6, P2J1.countInversions(a5));
-        
+
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();

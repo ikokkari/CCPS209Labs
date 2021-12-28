@@ -1,14 +1,17 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.List;
 
 public class WordCountTest {
     
-    @Test
-    public void scanWarAndPeace() throws IOException {
+    @Test public void scanWarAndPeace() throws IOException {
         WordCount wc = new WordCount();
         BufferedReader fr = new BufferedReader(
             new InputStreamReader(new FileInputStream("warandpeace.txt"), StandardCharsets.UTF_8)

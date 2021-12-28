@@ -1,6 +1,9 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 import java.util.zip.CRC32;
 
 public class CoinMoveTest {

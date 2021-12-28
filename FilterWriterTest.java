@@ -79,13 +79,11 @@ public class FilterWriterTest {
                 }
             }
             String ss = sb.toString();
-            //System.out.println("Original: <" + ss + "> " + ss.length());
             fw.write(ss);
             fw.write("\n");
         }
         sc.close();
         String result = sw.toString();
-        //System.out.println(result);
         check.update(result.getBytes());
         assertEquals(1191567916L, check.getValue());
     }    

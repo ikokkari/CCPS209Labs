@@ -3,7 +3,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.zip.CRC32;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class RewindIteratorTest {
 

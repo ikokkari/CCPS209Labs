@@ -101,7 +101,6 @@ public class BlockCellularAutomatonTest {
                 int k = rng.nextInt(j + 1);
                 int tmp = rule[k]; rule[k] = rule[j]; rule[j] = tmp;
             }
-            //System.out.println("Using rule " + java.util.Arrays.toString(rule) );
             // Execute the automaton some number of rounds forward.
             for(int round = 0; round < 10 * i; round++) {
                 BlockCellularAutomaton.margolusNextState(current, next, rule, round % 2);
@@ -121,7 +120,6 @@ public class BlockCellularAutomatonTest {
         JFrame f = new JFrame("Block Cellular Automata Demo");
         f.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
-                System.out.println("Timer stopped");
                 timer.stop();
                 f.dispose();
             }

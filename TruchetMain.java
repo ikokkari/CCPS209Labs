@@ -1,8 +1,10 @@
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.util.Random;
 
 public class TruchetMain {
+
     public static void main(String[] args) {
         JFrame f = new JFrame("Truchet demo");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

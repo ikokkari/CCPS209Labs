@@ -1,7 +1,11 @@
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 import java.util.function.DoubleFunction;

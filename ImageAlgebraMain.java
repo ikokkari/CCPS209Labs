@@ -1,6 +1,12 @@
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.CropImageFilter;
 import java.awt.image.FilteredImageSource;
 import java.awt.image.ImageFilter;

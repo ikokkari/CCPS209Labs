@@ -1,6 +1,6 @@
 import org.junit.Test;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.FlowLayout;
 import java.util.Random;
 import java.util.zip.CRC32;
 

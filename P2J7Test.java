@@ -1,5 +1,10 @@
 import org.junit.Test;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.zip.CRC32;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -43,7 +48,7 @@ public class P2J7Test {
         
         int[] a8 = {1000000000, 999999999, 999999998};
         int[] b8 = {334, 333, 333};
-        assertArrayEquals(b8, P2J7.huntingtonHill(a8, 1000));        
+        assertArrayEquals(b8, P2J7.huntingtonHill(a8, 1000));       
        
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);

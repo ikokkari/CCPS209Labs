@@ -1,9 +1,7 @@
 import org.junit.Test;
-
 import java.util.Random;
 import java.util.zip.CRC32;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class BitwiseStuffTest {
 
