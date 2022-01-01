@@ -74,15 +74,15 @@ public class P2J13Test {
     }
 
     @Test public void testCountDistinctSubstringsHundred() {
-        testCountDistinctSubstrings(100, 2929854517L);
+        testCountDistinctSubstrings(100, 3997080533L);
     }
 
     @Test public void testCountDistinctSubstringsThousand() {
-        testCountDistinctSubstrings(1000, 3572785367L);
+        testCountDistinctSubstrings(1000, 1195123337L);
     }
 
     @Test public void testCountDistinctSubstringsTenThousand() {
-        testCountDistinctSubstrings(10000, 914446553L);
+        testCountDistinctSubstrings(10000, 2175212746L);
     }
 
     private void testCountDistinctSubstrings(int n, long expected) {
@@ -93,7 +93,14 @@ public class P2J13Test {
             StringBuilder text = new StringBuilder();
             int a = Math.min(ALPHABET.length(), 1 + i % m);
             while(text.length() < m) {
-                text.append(ALPHABET.charAt(rng.nextInt(a)));
+                if(text.length() > 2 && rng.nextBoolean()) {
+                    int s = rng.nextInt(text.length() - 2);
+                    int e = s + rng.nextInt(text.length() - s);
+                    text.append(text.substring(s, e));
+                }
+                else {
+                    text.append(ALPHABET.charAt(rng.nextInt(a)));
+                }
             }
             int result = P2J13.countDistinctSubstrings(text.toString());
             check.update(result);
