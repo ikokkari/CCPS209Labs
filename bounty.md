@@ -264,7 +264,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>59. Hitomezashi golygons
    </td>
-   <td>
+   <td>Karel Tutsu, Jan 1, 2022
    </td>
   </tr>
    <tr>
