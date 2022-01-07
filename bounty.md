@@ -72,7 +72,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
   <td>0(N). Substring parts
   </td>
-  <td>
+  <td>Karel Tutsu, Jan 7, 2022
   </td>
   </tr>
   <tr>
