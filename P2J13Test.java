@@ -85,6 +85,17 @@ public class P2J13Test {
         testCountDistinctSubstrings(10000, 2175212746L);
     }
 
+    @Test public void testCountDistinctSubstringDontBeShlemiel() {
+        StringBuilder text = new StringBuilder();
+        for(int i = 0; i < 1000; i++) {
+            text.append('$');
+        }
+        for(int i = 1000; i < 2000; i++) {
+            assertEquals(i, P2J13.countDistinctSubstrings(text.toString()));
+            text.append('$');
+        }
+    }
+
     private void testCountDistinctSubstrings(int n, long expected) {
         Random rng = new Random(12345 + n);
         CRC32 check = new CRC32();
