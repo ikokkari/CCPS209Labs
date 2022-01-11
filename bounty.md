@@ -76,7 +76,7 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
   <tr>
-  <td>0(O). Chars to the left of me...
+  <td>0(O). Chars to the left of me, integers to the right...
   </td>
   <td>Karel Tutsu, Jan 7, 2022
   </td>
