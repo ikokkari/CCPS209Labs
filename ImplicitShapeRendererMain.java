@@ -2,7 +2,13 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Ellipse2D;
@@ -64,10 +70,10 @@ public class ImplicitShapeRendererMain {
 
     private static DoubleBinaryOperator[] ops = {
             // Perturbed disk of radius 200, centered at (250, 250)
-            (x, y) -> {
-                return superEllipse(x + 30*Math.sin(0.12*x-0.17*y),
-                        y + 30*Math.cos(-0.05*x + 0.33*y), 250, 250, 200, 2.0);
-            },
+            (x, y) -> superEllipse(
+                    x + 30*Math.sin(0.12*x-0.17*y),
+                    y + 30*Math.cos(-0.05*x + 0.33*y),
+                    250, 250, 200, 2.0),
             // Annulus of two superellipses, centered at 250, 250
             (x, y) -> {
                 int outer = superEllipse(x, y, 250, 250, 200, 2.3);
@@ -107,5 +113,4 @@ public class ImplicitShapeRendererMain {
         renderFrame.pack();
         renderFrame.setVisible(true);
     }
-
 }
