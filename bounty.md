@@ -246,7 +246,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>56. Find me a find, catch me a catch
    </td>
-   <td>
+   <td>Karel Tutsu, Jan 13, 2022
    </td>
   </tr>
    <tr>
