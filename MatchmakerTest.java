@@ -15,6 +15,7 @@ public class MatchmakerTest {
         };
         int[] exp0 = {1, 2, 0};
         assertArrayEquals(exp0, Matchmaker.galeShapley(boys0, girls0));
+
         int[][] boys1 = { // some diversity of opinion
             {1, 2, 3, 0}, {2, 3, 0, 1}, {3, 0, 1, 2}, {0, 1, 2, 3}
         };
@@ -23,6 +24,28 @@ public class MatchmakerTest {
         };
         int[] exp1 = {1, 2, 3, 0};
         assertArrayEquals(exp1, Matchmaker.galeShapley(boys1, girls1));
+
+        int[][] boys2 = { // every boy prefers their own numerical counterpart
+                {0, 1, 2, 3}, {1, 3, 0, 2}, {2, 0, 3, 1}, {3, 0, 2, 1}
+        };
+        int[][] girls2 = { // and so does every girl
+                {0, 3, 2, 1}, {1, 3, 0, 2}, {2, 0, 3, 1}, {3, 1, 2, 0}
+        };
+        int[] exp2 = {0, 1, 2, 3};
+        assertArrayEquals(exp2, Matchmaker.galeShapley(boys2, girls2));
+        // Organizing a Sadie Hawkins day should not make any difference in this case.
+        assertArrayEquals(exp2, Matchmaker.galeShapley(girls2, boys2));
+
+        int[][] boys3 = { // every boy prefers the next higher numbered girl
+                {1, 0, 3, 4, 2}, {2, 4, 1, 0, 3}, {3, 0, 4, 2, 1}, {4, 0, 1, 2, 3}, {0, 1, 2, 3, 4}
+        };
+        int[][] girls3 = { // but unfortunately, so does every girl
+                {1, 2, 0, 4, 3}, {2, 4, 0, 1, 3}, {3, 4, 0, 1, 2}, {4, 1, 0, 3, 2}, {0, 2, 3, 1, 4}
+        };
+        int[] exp3 = {1, 2, 3, 4, 0}; // algorithm is biased to be optimal for the boys
+        assertArrayEquals(exp3, Matchmaker.galeShapley(boys3, girls3));
+        // "♬ Girls who love boys who love girls who love boys... ♬"
+        assertArrayEquals(exp3, Matchmaker.galeShapley(girls3, boys3));
     }
     
     private void fillRandomPermutation(Random rng, int[] a) {
