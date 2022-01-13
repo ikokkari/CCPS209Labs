@@ -51,17 +51,17 @@ public class PowerIndexTest {
     }
     
     @Test public void massTestBanzhaf() {
-        testPower(3437155411L, true);
+        testPower(3119455996L, true, 350);
     }
     
     @Test public void massTestShapleyShubik() {
-        testPower(1214504174L, false);
+        testPower(482638707L, false, 170);
     }
     
-    private void testPower(long expected, boolean banzhaf) {
+    private void testPower(long expected, boolean banzhaf, int limit) {
         Random rng = new Random(12345);
         CRC32 check = new CRC32();
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < limit; i++) {
             int nn = 4 + (i / 20);
             int[] weights = new int[nn];
             int[] out = new int[nn];
