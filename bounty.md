@@ -210,7 +210,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
    <td>50. The weight of power
    </td>
-   <td>
+   <td>Karel Tutsu, Jan 15, 2022
    </td>
   </tr>
   <tr>
