@@ -288,7 +288,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>63. Recursive subdivision of implicit shapes
    </td>
-   <td>
+   <td>Karel Tutsu, Jan 17, 2022
    </td>
   </tr>
 </table>
