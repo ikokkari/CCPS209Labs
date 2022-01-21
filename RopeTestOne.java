@@ -42,6 +42,27 @@ public class RopeTestOne {
         Rope r7 = new SubRope(r6, 0, 0);
         assertEquals(0, r7.length());
         assertEquals("", r7.toString());
+
+        // Let's finish off this test in style with a humongous instance of Rope.
+        Rope giant = r3;
+        int expectedLength = r3.length();
+        while(giant.length() < 1_000_000_000) {
+            giant = new ConcatRope(giant, giant);
+            expectedLength *= 2;
+            assertEquals(expectedLength, giant.length());
+        }
+        // The resulting giant rope is a virtual sequence of exactly 1,342,177,280 characters.
+        assertEquals(1342177280, giant.length());
+        assertEquals('h', giant.charAt(0));
+        assertEquals('e', giant.charAt(11));
+        assertEquals('l', giant.charAt(5432));
+        assertEquals('l', giant.charAt(39393));
+        assertEquals('o', giant.charAt(444444));
+        assertEquals('w', giant.charAt(998855));
+        assertEquals('o', giant.charAt(4398536));
+        assertEquals('r', giant.charAt(7777777));
+        assertEquals('l', giant.charAt(81828388));
+        assertEquals('d', giant.charAt(999999999));
     }
 
     @Test public void testExceptions() {
