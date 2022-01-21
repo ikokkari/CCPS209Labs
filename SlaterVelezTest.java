@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SlaterVelezTest {
 
-    private static final int[] EXPECTED_PREFIX = {
+    private static final long[] EXPECTED_PREFIX = {
             1, 2, 4, 7, 3, 8, 14, 5, 12, 20, 6, 16, 27, 9, 21, 34, 10, 25, 41, 11, 28, 47, 13, 33, 54, 15,
             37, 60, 17, 42, 68, 18, 45, 73, 19, 48, 79, 22, 55, 23, 58, 94, 24, 61, 99, 26, 66, 107, 29, 71,
             115, 30, 75, 121, 31, 78, 126, 32, 81, 132, 35, 87, 140, 36, 91, 147, 38, 96, 155, 39
@@ -21,9 +21,13 @@ public class SlaterVelezTest {
         test(10_000, 2582796439L);
     }
 
+    @Test public void testFiftyThousand() {
+        test(50_000, 2482192664L);
+    }
+
     @Test public void testPrefix() {
         SlaterVelez sv = new SlaterVelez();
-        int[] result = new int[EXPECTED_PREFIX.length];
+        long[] result = new long[EXPECTED_PREFIX.length];
         for(int i = 0; i < EXPECTED_PREFIX.length; i++) {
             result[i] = sv.next();
         }
@@ -35,8 +39,8 @@ public class SlaterVelezTest {
         SlaterVelez sv = new SlaterVelez();
         for(int i = 0; i < n; i++) {
             assertTrue(sv.hasNext());
-            int v = sv.next();
-            check.update(v);
+            long v = sv.next();
+            check.update((int)(v & 0xFFFFFFFF));
         }
         assertEquals(expected, check.getValue());
     }
