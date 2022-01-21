@@ -3,8 +3,6 @@ import java.util.Random;
 import java.util.zip.CRC32;
 import java.util.HashSet;
 import java.util.TreeSet;
-import java.util.HashMap;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -111,33 +109,6 @@ public class RopeTestTwo {
             if(i > 0) {
                 check.update(ropes[i].compareTo(ropes[i-1]) < 0 ? 42: 99);
             }
-
-        }
-
-        // Build a HashMap of all the hash codes that occur for the previous ropes, and
-        // map each code to the list of ropes that have that hash code.
-        HashMap<Integer, ArrayList<Rope>> ropeMap = new HashMap<>();
-        for(Rope rope: ropes) {
-            assertTrue(ropeHash.contains(rope));
-            assertTrue(ropeTree.contains(rope));
-            int h = rope.hashCode();
-            if(!ropeMap.containsKey(h)) {
-                ropeMap.put(h, new ArrayList<Rope>());
-            }
-            ropeMap.get(h).add(rope);
-        }
-        // Verify that ropes with different hash codes are not equal to each other.
-        ArrayList<Rope> prev = null;
-        for(Integer h: ropeMap.keySet()) {
-            ArrayList<Rope> ropesHere = ropeMap.get(h);
-            for(Rope r1: ropesHere) {
-                if(prev != null) {
-                    for (Rope r2 : prev) {
-                        assertFalse(r1.equals(r2));
-                    }
-                }
-            }
-            prev = ropesHere;
         }
         assertEquals(expected, check.getValue());
     }

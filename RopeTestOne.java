@@ -51,7 +51,7 @@ public class RopeTestOne {
             expectedLength *= 2;
             assertEquals(expectedLength, giant.length());
         }
-        // The resulting giant rope is a virtual sequence of exactly 1,342,177,280 characters.
+        // The resulting giant rope is a sequence of exactly 1,342,177,280 characters.
         assertEquals(1342177280, giant.length());
         assertEquals('h', giant.charAt(0));
         assertEquals('e', giant.charAt(11));
@@ -76,6 +76,15 @@ public class RopeTestOne {
         testExceptions(r3);
 
         Rope r4 = new ConcatRope(r1, r2);
+        testExceptions(r4);
+
+        try {
+            // This one should not fail, but extract an empty subrope.
+            Rope r5 = new SubRope(r1, r1.length(), r1.length());
+        }
+        catch(IndexOutOfBoundsException ignored) {
+            fail();
+        }
     }
 
     private void testExceptions(Rope r) {
