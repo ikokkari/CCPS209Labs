@@ -291,5 +291,29 @@ All these bounty points will be added to the lab marks of those students all in 
    <td>Karel Tutsu, Jan 17, 2022
    </td>
   </tr>
+   <tr>
+   <td>64. Learning the ropes I: Composition
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>65. Learning the ropes II: Comparisons
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>66. Slater-Vélez sequence
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>67. Lemire Dynamic Frequency Sampling 
+   </td>
+   <td>
+   </td>
+  </tr>
 </table>
 
