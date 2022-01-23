@@ -21,8 +21,8 @@ public class SlaterVelezTest {
         test(10_000, 2582796439L);
     }
 
-    @Test public void testFiftyThousand() {
-        test(50_000, 2482192664L);
+    @Test public void testFiveHundredThousand() {
+        test(500_000, 3035586797L);
     }
 
     @Test public void testPrefix() {
@@ -37,9 +37,10 @@ public class SlaterVelezTest {
     private void test(int n, long expected) {
         CRC32 check = new CRC32();
         SlaterVelez sv = new SlaterVelez();
+        long v = 0;
         for(int i = 0; i < n; i++) {
             assertTrue(sv.hasNext());
-            long v = sv.next();
+            v = sv.next();
             check.update((int)(v & 0xFFFFFFFF));
         }
         assertEquals(expected, check.getValue());
