@@ -38,7 +38,7 @@ public class LemireFrequencySamplingTest {
         // Expected frequency table after deleting 9.
         int[][] e0 = { {3, 4, 1, 0, 4, 2, 0, 2}, {7, 1, 6, 2}, {8, 8}, {16} };
         // Actual frequency table after that deletion.
-        int r0 = LemireFrequencySampling.updateFrequencyTable(freq, 9);
+        int r0 = LemireFrequencySampling.updateSamplingTable(freq, 9);
         // 9 falls into position 4.
         assertEquals(4, r0);
         assertTrue(Arrays.deepEquals(e0, freq));
@@ -46,7 +46,7 @@ public class LemireFrequencySamplingTest {
         // Expected frequency table after deleting 5.
         int[][] e1 = { {3, 3, 1, 0, 4, 2, 0, 2}, {6, 1, 6, 2}, {7, 8}, {15} };
         // Actual frequency table after that deletion.
-        int r1 = LemireFrequencySampling.updateFrequencyTable(freq, 5);
+        int r1 = LemireFrequencySampling.updateSamplingTable(freq, 5);
         // 5 falls into position 1.
         assertEquals(1, r1);
         assertTrue(Arrays.deepEquals(e1, freq));
@@ -54,7 +54,7 @@ public class LemireFrequencySamplingTest {
         // Expected frequency table after deleting 13.
         int[][] e2 = { {3, 3, 1, 0, 4, 2, 0, 1}, {6, 1, 6, 1}, {7, 7}, {14} };
         // Actual frequency table after that deletion.
-        int r2 = LemireFrequencySampling.updateFrequencyTable(freq, 13);
+        int r2 = LemireFrequencySampling.updateSamplingTable(freq, 13);
         // 13 falls into position 7.
         assertEquals(7, r2);
         assertTrue(Arrays.deepEquals(e2, freq));
@@ -62,7 +62,7 @@ public class LemireFrequencySamplingTest {
         // Expected frequency table after deleting 0.
         int[][] e3 = { {2, 3, 1, 0, 4, 2, 0, 1}, {5, 1, 6, 1}, {6, 7}, {13} };
         // Actual frequency table after that deletion.
-        int r3 = LemireFrequencySampling.updateFrequencyTable(freq, 0);
+        int r3 = LemireFrequencySampling.updateSamplingTable(freq, 0);
         // 0 falls into position 0.
         assertEquals(0, r3);
         assertTrue(Arrays.deepEquals(e3, freq));
@@ -99,7 +99,7 @@ public class LemireFrequencySamplingTest {
                 assertEquals(sum, table[tlen][0]);
                 for(int j = 0; j < Math.min(a.length, 50); j++) {
                     int k = rng.nextInt(table[tlen][0]);
-                    int result = LemireFrequencySampling.updateFrequencyTable(table, k);
+                    int result = LemireFrequencySampling.updateSamplingTable(table, k);
                     assertTrue(table[0][result] >= 0);
                     check.update(result);
                 }
