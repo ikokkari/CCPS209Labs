@@ -2,8 +2,10 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.zip.CRC32;
 
@@ -41,6 +43,7 @@ public class DistanceTestThree {
                 prev = curr;
             }
         }
+        assertEquals(4064272570L, check.getValue());
     }  
     
     @Test public void massTestCollections() {
@@ -80,6 +83,39 @@ public class DistanceTestThree {
     }
     
     @Test public void testCompareTo() {
+
+        int[][][] testCases = {
+                // First two taken from a comment in https://news.ycombinator.com/item?id=30057582
+                // These two distances agree up to their 20th decimal place.
+                {{1000000, 1}, {1000018, 1}, {1000036, 1}, {1000059, 1}, {1000083, 1}}, // 0
+                {{1000003, 1}, {1000011, 1}, {1000048, 1}, {1000050, 1}, {1000084, 1}}, // 1
+                // Slightly smaller versions of the first two distances.
+                {{1000000, 1}, {1000018, 1}, {1000036, 1}, {1000059, 1}, {1000081, 1}}, // 2
+                {{1000003, 1}, {1000011, 1}, {1000046, 1}, {1000050, 1}, {1000084, 1}}, // 3
+                // Slightly larger versions of the first two distances.
+                {{1000000, 1}, {1000018, 1}, {1000036, 1}, {1000060, 1}, {1000083, 1}}, // 4
+                {{1000004, 1}, {1000011, 1}, {1000048, 1}, {1000052, 1}, {1000084, 1}}  // 5
+        };
+
+        ArrayList<Distance> distances = new ArrayList<>();
+        for(int[][] testCase: testCases) {
+            TreeMap<Integer, Integer> coeff = new TreeMap<>();
+            for(int[] co: testCase) {
+                coeff.put(co[0], co[1]);
+            }
+            distances.add(new Distance(coeff));
+        }
+
+        assertTrue(distances.get(0).compareTo(distances.get(1)) > 0);
+        assertTrue(distances.get(1).compareTo(distances.get(2)) > 0);
+        assertTrue(distances.get(2).compareTo(distances.get(3)) > 0);
+        assertTrue(distances.get(1).compareTo(distances.get(0)) < 0);
+        assertTrue(distances.get(2).compareTo(distances.get(1)) < 0);
+        assertTrue(distances.get(3).compareTo(distances.get(2)) < 0);
+        assertTrue(distances.get(4).compareTo(distances.get(0)) > 0);
+        assertTrue(distances.get(5).compareTo(distances.get(1)) > 0);
+        assertTrue(distances.get(5).compareTo(distances.get(4)) > 0);
+
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
         int N = 40;
@@ -103,7 +139,7 @@ public class DistanceTestThree {
         for(int i = 0; i < 3 * N; i++) {
             for(int j = i + 1; j < 3 * N; j++) {
                 int comp = ds[i].compareTo(ds[j]);
-                comp = Integer.compare(comp, 0);
+                comp = Integer.compare(comp, 0); // convert result to -1, 0, +1
                 check.update(comp);
             }
         }
