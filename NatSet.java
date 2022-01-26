@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
 
 // A monotonic set of natural numbers ideal for situations where these
 // numbers tend to be encountered in roughly ascending order, but not
@@ -8,10 +9,6 @@ public class NatSet {
 
     // Initial size of the boolean[] used to store membership info.
     private static final int PAGE = 1000;
-    // For statistics of how often these optimizations help us.
-    private long shiftCount = 0;
-    public long getShiftCount() { return shiftCount; }
-    
     // The set contains all natural numbers that are less than start.
     private long start = 0;
     // Array to keep track of set membership for elements i that satisfy
@@ -27,14 +24,14 @@ public class NatSet {
     }
     
     public void add(long n) {
-        if(n >= start) {
+        if(n + pos >= start) {
             // Determine the need for expanding the data array.
             int newSize = data.length;
             while(n >= start + newSize) {
                 // Grow the data array exponentially, but modestly.
                 newSize += data.length / 4;
             }
-            // If n is past the end of data array, expand data array.
+            // If n is past the end of the data array, expand the data array.
             if(newSize > data.length) {
                 data = Arrays.copyOf(data, newSize);
             }
@@ -42,35 +39,31 @@ public class NatSet {
             data[(int)(n - start)] = true;
             // Update the pos counter sweeping through the data array.
             while(pos < data.length && data[pos]) { pos++; }
-            // Once the first quarter of elements are true, shift the sliding window.
-            if(pos > data.length / 4) {
-                // Update the shifting statistics.
-                shiftCount += pos;
+            // Once at least the first half of elements is all true, shift the sliding window.
+            if(pos > data.length / 2) {
                 // Copy the rest of the array to start from the beginning.
-                if (data.length - pos >= 0) {
-                    System.arraycopy(data, pos, data, 0, data.length - pos);
-                }
+                System.arraycopy(data, pos, data, 0, data.length - pos);
                 // Update the position of the sliding window.
                 start += pos;
-                // Fill the portion of data array with false values again.
+                // Fill the right side of the data array with false values.
                 Arrays.fill(data, data.length - pos, data.length, false);
-                // And start sweeping the data array from the beginning again.
+                // Start sweeping the data array from the beginning again.
                 pos = 0;
             }            
         }
-        // No else here, since adding an element < start changes nothing.
+        // No else needed here, since adding an element < (start + pos) changes nothing.
     }
     
     public boolean contains(long n) {
         // Everything to the left of the sliding window is member.
-        if(n < start) { return true; }
+        if(n < start + pos) { return true; }
         // Everything to the right of the sliding window is a nonmember.
         if(n >= start + data.length) { return false; }
         // Inside the sliding window, consult the data array to get the answer.
         return data[(int)(n - start)];
     }
-    
-    public static void demo() {
+
+    public static void tortoiseAndHareDemo() {
         // Demonstration of the principle of "tortoise and hare" where two
         // position indices advance the exact same path, except that hare makes
         // two moves for every one move of tortoise. Two identical RNG's are
@@ -102,5 +95,9 @@ public class NatSet {
             }
         }
         System.out.println("Ended with hare at " + h + " and tortoise at " + t);
+    }
+
+    public static void main(String[] args) {
+        tortoiseAndHareDemo();
     }
 }
