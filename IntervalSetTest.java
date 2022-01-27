@@ -4,7 +4,8 @@ import java.util.Random;
 import java.io.UnsupportedEncodingException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class IntervalSetTest {
 
@@ -49,16 +50,39 @@ public class IntervalSetTest {
         assertEquals("[0-110]", is1.toString());
     }
 
+    @Test public void testContainsExplicit() {
+        IntervalSet is = new IntervalSet();
+        assertFalse(is.contains(42, 99));
+        is.add(42, 99);
+        assertEquals("[42-99]", is.toString());
+        assertTrue(is.contains(42, 99));
+        assertTrue(is.contains(50, 72));
+        assertFalse(is.contains(42, 100));
+        assertFalse(is.contains(35, 70));
+        is.add(10, 25);
+        assertEquals("[10-25, 42-99]", is.toString());
+        assertTrue(is.contains(42, 99));
+        assertTrue(is.contains(86));
+        assertTrue(is.contains(20));
+        assertTrue(is.contains(24, 25));
+        assertFalse(is.contains(25, 42));
+        is.add(35, 60);
+        assertEquals("[10-25, 35-99]", is.toString());
+        assertTrue(is.contains(11, 14));
+        assertTrue(is.contains(35, 99));
+        assertTrue(is.contains(40, 98));
+    }
+
     @Test public void massTestOneHundred() {
-        massTest(100, 3685015546L);
+        massTest(100, 1120302967L);
     }
 
     @Test public void massTestOneThousand() {
-        massTest(1000, 3655482498L);
+        massTest(1000, 3961018955L);
     }
 
     @Test public void massTestTenThousand() {
-        massTest(10000, 3765111832L);
+        massTest(10000, 2284193219L);
     }
 
     private void massTest(int n, long expected) {
@@ -82,6 +106,9 @@ public class IntervalSetTest {
                 }
             }
             starts[i] = start; ends[i] = end;
+            check.update(is.contains(start, end) ? 42: 99);
+            check.update(is.contains(start-3, start+3) ? 42: 99);
+            check.update(is.contains(end-10, end+10) ? 42: 99);
             is.add(start, end);
             // System.out.println("Adding " + start + "-" + end + ": " + is);
             try {
