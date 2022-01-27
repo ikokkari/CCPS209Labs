@@ -9,12 +9,13 @@ public class CupSurvivalTest {
 
     private static final Fraction ZERO = new Fraction(0, 1);
     private static final Fraction ONE = new Fraction(1,1);
+    private static final Fraction HALF = new Fraction(1, 2);
+    private static final Fraction THIRD = new Fraction(1, 3);
+    private static final Fraction TWO_THIRDS = new Fraction(2, 3);
+    private static final Fraction EIGHTH = new Fraction(1, 8);
 
     @Test public void testExplicit() {
-        Fraction HALF = new Fraction(1, 2);
-        Fraction THIRD = new Fraction(1, 3);
-        Fraction TWO_THIRDS = new Fraction(2, 3);
-        Fraction EIGHTH = new Fraction(1, 8);
+
         Fraction[][] winProb0 = {
                 {ONE, HALF, THIRD, HALF},
                 {HALF, ONE, TWO_THIRDS, TWO_THIRDS},
@@ -44,7 +45,7 @@ public class CupSurvivalTest {
         Fraction[] result1 = CupSurvival.computeSurvival(winProb1);
         assertArrayEquals(expected1, result1);
 
-        // If team 1 always wins, its survival probability should be one.
+        // If team 1 always wins, its survival probability should be one, all others zero.
         Fraction[][] winProb2 = {
                 {ONE, ZERO, THIRD, HALF},
                 {ONE, ONE, ONE, ONE},
@@ -57,11 +58,11 @@ public class CupSurvivalTest {
     }
 
     @Test public void testUpToLevelThree() {
-        massTest(3, 3034186112L);
+        massTest(3, 3981152699L);
     }
 
-    @Test public void testUpToLevelEight() {
-        massTest(8, 2311879630L);
+    @Test public void testUpToLevelSix() {
+        massTest(6, 2912218050L);
     }
 
     private void massTest(int level, long expected) {
@@ -70,22 +71,33 @@ public class CupSurvivalTest {
         int[] PRIMES = {2, 3, 5, 7, 11, 13, 17};
         for(int k = 2; k <= level; k++) {
             int n = (1 << k);
+            int[] strength = new int[n];
             Fraction[][] winProb = new Fraction[n][n];
-            for(int i = 0; i < n; i++) {
-                winProb[i][i] = ONE;
-                for (int j = i + 1; j < n; j++) {
-                    int den = PRIMES[rng.nextInt(PRIMES.length)];
-                    int num = rng.nextInt(den);
-                    winProb[i][j] = new Fraction(num, den);
-                    winProb[j][i] = ONE.subtract(winProb[i][j]);
+            for(int cup = 0; cup < 10; cup++) {
+                // Give each team a random strength.
+                for (int i = 0; i < n; i++) {
+                    strength[i] = 1 + rng.nextInt(10);
                 }
-            }
-            Fraction[] survival = CupSurvival.computeSurvival(winProb);
-            for(Fraction f: survival) {
-                check.update(f.toString().getBytes());
+                // Make up winning probabilities for each pairwise match.
+                for (int i = 0; i < n; i++) {
+                    winProb[i][i] = ONE;
+                    for (int j = i + 1; j < n; j++) {
+                        int si = strength[i] + rng.nextInt(3);
+                        int sj = strength[j] + rng.nextInt(3);
+                        winProb[i][j] = new Fraction(si, si + sj);
+                        winProb[j][i] = new Fraction(sj, si + sj);
+                    }
+                }
+                Fraction[] survival = CupSurvival.computeSurvival(winProb);
+                // Final survival probabilities have to add up to one.
+                Fraction sum = ZERO;
+                for (Fraction f : survival) {
+                    check.update(f.toString().getBytes());
+                    sum = sum.add(f);
+                }
+                assertEquals(ONE, sum);
             }
         }
         assertEquals(expected, check.getValue());
     }
-
 }
