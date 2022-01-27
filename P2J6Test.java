@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +45,9 @@ public class P2J6Test {
         int n = 1, step = 2, next = 10;
         while(n > 0) { // Keep going until n overflows and rolls back to negatives
             List<Integer> result = P2J6.sumOfDistinctCubes(n);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             // Increment n with regularly increasing steps
             n += rng.nextInt(step) + 1;
             if(n > next) {
@@ -95,7 +99,9 @@ public class P2J6Test {
             }
             int n = rng.nextInt(7) + 2;
             List<String> result = P2J6.forbiddenSubstrings(alpha, n, tabu);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(2852450563L, check.getValue());
     }

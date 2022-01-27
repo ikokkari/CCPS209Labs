@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -20,8 +22,9 @@ public class RationalRootsTest {
             int b = rng.nextInt(10 + i) + 1;
             Fraction x = new Fraction(a, b);
             Fraction result = RationalRoots.evaluate(coeffs, x);
-            //System.out.println(Arrays.toString(coeffs) + " " + x + " gives " + result);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(52768542L, check.getValue());
     }
@@ -64,7 +67,6 @@ public class RationalRootsTest {
             int[] coeff = rationalTestCases[i];
             String expected = rationalExpected[i];
             String result = RationalRoots.rationalRoots(coeff).toString();
-            //System.out.println(result);
             assertEquals(expected, result);
         }
     }
@@ -92,9 +94,10 @@ public class RationalRootsTest {
                 coeffs[j] *= den;
             }
             List<Fraction> result = RationalRoots.rationalRoots(coeffs);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(2380363903L, check.getValue());
-    }
-    
+    }    
 }

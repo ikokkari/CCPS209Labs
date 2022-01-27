@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -42,7 +44,6 @@ public class P2J8Test {
             for(int a = 2; a < b; a++) {
                 int t = 2 + (a + b) % 3;
                 P2J8.hittingIntegerPowers(a, b, tens[t], out);
-                //System.out.println(a + " " + b + " " + t + " " + Arrays.toString(out));
                 check.update(out[0]);
                 check.update(out[1]);
             }
@@ -78,7 +79,9 @@ public class P2J8Test {
             if(i % 5 == 0) { curr = curr.multiply(TWO); }
             int s = rng.nextInt(100) + 2;
             BigInteger result = P2J8.nearestPolygonalNumber(curr, s);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             curr = curr.add(new BigInteger("" + rng.nextInt(100) * tens[(i/5) % tens.length]));
         }
         assertEquals(3138704967L, check.getValue());

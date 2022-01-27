@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
@@ -39,8 +41,9 @@ public class TripleFreeTest {
         CRC32 check = new CRC32();
         for(int i = 1; i <= n; i++) {
             List<Integer> result = TripleFree.tripleFree(i);
-            //System.out.println(i + ": " + result.size() + " " + result);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(expected, check.getValue());
     }

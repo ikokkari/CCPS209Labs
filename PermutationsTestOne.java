@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -57,7 +58,9 @@ public class PermutationsTestOne {
             }
             assert res != null;
             assertEquals(perm.length, res.length);
-            check.update(Arrays.toString(res).getBytes());
+            try {
+                check.update(Arrays.toString(res).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             if(mode == 0) {
                 assertArrayEquals(perm, Permutations.inverse(res));
             }

@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -76,7 +78,9 @@ public class P2J7Test {
             }
             int seats = 2 * i + rng.nextInt(10 * i + 2);
             int[] result = P2J7.huntingtonHill(pops, seats);
-            check.update(Arrays.toString(result).getBytes());
+            try {
+                check.update(Arrays.toString(result).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(325067613L, check.getValue());
     }
@@ -117,7 +121,9 @@ public class P2J7Test {
             items.add(next);
             int k = rng.nextInt(2 * i + 2) + 1;
             items = P2J7.josephus(items, k);
-            check.update(items.toString().getBytes());
+            try {
+                check.update(items.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(3746131365L, check.getValue());
     }

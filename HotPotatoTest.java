@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -10,8 +12,8 @@ public class HotPotatoTest {
         testHotPotato(50, 2745874825L);
     }
     
-    @Test public void testHotPotatoFiveHundred() {
-        testHotPotato(500, 1867037834L);
+    @Test public void testHotPotatoTwoHundred() {
+        testHotPotato(200, 2094549067L);
     }
     
     private void testHotPotato(int n, long expected) {
@@ -35,7 +37,9 @@ public class HotPotatoTest {
                 enemies[j] = Arrays.copyOfRange(tmp, 0, count);
             }
             Fraction[] result = HotPotato.hotPotato(enemies, t);
-            check.update(Arrays.deepToString(result).getBytes());
+            try {
+                check.update(Arrays.deepToString(result).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(expected, check.getValue());
     }

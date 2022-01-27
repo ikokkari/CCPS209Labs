@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
@@ -46,8 +48,10 @@ public class BitwiseStuffTest {
             }
             long result = BitwiseStuff.reverseNybbles(n);
             long back = BitwiseStuff.reverseNybbles(result);
-            //System.out.println(Long.toHexString(n) + " " + Long.toHexString(result) + " " + Long.toHexString(back));
-            check.update(Long.toHexString(result).getBytes());
+            try {
+                check.update(Long.toHexString(result).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
+
             assertEquals(n, back);
         }
         assertEquals(232648447L, check.getValue());

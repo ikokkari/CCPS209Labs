@@ -33,9 +33,9 @@ public class CoinMoveTest {
                 curr[rng.nextInt(n)]++;
             }
             CoinMove.coinStep(curr, next, nbs);
-            check.update(Arrays.toString(next).getBytes());
+            for(int e: next) { check.update(e); }
         }
-        assertEquals(538741678L, check.getValue());
+        assertEquals(561039959L, check.getValue());
     }
     
     @Test public void testPeriod() {

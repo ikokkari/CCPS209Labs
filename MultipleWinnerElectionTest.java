@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -69,10 +71,6 @@ public class MultipleWinnerElectionTest {
         test(10000, 2082193870L, 2);
     }
     
-    @Test public void testAll() {
-        test(1000, 156607936L, 3);
-    }
-    
     private boolean isSorted(int[] a) {
         int prev = a[0] - 1;
         for(int e : a) {
@@ -85,7 +83,6 @@ public class MultipleWinnerElectionTest {
     private void test(int n, long expected, int mode) {
         CRC32 check = new CRC32();
         Random rng = new Random(12345);
-        int diffCount = 0;
         for(int i = 0; i < n; i++) {
             int C = 2 + Math.min(i / 20, 20) + Math.min(i / 1000, 20);
             int[] votes = new int[C];
@@ -96,31 +93,28 @@ public class MultipleWinnerElectionTest {
                 votes[c] += rng.nextInt(2 * i + 1);
             }
             Arrays.sort(votes);
-            //System.out.print(Arrays.toString(votes) + " for " + seats + " seats: ");
             int[] result0 = null, result1 = null, result2 = null;
             if(mode == 0 || mode == 3) { // DHondt
                 result0 = MultipleWinnerElection.DHondt(votes, seats);
                 assertTrue(isSorted(result0));
-                check.update(Arrays.toString(result0).getBytes());
+                try {
+                    check.update(Arrays.toString(result0).getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) { }
             }
             if(mode == 1 || mode == 3) { // Webster
                 result1 = MultipleWinnerElection.webster(votes, seats);
                 assertTrue(isSorted(result1));
-                check.update(Arrays.toString(result1).getBytes());
+                try {
+                    check.update(Arrays.toString(result1).getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) { }
             }
             if(mode == 2 || mode == 3) { // Imperiali
                 result2 = MultipleWinnerElection.imperiali(votes, seats);
                 assertTrue(isSorted(result2));
-                check.update(Arrays.toString(result2).getBytes());
+                try {
+                    check.update(Arrays.toString(result2).getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) { }
             }
-            if(mode == 3) { // For examining how the methods produce different results.
-                if(!(Arrays.equals(result0, result1) && Arrays.equals(result1, result2))) {
-                    diffCount++;
-                }
-            }
-        }
-        if(mode == 3) {
-            assertEquals(981, diffCount);
         }
         assertEquals(expected, check.getValue());
     }   

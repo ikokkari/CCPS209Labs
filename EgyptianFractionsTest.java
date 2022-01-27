@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Random;
@@ -43,8 +45,9 @@ public class EgyptianFractionsTest {
             } while(a % 2 == 0 && b % 2 == 0);
             Fraction apb = new Fraction(a, b);
             List<BigInteger> gRes = EgyptianFractions.greedy(apb);
-            check.update(gRes.toString().getBytes());
-            //System.out.println(a + "/" + b + " greedy : " + gRes);
+            try {
+                check.update(gRes.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             assertTrue(addsUp(gRes, apb));
         }
         assertEquals(93321355L, check.getValue());
@@ -77,8 +80,9 @@ public class EgyptianFractionsTest {
             } while(a % 2 == 0 && b % 2 == 0);
             Fraction apb = new Fraction(a, b);
             List<BigInteger> gRes = EgyptianFractions.splitting(apb);
-            check.update(gRes.toString().getBytes());
-            //System.out.println(a + "/" + b + " splitting : " + gRes);
+            try {
+                check.update(gRes.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             assertTrue(addsUp(gRes, apb));
         }
         assertEquals(2886553470L, check.getValue());

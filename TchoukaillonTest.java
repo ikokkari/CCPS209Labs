@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -26,7 +27,9 @@ public class TchoukaillonTest {
                 for(int k = 1; k < j; k++) {
                     boolean b1 = Tchoukaillon.move(board, k);
                     check.update(b1 ? i: -i);
-                    check.update(board.toString().getBytes());
+                    try {
+                        check.update(board.toString().getBytes("UTF-8"));
+                    } catch(UnsupportedEncodingException ignored) {}
                     boolean b2 = Tchoukaillon.undo(board, k);
                     check.update(b2 ? i: -i);
                     // Board after a legal move and its undo should equal the original board.
@@ -47,9 +50,7 @@ public class TchoukaillonTest {
                 for(int k = 0; k < j; k++) {
                     board.add(rng.nextBoolean() ? k : rng.nextInt(1 + k) + (k == j - 1 ? 1 : 0));
                 }
-                //System.out.print(board + ": ");
                 int v = Tchoukaillon.value(board);
-                //System.out.println(v);
                 check.update(v);
             }
         }
@@ -66,8 +67,9 @@ public class TchoukaillonTest {
             }
             sum += board.get(0);
             assertEquals(sum, i);
-            //System.out.println(i + " " + board);
-            check.update(board.toString().getBytes());
+            try {
+                check.update(board.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             Tchoukaillon.previousSolvable(board);
         }
         assertEquals(280052111L, check.getValue());

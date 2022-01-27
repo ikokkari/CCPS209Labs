@@ -3,6 +3,7 @@ import org.junit.Test;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.function.BiPredicate;
@@ -45,8 +46,9 @@ public class FilterWriterTest {
         }
         sc.close();
         String result = sw.toString();
-        //System.out.println(result);
-        check.update(result.getBytes());
+        try {
+            check.update(result.getBytes("UTF-8"));
+        } catch(UnsupportedEncodingException ignored) {}
         assertEquals(3533446551L, check.getValue());
     }
     
@@ -84,7 +86,9 @@ public class FilterWriterTest {
         }
         sc.close();
         String result = sw.toString();
-        check.update(result.getBytes());
+        try {
+            check.update(result.getBytes("UTF-8"));
+        } catch(UnsupportedEncodingException ignored) {}
         assertEquals(1191567916L, check.getValue());
     }    
 }

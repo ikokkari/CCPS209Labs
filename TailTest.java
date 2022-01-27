@@ -1,8 +1,6 @@
 import org.junit.Test;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.zip.CRC32;
@@ -23,7 +21,9 @@ public class TailTest {
             totalLines += result.size();
             fr.close();
             for(String line: result) {
-                check.update(line.getBytes());
+                try {
+                    check.update(line.getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) {}
             }
         }
         assertEquals(10 + 100 + 1000 + 10000 + 63852, totalLines);

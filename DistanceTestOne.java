@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.TreeMap;
 import java.util.zip.CRC32;
@@ -10,10 +12,22 @@ public class DistanceTestOne {
     private static final int SEED = 123456;
 
     @Test public void testExtractSquares() {
+        // Some explicit test cases
+        assertEquals(1, Distance.extractSquares(1));
+        assertEquals(1, Distance.extractSquares(11));
+        assertEquals(1, Distance.extractSquares(17));
+        assertEquals(6, Distance.extractSquares(2 * 2 * 3 * 3));
+        assertEquals(2, Distance.extractSquares(2 * 2 * 3 * 5 * 7));
+        assertEquals(7, Distance.extractSquares(2 * 7 * 7 * 11 * 13));
+        assertEquals(5, Distance.extractSquares(2 * 5 * 5));
+        assertEquals(19, Distance.extractSquares(2 * 5 * 11 * 19 * 19));
+        assertEquals(2 * 39, Distance.extractSquares(2 * 2 * 2 * 5 * 39 * 39 * 109));
+
+        // Pseudorandom fuzz tester
         CRC32 check = new CRC32();
         for(int n = 0; n < 100_000; n++) {
             int sp = Distance.extractSquares(n);
-            assertEquals(0, n % ((long) sp *sp));
+            assertEquals(0, n % ((long) sp * sp));
             int a = n / (sp*sp); // Integer division truncates
             assertEquals(n, sp*sp*a);
             check.update(sp);
@@ -40,7 +54,9 @@ public class DistanceTestOne {
         { {5, 1}, {10, -1}, {15, 1}, {20,-1} },
         { {11, 4}, {23, 4}, {11*4, -2}, {23*4, -2} }
     };
-    
+
+    // The returned String objects must have precisely these characters, no more and no less.
+    // This is how Wolfram Mathematica would emit these objects in their symbolic form.
     private static final String[] expected = {
         "3Sqrt[61]",
         "0",
@@ -65,7 +81,6 @@ public class DistanceTestOne {
                 coeff.put(co[0], co[1]);
             }
             Distance d = new Distance(coeff);
-            //System.out.println("\"" + d + "\"");
             assertEquals(expected[i], d.toString());
             i++;
         }
@@ -80,7 +95,9 @@ public class DistanceTestOne {
             int base = rng.nextInt(3 * (i + 2)) + 1;
             Distance d = new Distance(whole, base);
             String rep = d.toString();
-            check.update(rep.getBytes());
+            try {
+                check.update(rep.getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(4065287689L, check.getValue());
     }    

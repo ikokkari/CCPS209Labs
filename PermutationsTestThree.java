@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -31,7 +32,9 @@ public class PermutationsTestThree {
         for(int i = 0; i < n; i++) {
             Arrays.fill(coeff, 0);
             Permutations.toFactoradic(curr, coeff);
-            check.update(Arrays.toString(coeff).getBytes());
+            try {
+                check.update(Arrays.toString(coeff).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             long back = Permutations.fromFactoradic(coeff);
             assertEquals(curr, back);
             curr += 1 + rng.nextInt(step);
@@ -93,7 +96,9 @@ public class PermutationsTestThree {
                 int tmp = perm[k]; perm[k] = perm[s]; perm[s] = tmp;
             }
             int[] inv = Permutations.toLehmer(perm);
-            check.update(Arrays.toString(inv).getBytes());
+            try {
+                check.update(Arrays.toString(inv).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             int[] back = Permutations.fromLehmer(inv);
             assertArrayEquals(perm, back);
         }

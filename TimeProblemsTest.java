@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -48,8 +50,9 @@ public class TimeProblemsTest {
             long seconds = 1000;
             while(seconds <= 1_000_000_000L) {
                 String result = TimeProblems.dayAfterSeconds(now, seconds);
-                //System.out.println(now + " " + seconds + " " + result);
-                check.update(result.getBytes());
+                try {
+                    check.update(result.getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) {}
                 seconds = 10 * seconds;
             }
         }

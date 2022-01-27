@@ -1,9 +1,6 @@
 import org.junit.Test;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -32,7 +29,9 @@ public class P2J3Test {
         String line = fr.readLine();
         while(line != null) {
             String result = P2J3.pancakeScramble(line);
-            check.update(result.getBytes());
+            try {
+                check.update(result.getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             line = fr.readLine();
         }
         fr.close();
@@ -61,7 +60,9 @@ public class P2J3Test {
         String line = fr.readLine();
         while(line != null) {
             String result = P2J3.reverseVowels(line);
-            check.update(result.getBytes());
+            try {
+                check.update(result.getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             line = fr.readLine();
         }
         fr.close();

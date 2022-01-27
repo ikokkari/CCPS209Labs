@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
@@ -43,7 +45,9 @@ public class DistanceTestTwo {
                 String si = ds[i].toString();
                 String sii = ds[i].add(ds[i-1]).subtract(ds[i-1]).toString();
                 assertEquals(si, sii);
-                check.update(ds[i].toString().getBytes());
+                try {
+                    check.update(ds[i].toString().getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) {}
             }
         }
         assertEquals(expected, check.getValue());

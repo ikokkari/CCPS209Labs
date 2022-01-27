@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.zip.CRC32;
 import java.util.Random;
 
@@ -92,7 +94,10 @@ public class CupSurvivalTest {
                 // Final survival probabilities have to add up to one.
                 Fraction sum = ZERO;
                 for (Fraction f : survival) {
-                    check.update(f.toString().getBytes());
+
+                    try {
+                        check.update(f.toString().getBytes("UTF-8"));
+                    } catch(UnsupportedEncodingException ignored) {}
                     sum = sum.add(f);
                 }
                 assertEquals(ONE, sum);

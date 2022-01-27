@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Random;
@@ -37,7 +39,9 @@ public class P2J5Test {
         for(int i = 0; i < 500; i++) {
             List<BigInteger> result = P2J5.fibonacciSum(curr);
             for(BigInteger b: result) {
-                check.update(b.toString().getBytes());
+                try {
+                    check.update(b.toString().getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) {}
             }
             curr = curr.add(new BigInteger("" + (rng.nextInt(5) + 1)));
             curr = curr.multiply(TWO);
@@ -75,7 +79,9 @@ public class P2J5Test {
         int curr = 2;
         for(int i = 2; i < 400; i++) {
             BigInteger result = P2J5.sevenZero(curr);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             curr += rng.nextInt(5) + 1;
         }
         assertEquals(916368163L, check.getValue());

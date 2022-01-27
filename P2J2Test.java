@@ -1,8 +1,9 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.zip.CRC32;
-
 import static org.junit.Assert.assertEquals;
 
 public class P2J2Test {
@@ -15,6 +16,7 @@ public class P2J2Test {
         assertEquals("", P2J2.removeDuplicates(""));
         assertEquals("ilka", P2J2.removeDuplicates("ilkka"));
         assertEquals("aba", P2J2.removeDuplicates("aaaaaaaabaaaaaaa"));
+        assertEquals("cdcdc", P2J2.removeDuplicates("ccccddccccdcccccc"));
         assertEquals("x", P2J2.removeDuplicates("x"));
         assertEquals("x", P2J2.removeDuplicates("xxxxxxxxxxxxx"));
         assertEquals("abcdefgh", P2J2.removeDuplicates("abcdefgh"));
@@ -37,7 +39,9 @@ public class P2J2Test {
                     sb.append(c);
                 }
             }
-            check.update(P2J2.removeDuplicates(sb.toString()).getBytes());
+            try {
+                check.update(P2J2.removeDuplicates(sb.toString()).getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(2596651304L, check.getValue());
     }
@@ -54,13 +58,12 @@ public class P2J2Test {
         return sb.toString();
     }
     
-    @Test
-    public void testUniqueCharacters() {
+    @Test public void testUniqueCharacters() {
         // Explicit test cases
         assertEquals("abc", P2J2.uniqueCharacters("aaaaaabaaabbbaaababbbabbcbabababa"));
         assertEquals("ilka orne", P2J2.uniqueCharacters("ilkka kokkarinen"));
         assertEquals("", P2J2.uniqueCharacters(""));
-        assertEquals("\u4444", P2J2.uniqueCharacters("\u4444"));
+        assertEquals("\u4444", P2J2.uniqueCharacters("\u4444\u4444\u4444"));
         assertEquals("aABbcCDd", P2J2.uniqueCharacters("aABbcCDd"));
         
         // Pseudorandom fuzz tester

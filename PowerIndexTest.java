@@ -51,11 +51,11 @@ public class PowerIndexTest {
     }
     
     @Test public void massTestBanzhaf() {
-        testPower(3119455996L, true, 350);
+        testPower(1755122046L, true, 350);
     }
     
     @Test public void massTestShapleyShubik() {
-        testPower(482638707L, false, 170);
+        testPower(2840684198L, false, 170);
     }
     
     private void testPower(long expected, boolean banzhaf, int limit) {
@@ -84,7 +84,7 @@ public class PowerIndexTest {
             if(VERBOSE) {
                 System.out.println(Arrays.toString(out));
             }
-            check.update(Arrays.toString(out).getBytes());
+            for(int e: out) { check.update(e); }
         }
         assertEquals(expected, check.getValue());
     }   

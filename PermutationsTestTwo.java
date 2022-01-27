@@ -1,4 +1,7 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.zip.CRC32;
@@ -68,7 +71,9 @@ public class PermutationsTestTwo {
             }
             assertTrue(order == 1 || !identity);
             String pretty = Permutations.cycles(cycles, alpha);
-            check.update(pretty.getBytes());
+            try {
+                check.update(pretty.getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
             int[] back = Permutations.fromCycles(cycles);
             assertArrayEquals(perm, back);
         }

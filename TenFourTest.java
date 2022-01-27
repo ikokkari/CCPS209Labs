@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
@@ -16,17 +18,21 @@ public class TenFourTest {
             TenFour.shortestPath(197, 1_000_000).toString());
         
         /* Pseudorandom fuzz tester */
+        int maxlimit = 50_000;
         CRC32 check = new CRC32();
         for(int i = 1; i < 500; i++) {
-            int limit = 100 * 500 + 1;
+            int limit = 50_000 + 1;
             List<Integer> result;
             do {
                 result = TenFour.shortestPath(i, limit);
                 limit = limit * 2;
+                maxlimit = Math.max(maxlimit, limit);
             } while(result.size() == 0);
-            // System.out.println(i + ": " + result);
-            check.update(result.toString().getBytes());
+            try {
+                check.update(result.toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
+        System.out.println("Max limit is " + maxlimit);
         assertEquals(1154212991, check.getValue());
     }  
 }

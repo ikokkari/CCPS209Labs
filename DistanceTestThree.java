@@ -1,4 +1,6 @@
 import org.junit.Test;
+
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -32,12 +34,12 @@ public class DistanceTestThree {
                 if(rng.nextBoolean()) { whole = -whole; }
                 int base = rng.nextInt(10 * (i + 3)) + 2;
                 Distance dd = new Distance(whole, base);
-                //System.out.println("Adding " + dd);
                 d = d.add(dd);
                 
                 BigDecimal curr = d.approximate(mc2);
-                //System.out.println(d + " is approximately " + curr);
-                check.update(curr.toString().getBytes());
+                try {
+                    check.update(curr.toString().getBytes("UTF-8"));
+                } catch(UnsupportedEncodingException ignored) {}
                 BigDecimal diff = curr.subtract(prev);
                 assertTrue(diff.abs().compareTo(epsilon) < 0);
                 prev = curr;
