@@ -76,7 +76,7 @@ public class IntervalSetTest {
 
     @Test public void testRemoveExplicit() {
         IntervalSet is = new IntervalSet();
-        is.remove(42, 100); // nothing should happen
+        is.remove(42, 100); // nothing should happen, not even a crash
         assertEquals("[]", is.toString());
         is.add(10, 50);
         is.remove(5, 20);

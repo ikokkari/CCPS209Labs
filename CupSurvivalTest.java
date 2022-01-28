@@ -94,7 +94,6 @@ public class CupSurvivalTest {
                 // Final survival probabilities have to add up to one.
                 Fraction sum = ZERO;
                 for (Fraction f : survival) {
-
                     try {
                         check.update(f.toString().getBytes("UTF-8"));
                     } catch(UnsupportedEncodingException ignored) {}
