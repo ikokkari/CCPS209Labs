@@ -310,7 +310,19 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
    <tr>
-   <td>67. Lemire Dynamic Frequency Sampling 
+   <td>67. Lemire dynamic frequency sampling 
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>68. Interval sets 
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>69. Cup tournament survival
    </td>
    <td>
    </td>
