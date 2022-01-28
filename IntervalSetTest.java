@@ -52,6 +52,7 @@ public class IntervalSetTest {
 
     @Test public void testContainsExplicit() {
         IntervalSet is = new IntervalSet();
+        assertFalse(is.contains(1_000_000_000));
         assertFalse(is.contains(42, 99));
         is.add(42, 99);
         assertEquals("[42-99]", is.toString());
@@ -73,16 +74,55 @@ public class IntervalSetTest {
         assertTrue(is.contains(40, 98));
     }
 
-    @Test public void massTestOneHundred() {
-        massTest(100, 1120302967L);
+    @Test public void testRemoveExplicit() {
+        IntervalSet is = new IntervalSet();
+        is.remove(42, 100); // nothing should happen
+        assertEquals("[]", is.toString());
+        is.add(10, 50);
+        is.remove(5, 20);
+        assertEquals("[21-50]", is.toString());
+        is.remove(30, 33);
+        assertEquals("[21-29, 34-50]", is.toString());
+        is.remove(34, 37);
+        assertEquals("[21-29, 38-50]", is.toString());
+        is.remove(21, 29);
+        assertEquals("[38-50]", is.toString());
+        is.remove(45, 100);
+        assertEquals("[38-44]", is.toString());
+        is.remove(39, 42);
+        assertEquals("[38, 43-44]", is.toString());
+        is.remove(0, 42);
+        assertEquals("[43-44]", is.toString());
+        is.remove(44, 100);
+        assertEquals("[43]", is.toString());
+        is.remove(43);
+        assertEquals("[]", is.toString());
+
+        is.add(30, 66);
+        is.remove(50);
+        assertEquals("[30-49, 51-66]", is.toString());
+        is.remove(40, 50);
+        assertEquals("[30-39, 51-66]", is.toString());
+        is.remove(55, 60);
+        assertEquals("[30-39, 51-54, 61-66]", is.toString());
+        is.remove(52, 64);
+        assertEquals("[30-39, 51, 65-66]", is.toString());
+        is.remove(35, 65);
+        assertEquals("[30-34, 66]", is.toString());
+        is.remove(20, 100);
+        assertEquals("[]", is.toString());
     }
 
-    @Test public void massTestOneThousand() {
-        massTest(1000, 3961018955L);
+    @Test public void massTestOneHundred() {
+        massTest(100, 1471632031L);
     }
 
     @Test public void massTestTenThousand() {
-        massTest(10000, 2284193219L);
+        massTest(10000, 1796090957L);
+    }
+
+    @Test public void massTestOneMillion() {
+        massTest(1_000_000, 1101228305L);
     }
 
     private void massTest(int n, long expected) {
@@ -93,8 +133,8 @@ public class IntervalSetTest {
         for(int i = 0; i < n; i++) {
             int start, end;
             if(i < 5 || rng.nextBoolean()) {
-                start = rng.nextInt(5 + i * i);
-                end = start + rng.nextInt(5 + (i * i) / 20);
+                start = rng.nextInt(20 * i + 10);
+                end = start + rng.nextInt(5 * i + 10);
             }
             else {
                 int js = rng.nextInt(i);
@@ -109,13 +149,18 @@ public class IntervalSetTest {
             check.update(is.contains(start, end) ? 42: 99);
             check.update(is.contains(start-3, start+3) ? 42: 99);
             check.update(is.contains(end-10, end+10) ? 42: 99);
-            is.add(start, end);
-            // System.out.println("Adding " + start + "-" + end + ": " + is);
+            if(rng.nextBoolean()) {
+                is.add(start, end);
+                //System.out.println("Adding " + start + "-" + end + ": " + is);
+            }
+            else {
+                is.remove(start, end);
+                //System.out.println("Remove " + start + "-" + end + ": " + is);
+            }
             try {
                 check.update(is.toString().getBytes("UTF-8"));
             } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(expected, check.getValue());
     }
-
 }
