@@ -48,9 +48,9 @@ public class PlayfairCipherTest {
         String passPhrase0 = "Man suffers only because he takes seriously what the Gods made for fun.";
         char[][] table0 = PlayfairCipher.constructPlayfairTable(passPhrase0);
         String cipherText0 = PlayfairCipher.encodePlayfair(plainText0, table0);
-        assertEquals("CLBKSWHLILEKARHFNLAOFEGAEDIFCLBKSWHLIQBLHFNLRGUCOQYT", cipherText0);
+        assertEquals("CLBKSWHLILEKARHFNLAOFEGAEDIFCLBKSWHLIQBLHFNLRGUCOQLBGS", cipherText0);
         String decryptedText0 = PlayfairCipher.decodePlayfair(cipherText0, table0);
-        assertEquals("TRYINGTODEFINEYOURSELFISLIKETRYINGTOBITEYOUROWNTEXTH", decryptedText0);
+        assertEquals("TRYINGTODEFINEYOURSELFISLIKETRYINGTOBITEYOUROWNTEXETHX", decryptedText0);
 
         String plainText1 = "ASTHEOCEANWAVESTHEUNIVERSEPEOPLES";
         String passPhrase1 = "Total situations are, therefore, patterns in time as much as patterns in space.";
@@ -64,9 +64,9 @@ public class PlayfairCipherTest {
         String passPhrase2 = "Only words and conventions can isolate us from the entirely undefinable something which is everything.";
         char[][] table2 = PlayfairCipher.constructPlayfairTable(passPhrase2);
         String cipherText2 = PlayfairCipher.encodePlayfair(plainText2, table2);
-        assertEquals("GEAPWOSIVDTAMITHSWIDDVAMWYIDEUWMUISYNLIP", cipherText2);
+        assertEquals("GEAPANYCITAVAHTDUSNTCDMEXANTRIEYBUISYNDM", cipherText2);
         String decryptedText2 = PlayfairCipher.decodePlayfair(cipherText2, table2);
-        assertEquals("MUDXYWATERISBESTCLEAREDBYLEAVINGITALONEX", decryptedText2);
+        assertEquals("MUDXDYWATERISBESTCLEAREDBYLEAVINGITALONE", decryptedText2);
 
         String plainText3 = "THEMEANINGOFLIFEISJUSTTOBEALIVE";
         String passPhrase3 = "Zen does not confuse spirituality with thinking about God while one is peeling potatoes.";
@@ -108,6 +108,6 @@ public class PlayfairCipherTest {
             System.out.println("The test is not working. This is not supposed to happen.");
             fail();
         }
-        assertEquals(1790262835L, check.getValue());
+        assertEquals(1697781724L, check.getValue());
     }
 }
