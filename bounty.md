@@ -87,6 +87,12 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>Karel Tutsu, Jan 8, 2022
   </td>
   </tr>
+   <tr>
+  <td>0(Q). Aboutturn is Playfair
+  </td>
+  <td>
+  </td>
+  </tr>
   <tr>
    <td>18. Working scale
    </td>
@@ -323,6 +329,12 @@ All these bounty points will be added to the lab marks of those students all in 
   </tr>
    <tr>
    <td>69. Cup tournament survival
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>70. The Gamma and The Omega
    </td>
    <td>
    </td>
