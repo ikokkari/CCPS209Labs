@@ -47,33 +47,33 @@ public class PlayfairCipherTest {
         String plainText0 = "TRYINGTODEFINEYOURSELFISLIKETRYINGTOBITEYOUROWNTEETH";
         String passPhrase0 = "Man suffers only because he takes seriously what the Gods made for fun.";
         char[][] table0 = PlayfairCipher.constructPlayfairTable(passPhrase0);
-        String cipherText0 = PlayfairCipher.encodePlayfair(plainText0, table0);
+        String cipherText0 = PlayfairCipher.encryptPlayfair(plainText0, table0);
         assertEquals("CLBKSWHLILEKARHFNLAOFEGAEDIFCLBKSWHLIQBLHFNLRGUCOQLBGS", cipherText0);
-        String decryptedText0 = PlayfairCipher.decodePlayfair(cipherText0, table0);
+        String decryptedText0 = PlayfairCipher.decryptPlayfair(cipherText0, table0);
         assertEquals("TRYINGTODEFINEYOURSELFISLIKETRYINGTOBITEYOUROWNTEXETHX", decryptedText0);
 
         String plainText1 = "ASTHEOCEANWAVESTHEUNIVERSEPEOPLES";
         String passPhrase1 = "Total situations are, therefore, patterns in time as much as patterns in space.";
         char[][] table1 = PlayfairCipher.constructPlayfairTable(passPhrase1);
-        String cipherText1 = PlayfairCipher.encodePlayfair(plainText1, table1);
+        String cipherText1 = PlayfairCipher.encryptPlayfair(plainText1, table1);
         assertEquals("LTIBUSQCNPXOZITOCINRHTIEECCNAFSRAZ", cipherText1);
-        String decryptedText1 = PlayfairCipher.decodePlayfair(cipherText1, table1);
+        String decryptedText1 = PlayfairCipher.decryptPlayfair(cipherText1, table1);
         assertEquals("ASTHEOCEANWAVESTHEUNIVERSEPEOPLESX", decryptedText1);
 
         String plainText2 = "MUDDYWATERISBESTCLEAREDBYLEAVINGITALONE";
         String passPhrase2 = "Only words and conventions can isolate us from the entirely undefinable something which is everything.";
         char[][] table2 = PlayfairCipher.constructPlayfairTable(passPhrase2);
-        String cipherText2 = PlayfairCipher.encodePlayfair(plainText2, table2);
+        String cipherText2 = PlayfairCipher.encryptPlayfair(plainText2, table2);
         assertEquals("GEAPANYCITAVAHTDUSNTCDMEXANTRIEYBUISYNDM", cipherText2);
-        String decryptedText2 = PlayfairCipher.decodePlayfair(cipherText2, table2);
+        String decryptedText2 = PlayfairCipher.decryptPlayfair(cipherText2, table2);
         assertEquals("MUDXDYWATERISBESTCLEAREDBYLEAVINGITALONE", decryptedText2);
 
         String plainText3 = "THEMEANINGOFLIFEISJUSTTOBEALIVE";
         String passPhrase3 = "Zen does not confuse spirituality with thinking about God while one is peeling potatoes.";
         char[][] table3 = PlayfairCipher.constructPlayfairTable(passPhrase3);
-        String cipherText3 = PlayfairCipher.encodePlayfair(plainText3, table3);
+        String cipherText3 = PlayfairCipher.encryptPlayfair(plainText3, table3);
         assertEquals("CWTEDIEROHDUPRTDPTLTTCUEMZLPAMOM", cipherText3);
-        String decryptedText3 = PlayfairCipher.decodePlayfair(cipherText3, table3);
+        String decryptedText3 = PlayfairCipher.decryptPlayfair(cipherText3, table3);
         assertEquals("THEMEANINGOFLIFEISIUSTTOBEALIVEX", decryptedText3);
     }
 
@@ -92,9 +92,9 @@ public class PlayfairCipherTest {
                     if('A' <= c && c <= 'Z') { sb.append(c); }
                 }
                 line = sb.toString();
-                if(line.indexOf("XX") == -1) {
-                    String cipherText = PlayfairCipher.encodePlayfair(line, table);
-                    String decryptedText = PlayfairCipher.decodePlayfair(cipherText, table);
+                if(line.indexOf("XX") == -1) { // The nineteenth century was not as sexxy as ours.
+                    String cipherText = PlayfairCipher.encryptPlayfair(line, table);
+                    String decryptedText = PlayfairCipher.decryptPlayfair(cipherText, table);
                     check.update(cipherText.getBytes("UTF-8"));
                     check.update(decryptedText.getBytes("UTF-8"));
                 }
