@@ -80,11 +80,6 @@ public class PermutationGeneratorTest {
         assertArrayEquals(LEXICOGRAPHIC_EXPECTED, result);
     }
 
-    @Test public void testLexicographicPermutationFour() {
-        int[] perm = new int[4];
-        testPermutationGen(new LexicographicPermutation(perm), perm, 850034859L);
-    }
-
     @Test public void testLexicographicPermutationSeven() {
         int[] perm = new int[7];
         testPermutationGen(new LexicographicPermutation(perm), perm, 137736586L);
