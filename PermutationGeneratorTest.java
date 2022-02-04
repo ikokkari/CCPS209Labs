@@ -1,8 +1,8 @@
+import java.util.Arrays;
 import org.junit.Test;
 import java.util.zip.CRC32;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
 
 public class PermutationGeneratorTest {
 
@@ -38,19 +38,46 @@ public class PermutationGeneratorTest {
         assertEquals(2, ZaksPermutation.zaksSequenceElement(12, 171717234));
     }
 
-    @Test public void testZaksPermutationFour() {
+    private static final String[] ZAKS_EXPECTED = {
+            "0123", "1023", "2013", "0213", "1203", "2103", "3012", "0312", "1302", "3102", "0132", "1032",
+            "2301", "3201", "0231", "2031", "3021", "0321", "1230", "2130", "3120", "1320", "2310", "3210"
+    };
+
+    private static final String[] LEXICOGRAPHIC_EXPECTED = {
+            "0123", "0132", "0213", "0231", "0312", "0321", "1023", "1032", "1203", "1230", "1302", "1320",
+            "2013", "2031", "2103", "2130", "2301", "2310", "3012", "3021", "3102", "3120", "3201", "3210"
+    };
+
+    @Test public void testZaksPermutationExplicit() {
         int[] perm = new int[4];
-        testPermutationGen(new ZaksPermutation(perm), perm, 3321535687L);
+        String[] result = new String[24];
+        ZaksPermutation zp = new ZaksPermutation(perm);
+        for(int i = 0; i < 24; i++) {
+            result[i] = permToString(perm);
+            zp.next();
+        }
+        assertArrayEquals(ZAKS_EXPECTED, result);
     }
 
     @Test public void testZaksPermutationSeven() {
         int[] perm = new int[7];
-        testPermutationGen(new ZaksPermutation(perm), perm, 3656943312L);
+        testPermutationGen(new ZaksPermutation(perm), perm, 2234769897L);
     }
 
     @Test public void testZaksPermutationTen() {
         int[] perm = new int[10];
-        testPermutationGen(new ZaksPermutation(perm), perm, 3227210311L);
+        testPermutationGen(new ZaksPermutation(perm), perm, 721747669L);
+    }
+
+    @Test public void testLexicographicPermutationExplicit() {
+        int[] perm = new int[4];
+        String[] result = new String[24];
+        LexicographicPermutation zp = new LexicographicPermutation(perm);
+        for(int i = 0; i < 24; i++) {
+            result[i] = permToString(perm);
+            zp.next();
+        }
+        assertArrayEquals(LEXICOGRAPHIC_EXPECTED, result);
     }
 
     @Test public void testLexicographicPermutationFour() {
@@ -77,6 +104,7 @@ public class PermutationGeneratorTest {
             for(int j = 0; j < n; j++) {
                 check.update(perm[j]);
             }
+            //System.out.print("\"" + permToString(perm) + "\", ");
             boolean b = gen.next();
             assertTrue(i < f-1 || !b);
         }
