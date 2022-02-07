@@ -8,16 +8,16 @@ public class FrogCrossingTest {
 
     @Test public void testMaximumFrogsExplicit() {
         int[] strength0 = {8, 7, 5};
-        int[] stones0 = {0, 2, 4, 7, 9, 10, 13, 14, 16};
-        assertEquals(3, FrogCrossing.maximumFrogs(strength0, stones0));
+        int[] boxes0 = {0, 2, 4, 7, 9, 10, 13, 14, 16};
+        assertEquals(3, FrogCrossing.maximumFrogs(strength0, boxes0));
 
         int[] strength1 = {7, 5, 4};
-        int[] stones1 = {0, 3, 4, 6, 8, 10, 11};
-        assertEquals(2, FrogCrossing.maximumFrogs(strength1, stones1));
+        int[] boxes1 = {0, 3, 4, 6, 8, 10, 11};
+        assertEquals(2, FrogCrossing.maximumFrogs(strength1, boxes1));
 
         int[] strength2 = {20, 17, 15, 13, 11};
-        int[] stones2 = {7, 8, 11, 17, 20, 21, 24, 26, 31, 33, 38};
-        assertEquals(4, FrogCrossing.maximumFrogs(strength2, stones2));
+        int[] boxes2 = {7, 8, 11, 17, 20, 21, 24, 26, 31, 33, 38};
+        assertEquals(4, FrogCrossing.maximumFrogs(strength2, boxes2));
     }
 
     @Test public void testMaximumFrogsTwenty() {
@@ -45,13 +45,13 @@ public class FrogCrossingTest {
                 j1++; j2--;
             }
             int m = frogs + rng.nextInt(2 * frogs);
-            int[] stones = new int[m];
-            for(int j = 1; j < stones.length; j++) {
-                stones[j] = stones[j-1] + 1 + rng.nextInt(1 + frogs);
+            int[] boxes = new int[m];
+            for(int j = 1; j < boxes.length; j++) {
+                boxes[j] = boxes[j-1] + 1 + rng.nextInt(1 + frogs);
             }
-            int result = FrogCrossing.maximumFrogs(strength, stones);
+            int result = FrogCrossing.maximumFrogs(strength, boxes);
             check.update(result);
-            // System.out.println("Stones at " + Arrays.toString(stones));
+            // System.out.println("Boxes at " + Arrays.toString(boxes));
             // System.out.println("Strengths " + Arrays.toString(strength));
             // System.out.println(result);
             if(++count == goal) {
