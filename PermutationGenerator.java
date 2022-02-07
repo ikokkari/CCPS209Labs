@@ -1,3 +1,6 @@
+// Abstract superclass for students to extend the concrete subclasses
+// LexicographicComparator and ZaksComparator from.
+
 public abstract class PermutationGenerator {
 
     private int[] perm;
@@ -11,5 +14,5 @@ public abstract class PermutationGenerator {
         return next(pos++, perm);
     }
 
-    protected abstract boolean next(int i, int[] perm);
+    protected abstract boolean next(int pos, int[] perm);
 }

@@ -1,8 +1,9 @@
-import java.util.Arrays;
 import org.junit.Test;
 import java.util.zip.CRC32;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class PermutationGeneratorTest {
 
@@ -96,10 +97,7 @@ public class PermutationGeneratorTest {
         for(int i = 2; i <= n; i++) { f = f * i; }
         CRC32 check = new CRC32();
         for(int i = 0; i < f; i++) {
-            for(int j = 0; j < n; j++) {
-                check.update(perm[j]);
-            }
-            //System.out.print("\"" + permToString(perm) + "\", ");
+            for(int e: perm) { check.update(e); }
             boolean b = gen.next();
             assertTrue(i < f-1 || !b);
         }
