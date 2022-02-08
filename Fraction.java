@@ -11,26 +11,26 @@ import java.math.BigInteger;
 public class Fraction implements Comparable<Fraction> {
 
     // A fraction is internally encoded as numerator and denominator, both BigIntegers.
-
+    
     private BigInteger num; // the numerator
     private BigInteger den; // the denominator, should always be > 0
-
+    
     // The getter methods. Note that we don't have setter methods, since the Fraction
     // class is immutable, which means that an object, once created, cannot change.
     // (This has various advantages which may not be intuitive right now.)
-
+    
     /**
      * Return the numerator of this fraction.
      * @return The numerator of this fraction.
      */
     public BigInteger getNum() { return num; }
-
+    
     /**
      * Return the denominator of this fraction.
      * @return The denominator of this fraction.
      */
     public BigInteger getDen() { return den; }
-
+    
     /**
      * Construct a fraction from given numerator and denominator, as ints.
      * @param num The numerator of the fraction.
@@ -39,7 +39,7 @@ public class Fraction implements Comparable<Fraction> {
     public Fraction(int num, int den) {
         this(new BigInteger("" + num), new BigInteger("" + den));
     }
-
+    
     /**
      * Construct a fraction from given numerator and denominator, as BigIntegers.
      * @param num The numerator of the fraction.
@@ -50,15 +50,15 @@ public class Fraction implements Comparable<Fraction> {
         this.den = den;
         simplify();
     }
-
+    
     /**
      * Construct a fraction that is an integer, from an int.
      * @param num The integer part of this fraction.
      */
     public Fraction(int num) {
         this(new BigInteger("" + num));
-    }
-
+    } 
+    
     /**
      * Construct a fraction that is an integer, from a BigInteger.
      * @param num The integer part of this fraction.
@@ -68,11 +68,11 @@ public class Fraction implements Comparable<Fraction> {
         this.den = BigInteger.ONE;
         // no need to simplify, fraction is already in lowest terms
     }
-
+    
     // Addition of fractions. Note that to add two fractions, call this method for one of them,
     // and pass the second one as parameter. This method doesn't modify either fraction, but
     // creates and returns a new fraction that contains the result.
-
+    
     /**
      * Create a new fraction that is the sum of this fraction and the {@code other} fraction.
      * @param other The other fraction to add.
@@ -81,7 +81,7 @@ public class Fraction implements Comparable<Fraction> {
     public Fraction add(Fraction other) {
         return new Fraction(this.num.multiply(other.den).add(this.den.multiply(other.num)), this.den.multiply(other.den));
     }
-
+    
     /**
      * Create a new fraction that is the product of this fraction and the {@code other} fraction.
      * @param other The other fraction to multiply.
@@ -90,7 +90,7 @@ public class Fraction implements Comparable<Fraction> {
     public Fraction multiply(Fraction other) {
         return new Fraction(this.num.multiply(other.num), this.den.multiply(other.den));
     }
-
+    
     /**
      * Create a new fraction that is the difference of this fraction and the {@code other} fraction.
      * @param other The other fraction to subtract.
@@ -99,7 +99,7 @@ public class Fraction implements Comparable<Fraction> {
     public Fraction subtract(Fraction other) {
         return new Fraction(this.num.multiply(other.den).subtract(this.den.multiply(other.num)), this.den.multiply(other.den));
     }
-
+    
     /**
      * Create a new fraction that is the quotient of this fraction and the {@code other} fraction.
      * @param other The other fraction to divide.
@@ -108,7 +108,7 @@ public class Fraction implements Comparable<Fraction> {
     public Fraction divide(Fraction other) {
         return new Fraction(this.num.multiply(other.den), this.den.multiply(other.num));
     }
-
+    
     /**
      * Check the equality of this fraction and the {@code other} fraction.
      * @param o The other fraction of the equality comparison.
@@ -123,8 +123,8 @@ public class Fraction implements Comparable<Fraction> {
         else {
             return false;
         }
-    }
-
+    }    
+    
     /**
      * Compute the hash code for this object. We combine the hash code from
      * the hash codes of the numerator and denominator. The bytes of the
@@ -143,7 +143,7 @@ public class Fraction implements Comparable<Fraction> {
         // Hash codes are often combined from pieces with bitwise arithmetic.
         return hn ^ hd; // ^ is bitwise xor, not exponentiation.
     }
-
+    
     /**
      * The ordering comparison of fractions.
      * @param other The other fraction of the order comparison.
@@ -152,9 +152,9 @@ public class Fraction implements Comparable<Fraction> {
     @Override public int compareTo(Fraction other) {
         // We just subtract the fractions and return the sign of result.
         Fraction diff = this.subtract(other);
-        return diff.getNum().signum();
+        return diff.getNum().signum();  
     }
-
+    
     /**
      * Construct the {@code String} representation of this fraction.
      */
@@ -162,15 +162,26 @@ public class Fraction implements Comparable<Fraction> {
         if(den.equals(BigInteger.ONE)) { return num.toString(); }
         else { return num + "/" + den; }
     }
-
+    
     // A private method for simplifying the initial value to lowest terms.
-    private void simplify() {
+    private void simplify() { 
         if(den.signum() == -1) { // we want the denominator to always be positive
             den = den.negate(); num = num.negate();
         }
-
+        
         BigInteger gcd = num.gcd(den); // handy!
         num = num.divide(gcd); // to simplify a fraction num/den, divide both num
         den = den.divide(gcd); // and den by their greatest common divisor
+    }
+
+    // For demonstration purposes.
+    public static void main(String[] args) {
+        Fraction a = new Fraction(3, 7); // 3/7
+        Fraction b = new Fraction(-2, 18); // -1/9
+        Fraction c = a.add(b);
+        c = c.multiply(a.subtract(b));
+        System.out.println("a is now " + a);
+        System.out.println("b is now " + b);
+        System.out.println("c is now " + c);
     }
 }
