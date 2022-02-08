@@ -1,12 +1,8 @@
 import org.junit.Test;
-
 import java.util.Iterator;
 import java.util.Random;
 import java.util.zip.CRC32;
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class IntervalIteratorTest {
 
@@ -25,31 +21,29 @@ public class IntervalIteratorTest {
 
     @Test public void testIterationExplicit() {
         IntervalSet intervals = new IntervalSet();
-        String result = extinguish(intervals.iterator());
-        assertEquals("[]", result);
+        assertEquals("[]", extinguish(intervals.iterator()));
 
         intervals.add(10, 15);
         intervals.add(17);
         intervals.add(20, 24);
-        result = extinguish(intervals.iterator());
-        assertEquals("[10, 11, 12, 13, 14, 15, 17, 20, 21, 22, 23, 24]", result);
+        assertEquals("[10, 11, 12, 13, 14, 15, 17, 20, 21, 22, 23, 24]", extinguish(intervals.iterator()));
 
         intervals.remove(0, 100);
         intervals.add(5, 8);
         intervals.add(10, 14);
         intervals.add(3);
         intervals.add(42);
-        result = extinguish(intervals.iterator());
-        assertEquals("[3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 42]", result);
+        assertEquals("[3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 42]", extinguish(intervals.iterator()));
 
+        // Last test using two iterators simultanously to the same IntervalSet.
         Iterator<Integer> iterator0 = intervals.iterator();
         Iterator<Integer> iterator1 = intervals.iterator();
+        // Consume the first two elements from the first iterator.
         iterator0.next();
         iterator0.next();
-        result = extinguish(iterator1);
-        assertEquals("[3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 42]", result);
-        result = extinguish(iterator0);
-        assertEquals("[6, 7, 8, 10, 11, 12, 13, 14, 42]", result);
+        assertEquals("[3, 5, 6, 7, 8, 10, 11, 12, 13, 14, 42]", extinguish(iterator1));
+        // First two elements should not be there in the result.
+        assertEquals("[6, 7, 8, 10, 11, 12, 13, 14, 42]", extinguish(iterator0));
     }
 
     @Test public void testIteratorHundred() {
