@@ -94,6 +94,12 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
   <tr>
+  <td>0(R). Frogs and boxes
+  </td>
+  <td>
+  </td>
+  </tr>
+  <tr>
    <td>18. Working scale
    </td>
    <td>Zhengchao Gou, Oct 24, 2020
@@ -322,19 +328,37 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
    <tr>
-   <td>68. Interval sets 
+   <td>68. Interval sets I: Dynamic set operations 
    </td>
    <td>
    </td>
   </tr>
    <tr>
-   <td>69. Cup tournament survival
+   <td>69. Interval sets II: Iteration 
    </td>
    <td>
    </td>
   </tr>
    <tr>
-   <td>70. The Gamma and The Omega
+   <td>70. Cup tournament survival
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>71. The gamma and the omega
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>72. Lazy generation of permutations
+   </td>
+   <td>
+   </td>
+  </tr>
+   <tr>
+   <td>73. Newton-Raphson fractals
    </td>
    <td>
    </td>
