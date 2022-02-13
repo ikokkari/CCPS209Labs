@@ -55,6 +55,7 @@ public class HammingCenterTest {
         CRC32 check = new CRC32();
         int n = 3, count = 0, goal = 3;
         for(int i = 0; i < trials; i++) {
+            // Create rows of random bits.
             int m = n + rng.nextInt(4);
             boolean[][] bits = new boolean[n][m];
             for(int j1 = 0; j1 < n; j1++) {
@@ -62,9 +63,11 @@ public class HammingCenterTest {
                     bits[j1][j2] = rng.nextBoolean();
                 }
             }
+            // Increase radius until a Hamming center has been found.
             for(int r = 1; r < m; r++) {
                 boolean[] center = HammingCenter.findHammingCenter(bits, r);
                 if(center != null) {
+                    // Update the checksum with radius and the bits of the found center.
                     check.update(r);
                     for(boolean b: center) { check.update(b ? 42: 99); }
                     break;
