@@ -100,7 +100,7 @@ public class PlayfairCipherTest {
                     if('A' <= c && c <= 'Z') { sb.append(c); }
                 }
                 line = sb.toString();
-                if(line.indexOf("XX") == -1) { // The nineteenth century was not as sexxy as ours.
+                if(line.indexOf("XX") == -1 && !line.endsWith("X")) { // The nineteenth century was not as sexxy as ours.
                     String cipherText = PlayfairCipher.encryptPlayfair(line, table);
                     String decryptedText = PlayfairCipher.decryptPlayfair(cipherText, table);
                     check.update(cipherText.getBytes("UTF-8"));
@@ -116,6 +116,6 @@ public class PlayfairCipherTest {
             System.out.println("The test is not working. This is not supposed to happen.");
             fail();
         }
-        assertEquals(1697781724L, check.getValue());
+        assertEquals(189957488L, check.getValue());
     }
 }
