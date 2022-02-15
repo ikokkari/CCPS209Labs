@@ -75,6 +75,14 @@ public class PlayfairCipherTest {
         assertEquals("CWTEDIEROHDUPRTDPTLTTCUEMZLPAMOM", cipherText3);
         String decryptedText3 = PlayfairCipher.decryptPlayfair(cipherText3, table3);
         assertEquals("THEMEANINGOFLIFEISIUSTTOBEALIVEX", decryptedText3);
+
+        String plainText4 = "BOOOOO";
+        String passPhrase4 = "The more a thing tends to be permanent, the more it tends to be lifeless.";
+        char[][] table4 = PlayfairCipher.constructPlayfairTable(passPhrase4);
+        String cipherText4 = PlayfairCipher.encryptPlayfair(plainText4, table4);
+        assertEquals("LEEZEZEZEZ", cipherText4);
+        String decryptedText4 = PlayfairCipher.decryptPlayfair(cipherText4, table4);
+        assertEquals("BOOXOXOXOX", decryptedText4);
     }
 
     @Test public void testUsingWarAndPeace() {
