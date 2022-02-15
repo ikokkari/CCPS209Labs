@@ -23,7 +23,7 @@ Conversion notes:
 
 
 
-# Bug Bounty List for CCPS 209
+# Bounty List for CCPS 209 Lab Problems
 
 To ensure that these problems and their automated testers do not contain any errors that would make them impossible for students to solve, the author Ilkka Kokkarinen offers a bounty of **three extra lab marks** to the first solver of each problem in the list below.
 
@@ -90,7 +90,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
   <td>0(Q). Aboutturn is Playfair
   </td>
-  <td>
+  <td>Karel Tutsu, Feb 15, 2022
   </td>
   </tr>
   <tr>
