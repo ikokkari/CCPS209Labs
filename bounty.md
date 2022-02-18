@@ -99,6 +99,18 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>Karel Tutsu, Feb 16, 2022
   </td>
   </tr>
+   <tr>
+  <td>0(S). Hamming center
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>0(T). Clique mentality
+  </td>
+  <td>
+  </td>
+  </tr>
   <tr>
    <td>18. Working scale
    </td>
@@ -362,6 +374,18 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
    <td>
    </td>
+  </tr>
+   <tr>
+  <td>74. Between the lines
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>75. Square coral
+  </td>
+  <td>
+  </td>
   </tr>
 </table>
 
