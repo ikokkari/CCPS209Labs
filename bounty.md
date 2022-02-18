@@ -94,7 +94,7 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
   <tr>
-  <td>0(R). Frogs and boxes
+  <td>0(R). Frogs on a box
   </td>
   <td>Karel Tutsu, Feb 16, 2022
   </td>
