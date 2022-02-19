@@ -378,7 +378,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
   <td>74. Between the lines
   </td>
-  <td>
+  <td>Karel Tutsu, Feb 19, 2022
   </td>
   </tr>
    <tr>
