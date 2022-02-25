@@ -107,9 +107,6 @@ public class EliasCodingTest {
             if(mode.equals("gamma")) {
                 back = EliasCoding.decodeEliasGamma(bits);
             }
-            else if(mode.equals("delta")) {
-                back = EliasCoding.decodeEliasDelta(bits);
-            }
             else if(mode.equals("omega")) {
                 back = EliasCoding.decodeEliasOmega(bits);
             }
