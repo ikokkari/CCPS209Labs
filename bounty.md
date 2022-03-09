@@ -387,5 +387,17 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>
   </td>
   </tr>
+   <tr>
+  <td>76. Sultan's daughter
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>77. Generalized chaos game
+  </td>
+  <td>
+  </td>
+  </tr>
 </table>
 
