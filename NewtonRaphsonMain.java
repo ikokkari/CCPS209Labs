@@ -46,7 +46,7 @@ public class NewtonRaphsonMain {
             return yellowHue;
         };
         BufferedImage result = NewtonRaphson.createNewtonRaphson(
-                -3, 3, 1000, 6/1000.0, f0, fp0, hue0
+                new Complex(-3,3), 1000, 6/1000.0, f0, fp0, hue0
         );
 
         JFrame frame = new JFrame("Newton-Raphson Demo");
