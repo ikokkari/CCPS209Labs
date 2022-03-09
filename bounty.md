@@ -318,13 +318,13 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>64. Learning the ropes I: Composition
    </td>
-   <td>
+   <td>Sangoh Lee, Mar 8, 2022
    </td>
   </tr>
    <tr>
    <td>65. Learning the ropes II: Comparisons
    </td>
-   <td>
+   <td>Sangoh Lee, Mar 8, 2022
    </td>
   </tr>
    <tr>
