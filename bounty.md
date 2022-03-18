@@ -238,7 +238,7 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
   <tr>
-   <td>51. Fermat primality test
+   <td>51. Miller-Rabin primality test
    </td>
    <td>
    </td>
