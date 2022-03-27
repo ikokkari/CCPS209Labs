@@ -24,6 +24,14 @@ public class TowersTest {
         assertEquals(5, Towers.minimizeTowers(t5));
         int[] t6 = {18, 7, 13, 15, 12, 2, 5, 3, 14, 9, 4, 1};
         assertEquals(3, Towers.minimizeTowers(t6));
+        int[] t7 = {1, 1, 2};
+        assertEquals(3, Towers.minimizeTowers(t7));
+        int[] t8 = {3, 1, 5, 5};
+        assertEquals(3, Towers.minimizeTowers(t8));
+        int[] t9 = {1, 1, 2, 4, 5, 1, 5, 5, 6, 8, 9};
+        assertEquals(10, Towers.minimizeTowers(t9));
+        int[] t10 = {1, 9, 5, 5, 7, 3, 6, 12, 12, 9, 9, 10, 1};
+        assertEquals(7, Towers.minimizeTowers(t10));
     }
 
     @Test public void testTowersHundred() {
@@ -70,5 +78,4 @@ public class TowersTest {
         }
         assertEquals(expected, check.getValue());
     }
-
 }
