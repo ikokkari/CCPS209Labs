@@ -25,6 +25,15 @@ public class P2J15Test {
         int[] a5 = {6, 7, 10, 12, 20, 28};
         int[] e5 = {6};
         assertArrayEquals(e5, P2J15.findClosestElements(a5, 6, 1));
+        int[] a6 = {5, 10, 12, 18, 25, 26, 32};
+        int[] e6 = {10, 12, 18, 25, 26, 32};
+        assertArrayEquals(e6, P2J15.findClosestElements(a6, 25, 6));
+        int[] a7 = {1, 2, 4, 11, 15, 23, 25, 33, 43, 47};
+        int[] e7 = {4, 11, 15, 23, 25, 33, 43, 47};
+        assertArrayEquals(e7, P2J15.findClosestElements(a7, 43, 8));
+        int[] a8 = {9, 10, 17, 29, 36, 40, 42, 55, 64, 66, 70, 78, 81, 82};
+        int[] e8 = {9, 10, 17, 29, 36, 40, 42, 55};
+        assertArrayEquals(e8, P2J15.findClosestElements(a8, 17, 8));
     }
 
     @Test public void testFindClosestElementsHundred() {
