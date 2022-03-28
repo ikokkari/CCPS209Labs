@@ -74,6 +74,14 @@ public class PolynomialTestThree {
             // Add that same polynomial to both collections in lockstep.
             tree.add(p1);
             hash.add(p1);
+            // Both collections must contain the same number of polynomials. If
+            // they don't, the direction in which the failure happens provides a
+            // clue about whether equals, compareTo and hashCode is at fault. If
+            // either assertion fails, uncomment next line to see the polynomial
+            // that caused the discrepancy.
+            // System.out.println(p1);
+            assertFalse(tree.size() < hash.size());
+            assertFalse(tree.size() > hash.size());
             // Comparing any polynomial to itself must return 0.
             assertEquals(0, p1.compareTo(p1));
             assertEquals(0, p2.compareTo(p2));
@@ -81,11 +89,6 @@ public class PolynomialTestThree {
             assertEquals(p1.compareTo(p2), -p2.compareTo(p1));
             check.update(p1.compareTo(p2));
         }
-        // Both collections must now contain the same number of polynomials.
-        // If they don't, the direction in which the failure happens provides
-        // a clue about whether equals, compareTo and hashCode is at fault.
-        assertFalse(tree.size() < hash.size());
-        assertFalse(tree.size() > hash.size());
 
         // The hash must now contain every polynomial that the tree contains.
         for(Polynomial p: tree) {
