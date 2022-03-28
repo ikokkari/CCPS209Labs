@@ -77,11 +77,13 @@ public class PolynomialTestThree {
             // Both collections must contain the same number of polynomials. If
             // they don't, the direction in which the failure happens provides a
             // clue about whether equals, compareTo and hashCode is at fault. If
-            // either assertion fails, uncomment next line to see the polynomial
-            // that caused the discrepancy.
+            // any of the following four assertions fails, uncomment next line to
+            // see the polynomial p1 that caused the discrepancy.
             // System.out.println(p1);
             assertFalse(tree.size() < hash.size());
             assertFalse(tree.size() > hash.size());
+            assertTrue(tree.contains(p1));
+            assertTrue(hash.contains(p1));
             // Comparing any polynomial to itself must return 0.
             assertEquals(0, p1.compareTo(p1));
             assertEquals(0, p2.compareTo(p2));
