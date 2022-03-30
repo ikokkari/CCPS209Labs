@@ -1,5 +1,4 @@
 import org.junit.Test;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.TreeMap;
@@ -22,6 +21,9 @@ public class DistanceTestOne {
         assertEquals(5, Distance.extractSquares(2 * 5 * 5));
         assertEquals(19, Distance.extractSquares(2 * 5 * 11 * 19 * 19));
         assertEquals(2 * 39, Distance.extractSquares(2 * 2 * 2 * 5 * 39 * 39 * 109));
+        assertEquals(7 * 7 * 13, Distance.extractSquares(2 * 7 * 7 * 7 * 7 * 11 * 13 * 13));
+        assertEquals(5 * 5 * 5, Distance.extractSquares(5 * 5 * 5 * 5 * 5 * 5));
+        assertEquals(1000, Distance.extractSquares(1_000_000));
 
         // Pseudorandom fuzz tester
         CRC32 check = new CRC32();
