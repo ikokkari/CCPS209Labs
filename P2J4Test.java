@@ -66,6 +66,14 @@ public class P2J4Test {
         List<Integer> a5 = Arrays.asList(777, 666, 555, 444, 333, 222, 111);
         List<Integer> b5 = Arrays.asList(777, 666, 666, 555, 444, 333, 222);
         assertEquals(b5, P2J4.runningMedianOfThree(a5));
+
+        List<Integer> a6 = Arrays.asList(17, 99, 42);
+        List<Integer> b6 = Arrays.asList(17, 99, 42);
+        assertEquals(b6, P2J4.runningMedianOfThree(a6));
+
+        List<Integer> a7 = new ArrayList<>();
+        List<Integer> b7 = new ArrayList<>();
+        assertEquals(b7, P2J4.runningMedianOfThree(a7));
         
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
