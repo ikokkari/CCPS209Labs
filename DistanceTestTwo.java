@@ -3,12 +3,66 @@ import org.junit.Test;
 import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.zip.CRC32;
+import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class DistanceTestTwo {
 
     public static final Distance ZERO = new Distance(0, 1);
     private static final int SEED = 123456;
+
+    @Test public void testArithmeticExplicit() {
+
+        Map<Integer, Integer> coeff1 = Map.of(5, 2, 10, 3);
+        Distance d1 = new Distance(coeff1); // 2Sqrt[5] + 3Sqrt[10]
+
+        Map<Integer, Integer> coeff2 = Map.of(3, -1, 7, 2, 10, -3);
+        Distance d2 = new Distance(coeff2); // -Sqrt[3] + 2Sqrt[7] - 3Sqrt[10]
+
+        Distance d3 = d1.add(d2);
+        assertEquals("-Sqrt[3] + 2Sqrt[5] + 2Sqrt[7]", d3.toString());
+
+        Distance d4 = d1.subtract(d2);
+        assertEquals("Sqrt[3] + 2Sqrt[5] - 2Sqrt[7] + 6Sqrt[10]", d4.toString());
+
+        // Addition should be commutative.
+        assertEquals(d1.add(d2).toString(), d2.add(d1).toString());
+        assertEquals(d1.add(d3).toString(), d3.add(d1).toString());
+        assertEquals(d1.add(d4).toString(), d4.add(d1).toString());
+        assertEquals(d2.add(d3).toString(), d3.add(d2).toString());
+        assertEquals(d2.add(d4).toString(), d4.add(d2).toString());
+        assertEquals(d3.add(d4).toString(), d4.add(d3).toString());
+    }
+
+    @Test public void testMultiplyExplicit() {
+        Map<Integer, Integer> coeff1 = Map.of(5, 2, 10, 3);
+        Distance d1 = new Distance(coeff1); // 2Sqrt[5] + 3Sqrt[10]
+
+        Map<Integer, Integer> coeff2 = Map.of(3, -1, 7, 2, 10, -3);
+        Distance d2 = new Distance(coeff2); // -Sqrt[3] + 2Sqrt[7] - 3Sqrt[10]
+
+        Distance d3 = d1.multiply(d2);
+        assertEquals("-90 - 30Sqrt[2] - 2Sqrt[15] - 3Sqrt[30] + 4Sqrt[35] + 6Sqrt[70]", d3.toString());
+
+        Distance d4 = d1.multiply(d1);
+        assertEquals("110 + 60Sqrt[2]", d4.toString());
+
+        Map<Integer, Integer> coeff5 = Map.of(20, -1, 70, 2);
+        Distance d5 = new Distance(coeff5); // -Sqrt[20] + 2Sqrt[70]
+
+        Distance d6 = d1.multiply(d5);
+        assertEquals("-20 - 30Sqrt[2] + 60Sqrt[7] + 20Sqrt[14]", d6.toString());
+
+        // Multiplication should also be commutative.
+        assertEquals(d1.multiply(d2).toString(), d2.multiply(d1).toString());
+        assertEquals(d1.multiply(d3).toString(), d3.multiply(d1).toString());
+        assertEquals(d1.multiply(d4).toString(), d4.multiply(d1).toString());
+        assertEquals(d1.multiply(d5).toString(), d5.multiply(d1).toString());
+        assertEquals(d2.multiply(d3).toString(), d3.multiply(d2).toString());
+        assertEquals(d2.multiply(d4).toString(), d4.multiply(d2).toString());
+        assertEquals(d2.multiply(d5).toString(), d5.multiply(d2).toString());
+        assertEquals(d2.multiply(d6).toString(), d6.multiply(d2).toString());
+    }
 
     @Test public void testAdd() {
         testArithmetic(true, 2784019965L);
@@ -75,7 +129,9 @@ public class DistanceTestTwo {
                 int j2 = rng.nextInt(N) + N;
                 ds[i] = ds[j1].multiply(ds[j2]);
             }
-            check.update(ds[i].toString().getBytes());
+            try {
+                check.update(ds[i].toString().getBytes("UTF-8"));
+            } catch(UnsupportedEncodingException ignored) {}
         }
         assertEquals(2108081313L, check.getValue());
     }  
