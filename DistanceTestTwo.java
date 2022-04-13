@@ -48,7 +48,7 @@ public class DistanceTestTwo {
         assertEquals("110 + 60Sqrt[2]", d4.toString());
 
         Map<Integer, Integer> coeff5 = Map.of(20, -1, 70, 2);
-        Distance d5 = new Distance(coeff5); // -Sqrt[20] + 2Sqrt[70]
+        Distance d5 = new Distance(coeff5); // -2Sqrt[5] + 2Sqrt[70]
 
         Distance d6 = d1.multiply(d5);
         assertEquals("-20 - 30Sqrt[2] + 60Sqrt[7] + 20Sqrt[14]", d6.toString());
