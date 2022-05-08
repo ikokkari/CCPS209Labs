@@ -240,7 +240,7 @@ All these bounty points will be added to the lab marks of those students all in 
   <tr>
    <td>51. Miller-Rabin primality test
    </td>
-   <td>
+   <td>Karel Tutsu, May 8, 2022
    </td>
   </tr>
   <tr>
