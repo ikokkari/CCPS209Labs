@@ -394,7 +394,7 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
    <tr>
-  <td>77. Generalized chaos game
+  <td>79. Generalized chaos game
   </td>
   <td>
   </td>
