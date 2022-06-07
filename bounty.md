@@ -394,7 +394,7 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
    <tr>
-  <td>79. Generalized chaos game
+  <td>77. Generalized chaos game
   </td>
   <td>
   </td>
@@ -406,7 +406,7 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
    <tr>
-  <td>77. Die Hard with a Variance
+  <td>79. Die Hard with a Variance
   </td>
   <td>
   </td>
