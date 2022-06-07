@@ -31,7 +31,7 @@ Knowing the rate that the existing lab problems for 109 and 209 have contained e
 
 The problems that are not listed below had already been solved before this bounty list was created, and are not subject to any bounties.
 
-Each bounty is given to the student to first send their source code to the instructor's email address `ilkka.kokkarinen@gmail.com`. The student receiving the bounty will, same as all the other students who independently solve that lab problem during this semester, also receive the normal lab mark of three points for that lab. Being the trailblazer to clear the way for the main army that follows effectively comes with the reward of double points for that lab.
+Each bounty is given to the student to first send their source code to the instructor's email address `ilkka.kokkarinen@gmail.com`. The student receiving the bounty will, same as all the other students who independently solve that lab problem during this semester, also receive the normal lab mark of three points for that lab. Being the trailblazer to clear the way for the main army that follows effectively comes with the reward of double points for that lab. Bounties are available for everyone who wants to be the first to solve these problems, and there is no requirement to be an active student who is currently taking this course. 
 
 I will update this document as submissions arrive, so please check from this list if the bounty for the solution you would like to submit is still unclaimed. Finding errors in a specification for a lab is also worth a bounty between one and three points for the first finder. Please submit any such error reports to this same email address.
 
@@ -395,6 +395,18 @@ All these bounty points will be added to the lab marks of those students all in 
   </tr>
    <tr>
   <td>77. Generalized chaos game
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>78. Mind your P's and Q's
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>77. Die Hard with a Variance
   </td>
   <td>
   </td>
