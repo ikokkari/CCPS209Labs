@@ -294,7 +294,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>60. Bit deque
    </td>
-   <td>
+   <td>Kyle Charters, Jul 5, 2022
    </td>
   </tr>
    <tr>
