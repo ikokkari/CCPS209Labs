@@ -184,7 +184,7 @@ All these bounty points will be added to the lab marks of those students all in 
    </td>
   </tr>
   <tr>
-   <td>38. Euclid's orchard
+   <td>38. Fenceposts around Euclid's orchard
    </td>
    <td>Wendelle So, Nov 6, 2020
    </td>
