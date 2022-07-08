@@ -282,7 +282,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>58. Block cellular automata
    </td>
-   <td>
+   <td>Kyle Charters, Jul 7, 2022
    </td>
   </tr>
    <tr>
