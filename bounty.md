@@ -411,5 +411,11 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>
   </td>
   </tr>
+   <tr>
+  <td>Bonus problem 100: The Buddhabrot is silent
+  </td>
+  <td>
+  </td>
+  </tr>
 </table>
 
