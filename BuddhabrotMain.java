@@ -24,9 +24,9 @@ public class BuddhabrotMain {
 
     public static void main(String[] args) {
         // Change these three settings during your development of Buddhabrot.
-        final int[] THRESHOLDS = {90, 900, 9000};
+        final int[] THRESHOLDS = {50, 500, 5000};
         final int SIZE = 1000;
-        final long SAMPLES = 5_000_000L;
+        final long SAMPLES = 50_000_000L;
 
         BufferedImage result = Buddhabrot.renderBuddhabrot(SIZE, SAMPLES, THRESHOLDS);
         JFrame frame = new JFrame("The Buddhabrot Is Silent");
