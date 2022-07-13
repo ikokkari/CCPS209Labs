@@ -13,8 +13,8 @@ public class QuadTreeTest {
     @Test public void testExplicit() {
         QuadTree q1 = QuadNode.of(WHITE, BLACK, WHITE, BLACK);
         assertEquals(2, q1.computeArea(1));
-        assertEquals(16, q1.computeArea(2));
-        assertEquals(1024, q1.computeArea(5));
+        assertEquals(8, q1.computeArea(2));
+        assertEquals(512, q1.computeArea(5));
         assertFalse(q1.isOneColour());
         QuadTree q2 = QuadNode.of(BLACK, BLACK, BLACK, BLACK);
         assertEquals(4, q2.computeArea(1));
@@ -23,26 +23,26 @@ public class QuadTreeTest {
         assertTrue(q2.isOneColour());
         QuadTree q3 = QuadNode.of(q1, q2, q1, q2);
         assertFalse(q3.isOneColour());
-        assertEquals(256, q3.computeArea(4));
-        assertEquals(1048576, q3.computeArea(6));
+        assertEquals(192, q3.computeArea(4));
+        assertEquals(3072, q3.computeArea(6));
         QuadTree q4 = QuadNode.of(q1, q2, q3, BLACK);
-        assertEquals(265216, q4.computeArea(6));
+        assertEquals(3328, q4.computeArea(6));
     }
 
     @Test public void massTestHundred() {
-        massTest(100, 2177874880L);
+        massTest(100, 3130507033L);
     }
 
     @Test public void massTestThousand() {
-        massTest(1000, 3260158896L);
+        massTest(1000, 2159387927L);
     }
 
     @Test public void massTestHundredThousand() {
-        massTest(100000, 2997108164L);
+        massTest(100000, 3359260450L);
     }
 
     @Test public void massTestMillion() {
-        massTest(100000, 2997108164L);
+        massTest(100000, 3359260450L);
     }
 
     private void massTest(int n, long expected) {
