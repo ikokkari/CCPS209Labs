@@ -300,7 +300,7 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>61. Save the date
    </td>
-   <td>
+   <td>Kyle Charters, Jul 16, 2022
    </td>
   </tr>
    <tr>
