@@ -342,13 +342,13 @@ All these bounty points will be added to the lab marks of those students all in 
    <tr>
    <td>68. Interval sets I: Dynamic set operations 
    </td>
-   <td>
+   <td>Kyle Charters, Jul 26, 2022
    </td>
   </tr>
    <tr>
    <td>69. Interval sets II: Iteration 
    </td>
-   <td>
+   <td>Kyle Charters, Jul 26, 2022
    </td>
   </tr>
    <tr>
