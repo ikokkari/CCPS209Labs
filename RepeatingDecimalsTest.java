@@ -28,8 +28,8 @@ public class RepeatingDecimalsTest {
         String[] e4 = {"0.", "012345679"};
         assertArrayEquals(e4, r4);
 
-        String[] r5 = RepeatingDecimals.decimals(1, 23);
-        String[] e5 = {"0.", "0434782608695652173913"};
+        String[] r5 = RepeatingDecimals.decimals(1, 8325);
+        String[] e5 = {"0.00", "012"};
         assertArrayEquals(e5, r5);
 
         String[] r6 = RepeatingDecimals.decimals(3, 19);
@@ -76,6 +76,23 @@ public class RepeatingDecimalsTest {
         String[] r14 = RepeatingDecimals.decimals(5, 997);
         String[] e14 = {"0.", "0050150451354062186559679037111334002006018054162487462387161484453360080240722166499498495486459378134403209628886659979939819458375125376128385155466399197592778335"};
         assertArrayEquals(e14, r14);
+
+        String[] r15 = RepeatingDecimals.decimals(452, 555);
+        String[] e15 = {"0.8", "144"};
+        assertArrayEquals(e15, r15);
+
+        String[] r16 = RepeatingDecimals.decimals(631, 1665);
+        String[] e16 = {"0.3", "789"};
+        assertArrayEquals(e16, r16);
+
+        String[] r17 = RepeatingDecimals.decimals(123456, 999000);
+        String[] e17 = {"0.123", "579"};
+        assertArrayEquals(e17, r17);
+
+        String[] r18 = RepeatingDecimals.decimals(421, 3*2*2*2*5*5*5*5*5);
+        String[] e18 = {"0.00561", "3"};
+        assertArrayEquals(e18, r18);
+
     }
 
     @Test public void massTestHundred() {
