@@ -1,7 +1,6 @@
 import org.junit.Test;
 import java.util.Random;
 import java.util.zip.CRC32;
-import java.util.Arrays;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -94,9 +93,7 @@ public class RepeatingDecimalsTest {
         while(b < n) {
             int a = 1;
             while(a < b) {
-                //System.out.print(a + " " + b + " ");
                 String[] result = RepeatingDecimals.decimals(a, b);
-                //System.out.println(result[0] + " " + result[1]);
                 for(int i = 0; i < result[0].length(); i++) {
                     check.update(result[0].charAt(i));
                 }
