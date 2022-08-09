@@ -417,5 +417,17 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>
   </td>
   </tr>
+   <tr>
+  <td>Bonus problem 101: Remain, remain, remainder
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 100: Varshamov-Tenengolts code
+  </td>
+  <td>
+  </td>
+  </tr>
 </table>
 
