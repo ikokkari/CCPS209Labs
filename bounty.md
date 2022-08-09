@@ -424,7 +424,7 @@ All these bounty points will be added to the lab marks of those students all in 
   </td>
   </tr>
    <tr>
-  <td>Bonus problem 100: Varshamov-Tenengolts code
+  <td>Bonus problem 102: Varshamov-Tenengolts code
   </td>
   <td>
   </td>
