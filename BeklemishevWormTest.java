@@ -25,6 +25,25 @@ public class BeklemishevWormTest {
         assertEquals(0, r7.length());
     }
 
+    @Test public void testWormStep() {
+        Rope r1 = new StringRope("123");
+        assertEquals("12222", BeklemishevWorm.wormStep(r1, 2).toString());
+        Rope r2 = new StringRope("20202");
+        assertEquals("2020111111", BeklemishevWorm.wormStep(r2, 5).toString());
+        Rope r3 = new StringRope("321");
+        assertEquals("320320320320320320320", BeklemishevWorm.wormStep(r3, 6).toString());
+        Rope r4 = new StringRope("8");
+        assertEquals("7777", BeklemishevWorm.wormStep(r4, 3).toString());
+        Rope r5 = new StringRope("3042");
+        assertEquals("30414141", BeklemishevWorm.wormStep(r5, 2).toString());
+        Rope r6 = new StringRope("4242");
+        assertEquals("424142414241", BeklemishevWorm.wormStep(r6, 2).toString());
+        Rope r7 = new StringRope("1551");
+        assertEquals("155015501550155015501550", BeklemishevWorm.wormStep(r7, 5).toString());
+        Rope r8 = new StringRope("747");
+        assertEquals("746666666", BeklemishevWorm.wormStep(r8, 6).toString());
+    }
+
     @Test public void testIterateWorm() {
         assertEquals(24, BeklemishevWorm.iterateWorm("2031", 4));
         assertEquals(31, BeklemishevWorm.iterateWorm("313", 4));
