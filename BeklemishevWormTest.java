@@ -56,5 +56,6 @@ public class BeklemishevWormTest {
         assertEquals(362889, BeklemishevWorm.iterateWorm("8", 10));
         assertEquals(1150, BeklemishevWorm.iterateWorm("4321", 10));
         assertEquals(7307240, BeklemishevWorm.iterateWorm("420", 42));
+        assertEquals(750375878, BeklemishevWorm.iterateWorm("7", 30));
     }
 }
