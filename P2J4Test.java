@@ -115,7 +115,17 @@ public class P2J4Test {
         List<Integer> b5 = Arrays.asList(4, 4, 4, 4, 4, 4, 67, 67, 67, 67, 101, 101);
         P2J4.sortByElementFrequency(a5);
         assertEquals(b5, a5);
-        
+
+        // Let's see if you do the element comparisons correctly without overflows.
+        int v1 = Integer.MAX_VALUE;
+        int v2 = Integer.MIN_VALUE;
+        int v3 = Integer.MAX_VALUE - 1;
+        int v4 = Integer.MIN_VALUE + 1;
+        List<Integer> a6 = Arrays.asList(v1, v2, v3, v4, v4, v3, v2, v1);
+        List<Integer> b6 = Arrays.asList(v2, v2, v4, v4, v3, v3, v1, v1);
+        P2J4.sortByElementFrequency(a6);
+        assertEquals(a6, b6);
+
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
@@ -124,14 +134,14 @@ public class P2J4Test {
             items.clear();
             for(int j = 0; j < i; j++) {
                 int rep = rng.nextInt(100);
-                int e = rng.nextInt(10000000);
+                int e = rng.nextInt(2_000_000_000) - 1_000_000_000;
                 for(int k = 0; k < rep; k++) { items.add(e); }
             }
             Collections.shuffle(items, rng);
             P2J4.sortByElementFrequency(items);
             for(int e: items) { check.update(e); }
         }
-        assertEquals(3052228947L, check.getValue());
+        assertEquals(981235996L, check.getValue());
     }
     
     @Test public void testFactorFactorial() {
