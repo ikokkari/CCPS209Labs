@@ -435,5 +435,17 @@ All these bounty points will be added to the lab marks of those students all in 
   <td>
   </td>
   </tr>
+   <tr>
+  <td>Bonus problem 104: Beklemishev's Worms
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 105: Regex Fractals
+  </td>
+  <td>
+  </td>
+  </tr>
 </table>
 
