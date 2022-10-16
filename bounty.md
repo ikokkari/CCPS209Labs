@@ -25,18 +25,11 @@ Conversion notes:
 
 # Bounty List for CCPS 209 Lab Problems
 
-To ensure that these problems and their automated testers do not contain any errors that would make them impossible for students to solve, the author Ilkka Kokkarinen offers a bounty of **three extra lab marks** to the first solver of each problem in the list below.
+To ensure that these problems and their automated testers do not contain any errors that would make them impossible for all the hard working students to solve, the author Ilkka Kokkarinen offers a bounty of 100 CAD to the first person to email me (ilkka.kokkarinen@gmail.com) a working solution to pass my JUnit tests for that problem. This bounty is paid to either Sick Kids Toronto or the Ukrainian war effort, the donation made in your name. And for whatever it's worth, you get your name permanently displayed in the table below as long as this problem collection exists. If the person submitting the first solution is a student currently taking CCPS 209, he or she also gets **three extra lab marks**, in addition to the three labs marks for the working lab solution. And for whatever it's worth, you get your name permanently displayed in the table below as long as this problem collection exists. (If you do not wish to see your name in this list, please mention that in your submission email, and I will credit your bounty below as "Anonymous".)
 
-Knowing the rate that the existing lab problems for 109 and 209 have contained errors in their model solutions and therefore in their automated mass testers, the following list may still contain problems whose testers are currently impossible to pass even with a 100% correct working solution. Students who are reasonably sure that their solution is correct should submit their solution for the instructor for comparison. Any such solution that reveals a catastrophic bug in the private model solution, the automated tester or in the problem specification will receive a double bounty of **six extra lab marks**.  
+The problems that are not listed in the table have already been successfully solved before this bounty list was created, and are not subject to any bounties.
 
-The problems that are not listed below had already been solved before this bounty list was created, and are not subject to any bounties.
-
-Each bounty is given to the student to first send their source code to the instructor's email address `ilkka.kokkarinen@gmail.com`. The student receiving the bounty will, same as all the other students who independently solve that lab problem during this semester, also receive the normal lab mark of three points for that lab. Being the trailblazer to clear the way for the main army that follows effectively comes with the reward of double points for that lab. Bounties are available for everyone who wants to be the first to solve these problems, and there is no requirement to be an active student who is currently taking this course. 
-
-I will update this document as submissions arrive, so please check from this list if the bounty for the solution you would like to submit is still unclaimed. Finding errors in a specification for a lab is also worth a bounty between one and three points for the first finder. Please submit any such error reports to this same email address.
-
-All these bounty points will be added to the lab marks of those students all in one bunch at the end of the semester, along with the proud sense of achievement of protecting all future students from banging their head against the wall trying to solve something impossible. The names of the students solving these problems will be posted below. (If you do not wish to see your name in this list, please mention that in your submission email, and I will credit your bounty here as "Anonymous".)
-
+I will update this document as submissions arrive, so please check from this list if the bounty for the solution you would like to submit is still unclaimed. Finding errors in a specification for a lab is also worth a bounty between one and three lab marks for the first finder. Please submit any such error reports to this same email address.
 
 <table>
   <tr>
