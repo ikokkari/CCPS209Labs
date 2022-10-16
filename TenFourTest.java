@@ -32,7 +32,6 @@ public class TenFourTest {
                 check.update(result.toString().getBytes("UTF-8"));
             } catch(UnsupportedEncodingException ignored) {}
         }
-        System.out.println("Max limit is " + maxlimit);
         assertEquals(1154212991, check.getValue());
     }  
 }
