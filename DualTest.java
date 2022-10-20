@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 public class DualTest {
 
-    private static final double EPSILON_ONE = 0.0001;
-    private static final double EPSILON_TWO = 0.000000001;
+    private static final double EPSILON_ONE = 0.00001;
+    private static final double EPSILON_TWO = 0.0000000001;
 
     private Dual[] diffPoly(Dual[] coeff) {
         int n = coeff.length - 1;
