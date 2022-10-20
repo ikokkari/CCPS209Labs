@@ -221,7 +221,7 @@ I will update this document as submissions arrive, so please check from this lis
    </td>
   </tr>
   <tr>
-   <td>49. Bits of this and that
+   <td>49. Just a minor operation
    </td>
    <td>Karl Bustamante, Dec 7, 2020
    </td>
@@ -438,6 +438,12 @@ I will update this document as submissions arrive, so please check from this lis
   </tr>
    <tr>
   <td>Bonus problem 105: Regex fractals
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 106: Automatic for the peephole
   </td>
   <td>
   </td>
