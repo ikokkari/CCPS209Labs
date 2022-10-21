@@ -4,8 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 public class DualTest {
 
-    private static final double EPSILON_ONE = 0.00001;
-    private static final double EPSILON_TWO = 0.0000000001;
+    private static final double EPSILON_ONE = 0.000001;
+    private static final double EPSILON_TWO = 0.00000000001;
 
     private Dual[] diffPoly(Dual[] coeff) {
         int n = coeff.length - 1;
@@ -24,12 +24,12 @@ public class DualTest {
         testHornerRule(10_000);
     }
 
-    @Test public void testHornerRuleMillion() {
+    @Test public void testHornerRuleOneMillion() {
         testHornerRule(1_000_000);
     }
 
     private void testHornerRule(int n) {
-        Random rng = new Random(12345);
+        Random rng = new Random(12345 + n);
         int m = 3, count = 0, goal = 10;
         for(int i = 0; i < n; i++) {
             Dual[] poly = new Dual[m];
