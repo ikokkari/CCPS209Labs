@@ -167,7 +167,7 @@ I will update this document as submissions arrive, so please check from this lis
    </td>
   </tr>
   <tr>
-   <td>34. Runoff voting
+   <td>34. Leaders of men
    </td>
    <td>Kevan Hoong, December 10, 2021
    </td>
@@ -233,7 +233,7 @@ I will update this document as submissions arrive, so please check from this lis
    </td>
   </tr>
   <tr>
-   <td>51. Miller-Rabin primality test
+   <td>51. Twelve angry primes
    </td>
    <td>Karel Tutsu, May 8, 2022
    </td>
