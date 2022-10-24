@@ -427,7 +427,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 103: In the end was the word
   </td>
-  <td>
+  <td>Karel Tutsu, Oct 24, 2022
   </td>
   </tr>
    <tr>
