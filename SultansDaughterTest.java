@@ -9,6 +9,7 @@ public class SultansDaughterTest {
 
     @Test public void testSultansDaughter() {
         assertEquals("555666777", SultansDaughter.sultansDaughter("15556667772"));
+        assertEquals("555666777", SultansDaughter.sultansDaughter("15556667772"));
         assertEquals("987987", SultansDaughter.sultansDaughter("319872"));
         assertEquals("456456456456", SultansDaughter.sultansDaughter("3314562"));
         assertEquals("8282", SultansDaughter.sultansDaughter("44431282"));
@@ -21,6 +22,15 @@ public class SultansDaughterTest {
         assertNull(SultansDaughter.sultansDaughter("55429001"));
         assertNull(SultansDaughter.sultansDaughter("3971478514722"));
         assertNull(SultansDaughter.sultansDaughter("81932"));
+        assertNull(SultansDaughter.sultansDaughter("12345"));
+        assertNull(SultansDaughter.sultansDaughter("1"));
+        assertNull(SultansDaughter.sultansDaughter("12")); // Quoted string must be nonempty
+        assertNull(SultansDaughter.sultansDaughter("2"));
+        assertNull(SultansDaughter.sultansDaughter("3"));
+        assertNull(SultansDaughter.sultansDaughter("4"));
+        assertNull(SultansDaughter.sultansDaughter("5"));
+        assertNull(SultansDaughter.sultansDaughter("6"));
+        assertNull(SultansDaughter.sultansDaughter("7"));
 
         // Two given known fixed points for Sultan's daughter.
         assertEquals("47536414753642", SultansDaughter.sultansDaughter("47536414753642"));
@@ -102,7 +112,7 @@ public class SultansDaughterTest {
     }
 
     @Test public void massTestIterateSultansDaughterThousand() {
-        massTestIterateSultansDaughter(1000, 2213186094L);
+        massTestIterateSultansDaughter(1000, 1501637869L);
     }
 
     private void massTestIterateSultansDaughter(int rounds, long expected) {
