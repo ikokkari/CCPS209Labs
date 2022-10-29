@@ -25,7 +25,7 @@ Conversion notes:
 
 # Bounty List for CCPS 209 Lab Problems
 
-To ensure that these problems and their automated testers do not contain any errors that would make them impossible for all the hard working students to solve, the author Ilkka Kokkarinen offers **a bounty of 100 CAD** to the first person to email me (ilkka.kokkarinen@gmail.com) a working solution to pass my JUnit tests for that problem. This bounty is paid to either Sick Kids Toronto or the Ukrainian war effort, the donation made in your name. If the person submitting the first solution is a student currently taking CCPS 209, he or she also gets **three extra lab marks**, in addition to the three labs marks normally awarded for that working lab solution. 
+To ensure that the [CCPS 209 Lab Problems](https://github.com/ikokkari/CCPS209Labs) and their automated JUnit testers do not contain any errors that would make them impossible for any hard working students to solve, the author Ilkka Kokkarinen offers **a bounty of 100 CAD** to the first person to email me (ilkka.kokkarinen@gmail.com) a working solution to pass my JUnit tests for each problem that doesn't have a bounty claimed so far. This bounty is paid to either Sick Kids Toronto or the Ukrainian war effort, the donation made in your name. If the person submitting the first solution is a student currently taking CCPS 209, he or she also gets **three extra lab marks**, in addition to the three labs marks normally awarded for that working lab solution. 
 
 And, for whatever it's worth, you get your name permanently displayed in the table below as long as this problem collection exists. (If you do not wish to see your name in this list, please mention that in your submission email, and I will credit your bounty below as "Anonymous".)
 
