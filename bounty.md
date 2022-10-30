@@ -385,7 +385,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>76. Sultan's daughter
   </td>
-  <td>
+  <td>Ethan Mercado, Oct 30, 2022
   </td>
   </tr>
    <tr>
