@@ -22,7 +22,7 @@ public class InventorySequenceTest {
         int[] actual1 = InventorySequence.inventorySequence(0, expected1.length);
         assertArrayEquals(expected1, actual1);
 
-        // 30 elements starting from position 1000.
+        // A window of 30 elements starting from position 1000.
         int[] expected2 = {
                 10, 19, 14, 12, 14, 13, 10, 5, 4, 4, 6, 7, 4, 2, 1, 1, 1, 0, 43, 38, 44, 31, 50, 36, 42,
                 32, 34, 38, 35, 35
@@ -30,7 +30,7 @@ public class InventorySequenceTest {
         int[] actual2 = InventorySequence.inventorySequence(1000, 1000 + expected2.length);
         assertArrayEquals(expected2, actual2);
 
-        // 30 elements starting from position 10000.
+        // A window of 30 elements starting from position 10000.
         int[] expected3 = {
                 17, 17, 15, 24, 20, 16, 16, 16, 11, 15, 14, 10, 14, 17, 16, 9, 9, 14, 13, 13, 17, 8, 6,
                 16, 8, 8, 9, 3, 11, 7, 6, 11, 5, 7, 6, 9, 5, 8, 6, 8, 6, 7, 5, 5, 4, 2, 6, 5, 5, 4
@@ -38,6 +38,7 @@ public class InventorySequenceTest {
         int[] actual3 = InventorySequence.inventorySequence(10000, 10000 + expected3.length);
         assertArrayEquals(expected3, actual3);
 
+        // A window of 100 elements starting from position 100000.
         int[] expected4 = {
                 56, 54, 51, 58, 48, 58, 39, 59, 41, 31, 39, 34, 34, 34, 39, 42, 27, 38, 38, 31, 29, 31,
                 36, 34, 34, 31, 38, 18, 26, 29, 39, 20, 24, 30, 33, 18, 34, 22, 27, 30, 28, 44, 26, 27,
@@ -67,8 +68,7 @@ public class InventorySequenceTest {
 
     private void massTest(int start, int end, long expected) {
         CRC32 check = new CRC32();
-        int[] result = InventorySequence.inventorySequence(start, end);
-        for(int e: result) {
+        for(int e: InventorySequence.inventorySequence(start, end)) {
             check.update(e);
         }
         assertEquals(expected, check.getValue());
