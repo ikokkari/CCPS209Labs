@@ -403,7 +403,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>79. Die Hard with a Variance
   </td>
-  <td>
+  <td>Ethan Mercado, Nov 13, 2022
   </td>
   </tr>
    <tr>
