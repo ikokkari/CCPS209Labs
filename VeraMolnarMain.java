@@ -22,7 +22,7 @@ public class VeraMolnarMain {
     }
 
     public static void main(String[] args) {
-        JFrame f = new JFrame("Vera Molnar tribute");
+        JFrame f = new JFrame("Vera Molnár tribute");
         f.setLayout(new GridLayout(2, 2));
         f.add(new ImagePanel(
                 VeraMolnar.centTrapezes(new Random(12345),500, 500, 5, 30),
