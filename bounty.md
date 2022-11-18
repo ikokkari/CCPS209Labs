@@ -448,5 +448,35 @@ I will update this document as submissions arrive, so please check from this lis
   <td>
   </td>
   </tr>
+   <tr>
+  <td>Bonus problem 107: Inventory sequence
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 108: Rendering piecewise Béziergons
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 109: Soft interruptions
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 110: Twisty little passages, reversible
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 111: Dig-through-raster, naked
+  </td>
+  <td>
+  </td>
+  </tr>
 </table>
 
