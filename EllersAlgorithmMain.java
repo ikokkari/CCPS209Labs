@@ -22,18 +22,10 @@ public class EllersAlgorithmMain {
     }
 
     private static final IntBinaryOperator digProbNormal = (x, y) -> 40;
-    private static final IntBinaryOperator digProbNake = (x, y) -> {
-        if(y <= 14) { return 4 * y; }
-        else if(15 <= y && y <= 35) { return 95; }
-        else { return 4 * (50 - y); }
-    };
+    private static final IntBinaryOperator digProbNake = (x, y) -> 100 - 2*Math.abs(x-y)/3;
 
     private static final IntBinaryOperator mergeProbNormal = (x, y) -> 50;
-    private static final IntBinaryOperator mergeProbNake = (x, y) -> {
-        if(y <= 14) { return 60 - 3 * y; }
-        else if(15 <= y && y <= 35) { return 15; }
-        else { return 60 - 3 * (50 - y); }
-    };
+    private static final IntBinaryOperator mergeProbNake = (x, y) -> 2*Math.abs(x-y)/3;
 
     public static void main(String[] args) {
         JFrame f = new JFrame("Eller's Algorithm Maze Generation");
