@@ -25,14 +25,14 @@ public class P2J1Test {
 
         // Mass tester
         CRC32 check = new CRC32();
-        for(int b = -10; b < 10; b++) {
+        for(int b = -10; b < 20; b++) {
             for(int e = 0; e < 10; e++) {
                 long p = P2J1.fallingPower(b, e);
                 check.update((int)(p & 0xFFFF));
                 check.update((int)((p >> 31) & 0xFFFF));
             }
         }
-        assertEquals(4140005098L, check.getValue());
+        assertEquals(2652223294L, check.getValue());
         // Test was a success!
     }
 
@@ -72,20 +72,25 @@ public class P2J1Test {
 
     @Test public void testCreateZigZag() {
         // Explicit test cases
-        int[][] a1 = {{4, 5, 6, 7}, {11, 10, 9, 8}, {12, 13, 14, 15}};
-        assertTrue(Arrays.deepEquals(a1, P2J1.createZigZag(3, 4, 4)));
+        int[][] e1 = {{4, 5, 6, 7}, {11, 10, 9, 8}, {12, 13, 14, 15}};
+        int[][] r1 = P2J1.createZigZag(3, 4, 4);
+        assertEquals(Arrays.deepToString(e1), Arrays.deepToString(r1));
 
-        int[][] a2 = {{1, 2}, {4, 3}, {5, 6}, {8, 7}, {9, 10}};
-        assertTrue(Arrays.deepEquals(a2, P2J1.createZigZag(5, 2, 1)));
+        int[][] e2 = {{1, 2}, {4, 3}, {5, 6}, {8, 7}, {9, 10}};
+        int[][] r2 = P2J1.createZigZag(5, 2, 1);
+        assertEquals(Arrays.deepToString(e2), Arrays.deepToString(r2));
 
-        int[][] a3 = {{42}, {43}, {44}, {45}};
-        assertTrue(Arrays.deepEquals(a3, P2J1.createZigZag(4, 1, 42)));
+        int[][] e3 = {{42}, {43}, {44}, {45}};
+        int[][] r3 = P2J1.createZigZag(4, 1, 42);
+        assertEquals(Arrays.deepToString(e3), Arrays.deepToString(r3));
 
-        int[][] a4 = {{77, 78, 79, 80, 81, 82}};
-        assertTrue(Arrays.deepEquals(a4, P2J1.createZigZag(1, 6, 77)));
+        int[][] e4 = {{77, 78, 79, 80, 81, 82}};
+        int[][] r4 = P2J1.createZigZag(1, 6, 77);
+        assertEquals(Arrays.deepToString(e4), Arrays.deepToString(r4));
 
-        int[][] a5 = {{42}};
-        assertTrue(Arrays.deepEquals(a5, P2J1.createZigZag(1, 1, 42)));
+        int[][] e5 = {{42}};
+        int[][] r5 = P2J1.createZigZag(1, 1, 42);
+        assertEquals(Arrays.deepToString(e5), Arrays.deepToString(r5));
 
         // Pseudorandom fuzz tester
         Random rng = new Random(SEED);
