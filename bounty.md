@@ -473,7 +473,19 @@ I will update this document as submissions arrive, so please check from this lis
   </td>
   </tr>
    <tr>
-  <td>Bonus problem 111: Dig-through-raster, naked
+  <td>Bonus problem 111: Dig-through raster, naked
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 112: Kruskal mazes
+  </td>
+  <td>
+  </td>
+  </tr>
+   <tr>
+  <td>Bonus problem 113: Beautiful for having been broken
   </td>
   <td>
   </td>
