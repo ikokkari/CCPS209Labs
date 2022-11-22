@@ -164,7 +164,7 @@ public class P2J2Test {
         CRC32 check = new CRC32();
         for(int i = 0; i < inputs.length; i++) {
             int rec = P2J2.recaman(inputs[i]);
-            assertEquals(rec, expected[i]);
+            assertEquals(expected[i], rec);
             check.update(rec);
         }
         assertEquals(2348649420L, check.getValue());
