@@ -51,8 +51,13 @@ public class TimeProblemsTest {
 
         // He's taken everything this old earth can give...
         LocalDate startDate9 = LocalDate.of(2525, 1, 1);
-        LocalDate endDate9 = LocalDate.of(9591, 12, 31);
-        assertEquals(12157, TimeProblems.countFridayThirteens(startDate9, endDate9));
+        LocalDate endDate9 = LocalDate.of(9595, 12, 31);
+        assertEquals(12163, TimeProblems.countFridayThirteens(startDate9, endDate9));
+
+        // Era of fossil fuels depletion before the coming of the Patagonian civilization
+        LocalDate startDate10 = LocalDate.of(6200, 1, 1);
+        LocalDate endDate10 = LocalDate.of(106200, 12, 31);
+        assertEquals(172001, TimeProblems.countFridayThirteens(startDate10, endDate10));
     }
 
     @Test public void testCountFridayThirteensMass() {
