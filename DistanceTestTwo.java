@@ -53,6 +53,24 @@ public class DistanceTestTwo {
         Distance d6 = d1.multiply(d5);
         assertEquals("-20 - 30Sqrt[2] + 60Sqrt[7] + 20Sqrt[14]", d6.toString());
 
+        Map<Integer, Integer> coeff7 = Map.of(3, 2, 2, 3);
+        Distance d7 = new Distance(coeff7); // 2Sqrt[3] + 3Sqrt[2]
+
+        Map<Integer, Integer> coeff8 = Map.of(3, -2, 2, 3);
+        Distance d8 = new Distance(coeff8); // -2Sqrt[3] + 3Sqrt[2]
+
+        Distance d9 = d7.multiply(d8); // Some nice cancellation of roots going on here
+        assertEquals("6", d9.toString());
+
+        Map<Integer, Integer> coeff10 = Map.of(30, -1, 10, 1, 5, -1, 15, -1);
+        Distance d10 = new Distance(coeff10);
+
+        Map<Integer, Integer> coeff11 = Map.of(30, 1, 10, 1, 5, -1, 15, 1);
+        Distance d11 = new Distance(coeff11);
+
+        Distance d12 = d10.multiply(d11); // As is also here
+        assertEquals("-30 - 40Sqrt[2]", d12.toString());
+
         // Multiplication should also be commutative.
         assertEquals(d1.multiply(d2).toString(), d2.multiply(d1).toString());
         assertEquals(d1.multiply(d3).toString(), d3.multiply(d1).toString());
@@ -62,6 +80,8 @@ public class DistanceTestTwo {
         assertEquals(d2.multiply(d4).toString(), d4.multiply(d2).toString());
         assertEquals(d2.multiply(d5).toString(), d5.multiply(d2).toString());
         assertEquals(d2.multiply(d6).toString(), d6.multiply(d2).toString());
+        assertEquals(d5.multiply(d8).toString(), d8.multiply(d5).toString());
+        assertEquals(d3.multiply(d9).toString(), d9.multiply(d3).toString());
     }
 
     @Test public void testAdd() {
