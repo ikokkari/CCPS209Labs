@@ -130,21 +130,22 @@ public class DistanceTestTwo {
     @Test public void testMultiply() {
         Random rng = new Random(SEED);
         CRC32 check = new CRC32();
-        int N = 100;
-        Distance[] ds = new Distance[3 * N];
-        for(int i = 0; i < 3 * N; i++) {
+        int N = 50;
+        Distance[] ds = new Distance[20 * N];
+        for(int i = 0; i < ds.length; i++) {
             if(i < N) { // For first N, just create some random distances.
-                int whole = rng.nextInt(i + 3);
-                if(rng.nextBoolean()) { whole = -whole; }
-                int base = rng.nextInt(10 * (i + 3)) + 1;
+                int whole = rng.nextInt(2 + i/5);
+                int base = rng.nextInt(4 * (i+1)) + 1;
                 ds[i] = new Distance(whole, base);
+                ds[i+1] = new Distance(-whole, base);
+                i++;
             }
-            else if(i < 2 * N) { // Create some more complex distances by addition.
+            else if(i < 10 * N) { // Create some more complex distances by addition.
                 int j1 = rng.nextInt(i);
                 int j2 = rng.nextInt(i);
                 ds[i] = ds[j1].add(ds[j2]);
             }
-            else { // For last third, multiply random distances created in second part.
+            else { // Multiply random distances created in second part.
                 int j1 = rng.nextInt(N) + N;
                 int j2 = rng.nextInt(N) + N;
                 ds[i] = ds[j1].multiply(ds[j2]);
@@ -153,6 +154,6 @@ public class DistanceTestTwo {
                 check.update(ds[i].toString().getBytes("UTF-8"));
             } catch(UnsupportedEncodingException ignored) {}
         }
-        assertEquals(2108081313L, check.getValue());
+        assertEquals(4293496691L, check.getValue());
     }  
 }
