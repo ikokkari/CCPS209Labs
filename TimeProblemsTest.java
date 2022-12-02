@@ -10,13 +10,15 @@ import static org.junit.Assert.assertEquals;
 
 public class TimeProblemsTest {
 
-    private static final int[] daysInMonth = {
-            0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-        };
+    private static final int[] daysInMonth = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     @Test public void testCountFridayThirteensExplicit() {
-        LocalDate startDate1 = LocalDate.of(1905, 4, 13);
-        LocalDate endDate1 = LocalDate.of(1905, 11, 9);
+        LocalDate startDate0 = LocalDate.of(2022, 1, 1);
+        LocalDate endDate0 = LocalDate.of(2022, 4, 30);
+        assertEquals(0, TimeProblems.countFridayThirteens(startDate0, endDate0));
+
+        LocalDate startDate1 = LocalDate.of(2022, 5, 13);
+        LocalDate endDate1 = LocalDate.of(2022, 5, 13);
         assertEquals(1, TimeProblems.countFridayThirteens(startDate1, endDate1));
 
         LocalDate startDate2 = LocalDate.of(1905, 4, 13);
@@ -28,24 +30,29 @@ public class TimeProblemsTest {
         assertEquals(75, TimeProblems.countFridayThirteens(startDate3, endDate3));
 
         LocalDate startDate4 = LocalDate.of(1901, 9, 13);
-        LocalDate endDate4 = LocalDate.of(1912, 01, 13);
+        LocalDate endDate4 = LocalDate.of(1912, 1, 13);
         assertEquals(19, TimeProblems.countFridayThirteens(startDate4, endDate4));
 
         LocalDate startDate5 = LocalDate.of(2187, 6, 29);
         LocalDate endDate5 = LocalDate.of(2283, 4, 13);
         assertEquals(166, TimeProblems.countFridayThirteens(startDate5, endDate5));
 
-        LocalDate startDate6= LocalDate.of(1936, 4, 17);
+        LocalDate startDate6 = LocalDate.of(1936, 4, 17);
         LocalDate endDate6 = LocalDate.of(1941, 6, 13);
         assertEquals(8, TimeProblems.countFridayThirteens(startDate6, endDate6));
 
-        LocalDate startDate7= LocalDate.of(1982, 8, 13);
+        LocalDate startDate7 = LocalDate.of(1982, 8, 13);
         LocalDate endDate7 = LocalDate.of(2012, 12, 21);
         assertEquals(53, TimeProblems.countFridayThirteens(startDate7, endDate7));
 
-        LocalDate startDate8= LocalDate.of(2164, 4, 13);
+        LocalDate startDate8 = LocalDate.of(2164, 4, 13);
         LocalDate endDate8 = LocalDate.of(2337, 8, 13);
         assertEquals(301, TimeProblems.countFridayThirteens(startDate8, endDate8));
+
+        // He's taken everything this old earth can give...
+        LocalDate startDate9 = LocalDate.of(2525, 1, 1);
+        LocalDate endDate9 = LocalDate.of(9591, 12, 31);
+        assertEquals(12157, TimeProblems.countFridayThirteens(startDate9, endDate9));
     }
 
     @Test public void testCountFridayThirteensMass() {
