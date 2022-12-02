@@ -60,11 +60,11 @@ public class TimeProblemsTest {
         CRC32 check = new CRC32();
         for(int i = 0; i < 3000; i++) {
             int y1 = 1900 + rng.nextInt(1 + (i+2)/5);
-            int y2 = y1 + rng.nextInt(3 + i/10);
+            int y2 = y1 + rng.nextInt(3 + i/300);
             int m1 = rng.nextInt(12) + 1;
             int m2 = rng.nextInt(12) + 1;
-            int d1 = rng.nextInt(100) < 20 ? 13 : rng.nextInt(daysInMonth[m1]) + 1;
-            int d2 = rng.nextInt(100) < 20 ? 13 : rng.nextInt(daysInMonth[m2]) + 1;
+            int d1 = rng.nextInt(100) < 50 ? 12 + rng.nextInt(3) : rng.nextInt(daysInMonth[m1]) + 1;
+            int d2 = rng.nextInt(100) < 50 ? 12 + rng.nextInt(3) : rng.nextInt(daysInMonth[m2]) + 1;
             LocalDate startDate = LocalDate.of(y1, m1, d1);
             LocalDate endDate = LocalDate.of(y2, m2, d2);
             if(startDate.compareTo(endDate) > 0) {
@@ -73,7 +73,7 @@ public class TimeProblemsTest {
             int result = TimeProblems.countFridayThirteens(startDate, endDate);
             check.update(result);
         }
-        assertEquals(3994495565L, check.getValue());
+        assertEquals(2254518609L, check.getValue());
     }
 
     @Test public void testDayAfterSeconds() {
@@ -93,7 +93,7 @@ public class TimeProblemsTest {
                 try {
                     check.update(result.getBytes("UTF-8"));
                 } catch(UnsupportedEncodingException ignored) {}
-                seconds = 10 * seconds;
+                seconds *= 10;
             }
         }
         assertEquals(1758684803L, check.getValue());
