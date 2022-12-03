@@ -41,17 +41,23 @@ public class P2J3Test {
     @Test public void testReverseVowels() throws IOException {
         // Explicit test cases
         assertEquals("", P2J3.reverseVowels(""));
+        assertEquals("e", P2J3.reverseVowels("e"));
         assertEquals("X", P2J3.reverseVowels("X"));
         assertEquals("Au", P2J3.reverseVowels("Ua"));
+        assertEquals("eI", P2J3.reverseVowels("iE"));
         assertEquals("cDfghklM", P2J3.reverseVowels("cDfghklM"));
         assertEquals("LOL", P2J3.reverseVowels("LOL"));
         assertEquals("Jova, Pythan, C", P2J3.reverseVowels("Java, Python, C"));
         assertEquals("Wuuleemoolaa", P2J3.reverseVowels("Waaloomeeluu"));
+        assertEquals("ThIs As LaKa ElL sIrCiStIc", P2J3.reverseVowels("ThIs Is LiKe AlL sArCaStIc"));
         assertEquals("Ent, uat, boa, oka", P2J3.reverseVowels("Ant, oat, boa, uke"));
         assertEquals("Stix nix hix pix", P2J3.reverseVowels("Stix nix hix pix"));
         assertEquals("UoIeAxxxuOiEa", P2J3.reverseVowels("AeIoUxxxaEiOu"));
         assertEquals("Lettor Y as not i vewel", P2J3.reverseVowels("Letter Y is not a vowel"));
-        
+        assertEquals("lewercoselettersanlyhero", P2J3.reverseVowels("lowercaselettersonlyhere"));
+        assertEquals("!@#$%^&*(){}:;'[]'", P2J3.reverseVowels("!@#$%^&*(){}:;'[]'"));
+        assertEquals("àáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúū", P2J3.reverseVowels("àáâäæãåāèéêëēėęîïíīįìôöòóœøōõûüùúū"));
+
         // Testing with War and Peace
         CRC32 check = new CRC32();
         BufferedReader fr = new BufferedReader(
