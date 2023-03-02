@@ -1,4 +1,5 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public abstract class FileProcessor<R> {
     protected abstract void startFile();

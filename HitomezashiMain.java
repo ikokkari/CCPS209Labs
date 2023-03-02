@@ -42,10 +42,10 @@ public class HitomezashiMain {
                 boolean[] vertical = new boolean[H];
                 horizontal[0] = vertical[0] = rng.nextBoolean();
                 for(int x = 1; x < W; x++) {
-                    horizontal[x] = rng.nextInt(100) < PROB[imageCount] ? horizontal[x-1] : !horizontal[x-1];
+                    horizontal[x] = (rng.nextInt(100) < PROB[imageCount]) == horizontal[x - 1];
                 }
                 for(int y = 1; y < H; y++) {
-                    vertical[y] = rng.nextInt(100) < PROB[imageCount] ? vertical[y-1] : !vertical[y-1];
+                    vertical[y] = (rng.nextInt(100) < PROB[imageCount]) == vertical[y - 1];
                 }
                 BufferedImage pattern = Hitomezashi.createPattern(W, H, SQUARE, horizontal, vertical);
                 f.add(new ImagePanel(pattern, PROB[imageCount] + "%"));
