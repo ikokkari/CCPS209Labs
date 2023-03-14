@@ -17,6 +17,9 @@ public class CompGeomTestTwo {
     }
 
     @Test public void testIsSimplePolygonExplicit() {
+        int[] xs0 = {1, 0, -1}; // Small and simple
+        int[] ys0 = {-1, 0, 0};
+        assertTrue(CompGeom.isSimplePolygon(xs0, ys0));
         int[] xs1 = {0, 4, -1, 1}; // Wonky but legal
         int[] ys1 = {0, 2, 1, -3};
         assertTrue(CompGeom.isSimplePolygon(xs1, ys1));
