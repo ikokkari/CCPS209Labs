@@ -50,7 +50,7 @@ public class ImageAlgebraMain {
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setLayout(new FlowLayout());
         f.add(new ImagePanel(all, "Stack"));
-        f.add(new ImagePanel(ImageAlgebra.halving(coffee, 4), "Halving"));
+        f.add(new ImagePanel(ImageAlgebra.halving(coffee, 5), "Halving"));
         
         f.pack();
         f.setVisible(true);                           
