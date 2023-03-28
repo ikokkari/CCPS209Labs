@@ -97,13 +97,13 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>0(S). Hamming center
   </td>
-  <td>Reza Bazati, Mar 28, 2023
+  <td>Reza Barati, Mar 28, 2023
   </td>
   </tr>
    <tr>
   <td>0(T). Clique mentality
   </td>
-  <td>Reza Bazati, Mar 28, 2023
+  <td>Reza Barati, Mar 28, 2023
   </td>
   </tr>
   <tr>
