@@ -119,7 +119,7 @@ I will update this document as submissions arrive, so please check from this lis
    </td>
   </tr>
   <tr>
-   <td>23. Ulam-Warburton crystals
+   <td>23. Ulam–Warburton crystals
    </td>
    <td>Karl Bustamante, Nov 9, 2020
    </td>
@@ -323,7 +323,7 @@ I will update this document as submissions arrive, so please check from this lis
    </td>
   </tr>
    <tr>
-   <td>66. Slater-Vélez sequence
+   <td>66. Slater–Vélez sequence
    </td>
    <td>
    </td>
@@ -365,7 +365,7 @@ I will update this document as submissions arrive, so please check from this lis
    </td>
   </tr>
    <tr>
-   <td>73. Newton-Raphson fractals
+   <td>73. Newton–Raphson fractals
    </td>
    <td>
    </td>
@@ -419,7 +419,7 @@ I will update this document as submissions arrive, so please check from this lis
   </td>
   </tr>
    <tr>
-  <td>Bonus problem 102: Varshamov-Tenengolts code
+  <td>Bonus problem 102: Varshamov–Tenengolts code
   </td>
   <td>
   </td>
