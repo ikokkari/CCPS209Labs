@@ -1,5 +1,7 @@
 import org.junit.Test;
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -9,33 +11,44 @@ import static org.junit.Assert.assertNotNull;
 public class CliqueTest {
 
     private boolean[][] createRandomAdjacencyMatrix(int n, int edges, Random rng) {
+        ArrayList<Integer> indices = new ArrayList<>();
+        for(int i = 0; i < n; i++) {
+            indices.add(i);
+        }
         boolean[][] adjacencyMatrix = new boolean[n][n];
-        int u = rng.nextInt(n);
+        int pct = rng.nextInt(40) + 40;
         while(edges > 0) {
-            int v = rng.nextInt(n);
-            if(u != v & !adjacencyMatrix[u][v]) {
-                adjacencyMatrix[u][v] = true;
-                adjacencyMatrix[v][u] = true;
-                edges--;
+            Collections.shuffle(indices, rng);
+            int upTo = 1;
+            while(upTo < n && rng.nextInt(100) < pct) { upTo++; }
+            for(int i = 1; i < upTo; i++) {
+                int u = indices.get(i);
+                for(int j = 0; j < i; j++) {
+                    int v = indices.get(j);
+                    if(!adjacencyMatrix[u][v]) {
+                        edges--;
+                        adjacencyMatrix[u][v] = true;
+                        adjacencyMatrix[v][u] = true;
+                    }
+                }
             }
-            if(rng.nextInt(100) < 30) { u = rng.nextInt(n); }
         }
         return adjacencyMatrix;
     }
 
     @Test public void testFindFirstCliqueOneHundred() {
-        test(100, 1381342682L);
+        testClique(100, 2899382865L);
     }
 
     @Test public void testFindFirstCliqueFiveHundred() {
-        test(500, 3729285310L);
+        testClique(500, 1058405530L);
     }
 
     @Test public void testFindFirstCliqueOneThousand() {
-        test(1000, 3825507316L);
+        testClique(1000, 2204406524L);
     }
 
-    private void test(int trials, long expected) {
+    private void testClique(int trials, long expected) {
         Random rng = new Random(12345 + trials);
         CRC32 check = new CRC32();
         int n = 3, count = 0, goal = 1;
