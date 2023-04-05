@@ -33,6 +33,9 @@ public class CompGeomTestOne {
         assertTrue(CompGeom.segmentIntersect(0, 0, -1, -3, -2, 1, 2, -1));
         assertTrue(CompGeom.segmentIntersect(0, 0, -1, -1, 0, 0, 0, -1));
         assertTrue(CompGeom.segmentIntersect(-4, -5, 3, 4, -2, 7, 3, -8));
+
+        // If this one gives wrong answer, you are using multiplication that overflows.
+        assertTrue(CompGeom.segmentIntersect(-128, -150, 73, 76, -93, 150, 128, -162));
         
         assertFalse(CompGeom.segmentIntersect(1, 0, 5, 0, 3, 5, 7, -4));
         assertFalse(CompGeom.segmentIntersect(1, 0, 5, 0, 3, 5, 7, -4));
