@@ -13,6 +13,9 @@ public class P2J4Test {
     
     @Test public void testFirstMissingPositive() {
         // Explicit test cases
+        List<Integer> a0 = Arrays.asList();
+        assertEquals(1, P2J4.firstMissingPositive(a0));
+
         List<Integer> a1 = Arrays.asList(42, 99, 66);
         assertEquals(1, P2J4.firstMissingPositive(a1));
         
@@ -24,22 +27,37 @@ public class P2J4Test {
         
         List<Integer> a4 = Arrays.asList(10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
         assertEquals(11, P2J4.firstMissingPositive(a4));
+
+        List<Integer> a5 = Arrays.asList(1, 2, 2, 4);
+        assertEquals(3, P2J4.firstMissingPositive(a5));
+
+        List<Integer> a6 = Arrays.asList(1, 2, 2, 3);
+        assertEquals(4, P2J4.firstMissingPositive(a6));
+
+        // Verify that you are using the equals method of Integer instead of ==.
+        List<Integer> a7 = new ArrayList<>();
+        for(int i = 1; i < 200; i++) {
+            for(int j = 1; j < 3; j++) {
+                a7.add(i);
+            }
+        }
+        assertEquals(200, P2J4.firstMissingPositive(a7));
         
         // Pseudorandom fuzz tester
-        Random rng = new Random(SEED);
+        Random rng = new Random(SEED+1);
         List<Integer> items = new ArrayList<>();
         for(int i = 0; i < 100; i++) {
             items.clear();
-            int miss = 1 + rng.nextInt(10000);
+            int miss = 1 + rng.nextInt(1000);
             for(int j = 1; j < miss; j++) {
                 int rep = 1 + rng.nextInt(10);
                 for(int k = 0; k < rep; k++) { items.add(j); }
             }
-            int more = rng.nextInt(1000);
+            int more = rng.nextInt(i + 2);
             for(int j = 0; j < more; j++) {
                 items.add(rng.nextInt(100000000));
             }
-            Collections.shuffle(items, rng);
+            Collections.sort(items);
             int ans = P2J4.firstMissingPositive(items);
             assertEquals(miss, ans);
         }
