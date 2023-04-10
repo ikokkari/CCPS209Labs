@@ -331,7 +331,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
    <td>67. Lemire dynamic frequency sampling 
    </td>
-   <td>
+   <td>Reza Barati, Apr 10, 2023
    </td>
   </tr>
    <tr>
@@ -457,7 +457,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 108: Rendering piecewise Béziergons
   </td>
-  <td>
+  <td>Reza Barati, Apr 10, 2023
   </td>
   </tr>
    <tr>
