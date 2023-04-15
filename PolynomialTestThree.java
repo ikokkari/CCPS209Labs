@@ -28,8 +28,20 @@ public class PolynomialTestThree {
         assertNotEquals(p1, c1);
     }
 
+    @Test public void testHashCodeLeadingZeros() {
+        // All these polynomials are equal, so they must have equal hash codes.
+        int[] c1 = {4, 2, -3};
+        int[] c2 = {4, 2, -3, 0};
+        int[] c3 = {4, 2, -3, 0, 0, 0, 0};
+        Polynomial p1 = new Polynomial(c1);
+        Polynomial p2 = new Polynomial(c2);
+        Polynomial p3 = new Polynomial(c3);
+        assertEquals(p1.hashCode(), p2.hashCode());
+        assertEquals(p2.hashCode(), p3.hashCode());
+    }
+
     @Test public void testCompareTo() {
-        // Remember to perform elementwise comparison down from the highest coefficient.
+        // Remember to perform element-wise comparison down from the highest coefficient.
         int[] c1 = {-6, 99, 11, 12};
         int[] c2 = {6, -99, 11, 12};
         int[] c3 = {42, 10000000};
@@ -48,7 +60,7 @@ public class PolynomialTestThree {
     }
 
     private static final int SEED = 12345;
-    private static final int TRIALS = 100000;
+    private static final int TRIALS = 1000000;
 
     private Polynomial createRandom(int deg, Random rng) {
         int[] c = new int[deg + 1];
@@ -103,6 +115,6 @@ public class PolynomialTestThree {
         // So far, so good. Without this final hurdle using the checksum, all
         // previous tests could be trivially passed by defining your equals and
         // compareTo methods to simply consider all polynomials to be equal...
-        assertEquals(28339163L, check.getValue());
+        assertEquals(3165052107L, check.getValue());
     }
 }
