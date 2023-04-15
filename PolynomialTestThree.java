@@ -38,6 +38,8 @@ public class PolynomialTestThree {
         Polynomial p3 = new Polynomial(c3);
         assertEquals(p1.hashCode(), p2.hashCode());
         assertEquals(p2.hashCode(), p3.hashCode());
+        assertEquals(p1, p2);
+        assertEquals(p2, p3);
     }
 
     @Test public void testCompareTo() {
