@@ -27,7 +27,7 @@ public class RunoffVotingTest {
         int[][] b4 = { // Four candidates, 2 being everyone's second choice
             {0, 2, 1, 3}, {1, 2, 3, 0}, {3, 2, 1, 0}, {1, 2, 0, 3}, {0, 2, 1, 3}, {3, 2, 0, 1}  
         };
-        assertEquals(1, RunoffVoting.instantRunoff(b4)); // Apple pie loses
+        assertEquals(2, RunoffVoting.condorcetMethod(b4)); // Apple pie wins
         
         // From Wikipedia page on Condorcet: voting for the capital of Tennessee
         int[][] tn = new int[100][4];
