@@ -451,7 +451,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 107: Inventory sequence
   </td>
-  <td>
+  <td>Ethan Yitzhaky, May 31, 2023
   </td>
   </tr>
    <tr>
