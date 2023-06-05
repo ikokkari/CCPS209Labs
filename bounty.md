@@ -325,7 +325,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
    <td>66. Slater–Vélez sequence
    </td>
-   <td>
+   <td>Ethan Yitzhaky, Jun 4, 2023
    </td>
   </tr>
    <tr>
