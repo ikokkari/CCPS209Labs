@@ -25,12 +25,12 @@ public class P2J10Test {
     @Test public void testDissimilarityExplicit() {
         boolean[] f1 = conv("10101");
         boolean[] s1 = conv("10101");
-        assertEquals("0", P2J10.matchingDissimilarity(f1, s1).toString());
-        assertEquals("0", P2J10.jaccardDissimilarity(f1, s1).toString());
-        assertEquals("0", P2J10.diceDissimilarity(f1, s1).toString());
-        assertEquals("0", P2J10.rogersTanimonoDissimilarity(f1, s1).toString());
+        assertEquals(new Fraction(0).toString(), P2J10.matchingDissimilarity(f1, s1).toString());
+        assertEquals(new Fraction(0).toString(), P2J10.jaccardDissimilarity(f1, s1).toString());
+        assertEquals(new Fraction(0).toString(), P2J10.diceDissimilarity(f1, s1).toString());
+        assertEquals(new Fraction(0).toString(), P2J10.rogersTanimonoDissimilarity(f1, s1).toString());
         assertEquals("2/5", P2J10.russellRaoDissimilarity(f1, s1).toString());
-        assertEquals("0", P2J10.sokalSneathDissimilarity(f1, s1).toString());
+        assertEquals(new Fraction(0).toString(), P2J10.sokalSneathDissimilarity(f1, s1).toString());
 
         boolean[] f2 = conv("01111");
         boolean[] s2 = conv("00100");
@@ -79,12 +79,12 @@ public class P2J10Test {
 
         boolean[] f7 = conv("01101");
         boolean[] s7 = conv("10010");
-        assertEquals("1", P2J10.matchingDissimilarity(f7, s7).toString());
-        assertEquals("1", P2J10.jaccardDissimilarity(f7, s7).toString());
-        assertEquals("1", P2J10.diceDissimilarity(f7, s7).toString());
-        assertEquals("1", P2J10.rogersTanimonoDissimilarity(f7, s7).toString());
-        assertEquals("1", P2J10.russellRaoDissimilarity(f7, s7).toString());
-        assertEquals("1", P2J10.sokalSneathDissimilarity(f7, s7).toString());
+        assertEquals(new Fraction(1).toString(), P2J10.matchingDissimilarity(f7, s7).toString());
+        assertEquals(new Fraction(1).toString(), P2J10.jaccardDissimilarity(f7, s7).toString());
+        assertEquals(new Fraction(1).toString(), P2J10.diceDissimilarity(f7, s7).toString());
+        assertEquals(new Fraction(1).toString(), P2J10.rogersTanimonoDissimilarity(f7, s7).toString());
+        assertEquals(new Fraction(1).toString(), P2J10.russellRaoDissimilarity(f7, s7).toString());
+        assertEquals(new Fraction(1).toString(), P2J10.sokalSneathDissimilarity(f7, s7).toString());
     }
 
     private static final int N = 1000;
