@@ -349,13 +349,13 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
    <td>70. Cup tournament survival
    </td>
-   <td>
+   <td>John Hodgins, Dec 8, 2023 
    </td>
   </tr>
    <tr>
    <td>71. The gamma and the omega
    </td>
-   <td>
+   <td>John Hodgins, Dec 8, 2023
    </td>
   </tr>
    <tr>
