@@ -33,6 +33,8 @@ public class EgyptianFractionsTest {
             EgyptianFractions.greedy(new Fraction(124, 229)).toString());
         assertEquals("[2, 13, 199, 52603, 4150560811, 34454310087467394631]",
             EgyptianFractions.greedy(new Fraction(71, 122)).toString());
+        assertEquals("[19, 433, 249553, 93414800161, 17452649778145716451681]",
+                EgyptianFractions.greedy(new Fraction(5, 91)).toString());
         
         /* Pseudorandom fuzz tester */
         CRC32 check = new CRC32();
@@ -44,7 +46,13 @@ public class EgyptianFractionsTest {
                 a = rng.nextInt(b - 1) + 1;
             } while(a % 2 == 0 && b % 2 == 0);
             Fraction apb = new Fraction(a, b);
+            // Verify that the result unit fractions add up to the original.
             List<BigInteger> gRes = EgyptianFractions.greedy(apb);
+            Fraction result = new Fraction(0);
+            for(BigInteger n: gRes) {
+                result = result.add(new Fraction(BigInteger.ONE, n));
+            }
+            assertEquals(apb, result);
             try {
                 check.update(gRes.toString().getBytes("UTF-8"));
             } catch(UnsupportedEncodingException ignored) {}
@@ -53,21 +61,22 @@ public class EgyptianFractionsTest {
         assertEquals(93321355L, check.getValue());
     }
     
-    @Test public void testSplitting() {
+    @Test public void testPairing() {
         /* Explicit test cases */
-        assertEquals("[2, 4, 8, 16]", EgyptianFractions.splitting(new Fraction(15, 16)).toString());
-        assertEquals("[2, 7, 14]", EgyptianFractions.splitting(new Fraction(20, 28)).toString());
-        assertEquals("[7, 8, 56]", EgyptianFractions.splitting(new Fraction(2, 7)).toString());
-        assertEquals("[3, 9, 10, 27, 90]", EgyptianFractions.splitting(new Fraction(16, 27)).toString());
-        assertEquals("[3, 11, 33, 132]", EgyptianFractions.splitting(new Fraction(61, 132)).toString());
-        assertEquals("[9, 10, 17, 90, 153, 154, 23562]", EgyptianFractions.splitting(new Fraction(5, 17)).toString());
-        assertEquals("[5, 15]", EgyptianFractions.splitting(new Fraction(4, 15)).toString());
-        assertEquals("[11, 21, 22, 41, 42, 231, 431, 462, 492, 861, 862, 1722, 371091, 742182]",
-            EgyptianFractions.splitting(new Fraction(121, 492)).toString());
-        assertEquals("[6, 11, 12, 66, 132]", EgyptianFractions.splitting(new Fraction(132, 363)).toString());
-        assertEquals("[13, 14, 65, 66, 182, 4290]", EgyptianFractions.splitting(new Fraction(12, 65)).toString());
-        assertEquals("[9, 10, 17, 90, 153, 154, 23562]", EgyptianFractions.splitting(new Fraction(5, 17)).toString());
-        assertEquals("[3, 4, 12, 27, 28, 756]", EgyptianFractions.splitting(new Fraction(20, 27)).toString());
+        assertEquals("[2, 4, 8, 16]", EgyptianFractions.pairing(new Fraction(15, 16)).toString());
+        assertEquals("[2, 7, 14]", EgyptianFractions.pairing(new Fraction(20, 28)).toString());
+        assertEquals("[4, 28]", EgyptianFractions.pairing(new Fraction(2, 7)).toString());
+        assertEquals("[3, 5, 27, 45]", EgyptianFractions.pairing(new Fraction(16, 27)).toString());
+        assertEquals("[3, 11, 33, 132]", EgyptianFractions.pairing(new Fraction(61, 132)).toString());
+        assertEquals("[5, 17, 45, 77, 11781]", EgyptianFractions.pairing(new Fraction(5, 17)).toString());
+        assertEquals("[5, 15]", EgyptianFractions.pairing(new Fraction(4, 15)).toString());
+        assertEquals("[6, 21, 66, 116, 216, 492, 861, 26796, 93096, 185546, 68854450686]",
+            EgyptianFractions.pairing(new Fraction(121, 492)).toString());
+        assertEquals("[3, 33]", EgyptianFractions.pairing(new Fraction(132, 363)).toString());
+        assertEquals("[7, 33, 91, 2145]", EgyptianFractions.pairing(new Fraction(12, 65)).toString());
+        assertEquals("[5, 17, 45, 77, 11781]", EgyptianFractions.pairing(new Fraction(5, 17)).toString());
+        assertEquals("[2, 6, 14, 378]", EgyptianFractions.pairing(new Fraction(20, 27)).toString());
+        assertEquals("[23, 91, 2093]", EgyptianFractions.pairing(new Fraction(5, 91)).toString());
         
         /* Pseudorandom fuzz tester */
         CRC32 check = new CRC32();
@@ -79,12 +88,18 @@ public class EgyptianFractionsTest {
                 a = rng.nextInt(b - 1) + 1;
             } while(a % 2 == 0 && b % 2 == 0);
             Fraction apb = new Fraction(a, b);
-            List<BigInteger> gRes = EgyptianFractions.splitting(apb);
+            // Verify that the result unit fractions add up to the original.
+            List<BigInteger> pRes = EgyptianFractions.pairing(apb);
+            Fraction result = new Fraction(0);
+            for(BigInteger n: pRes) {
+                result = result.add(new Fraction(BigInteger.ONE, n));
+            }
+            assertEquals(apb, result);
             try {
-                check.update(gRes.toString().getBytes("UTF-8"));
+                check.update(pRes.toString().getBytes("UTF-8"));
             } catch(UnsupportedEncodingException ignored) {}
-            assertTrue(addsUp(gRes, apb));
+            assertTrue(addsUp(pRes, apb));
         }
-        assertEquals(2886553470L, check.getValue());
+        assertEquals(2989506769L, check.getValue());
     }
 }
