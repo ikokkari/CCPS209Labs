@@ -1,3 +1,4 @@
+
 <!-- Output copied to clipboard! -->
 
 <!-----
@@ -367,7 +368,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
    <td>73. Newton–Raphson fractals
    </td>
-   <td>
+   <td>Omer Akgul, Apr 2, 2024
    </td>
   </tr>
    <tr>
