@@ -197,6 +197,30 @@ I will update this document as submissions arrive, so please check from this lis
    <td>Karel Tutsu, Dec 25, 2021
    </td>
   </tr>
+   <tr>
+  <td>41. Geometry I: Segments
+  </td>
+  <td>Wendelle So, Nov 1, 2020
+  </td>
+  </tr>
+   <tr>
+  <td>42. Geometry II: Polygons
+  </td>
+  <td>Wendelle So, Nov 1, 2020
+  </td>
+  </tr>
+   <tr>
+  <td>43. Geometry III: Points in polygons
+  </td>
+  <td>Wendelle So, Nov 1, 2020
+  </td>
+  </tr>
+   <tr>
+  <td>42. Geometry IV: Convex hull
+  </td>
+  <td>Wendelle So, Nov 1, 2020
+  </td>
+  </tr>
   <tr>
    <td>45. Permutations I: Algebraic operations
    </td>
