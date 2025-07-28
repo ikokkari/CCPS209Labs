@@ -77,10 +77,13 @@ public class RationalRootsTest {
         for(int i = 0; i < 500; i++) {
             int n = 3 + i % 4;
             int[] coeffs = new int[n];
-            for(int j = 1; j < coeffs.length; j++) {
-                int c = j == coeffs.length - 1 ? 1 : rng.nextInt(5 + i);
+            for(int j = 1; j < n; j++) {
+                int c = j == n - 1 ? 1 : rng.nextInt(5 + i);
                 if(rng.nextBoolean()) { c = -c; }
                 coeffs[j] = c;
+            }
+            if(coeffs[0] == 0) {
+                coeffs[0] = rng.nextInt(5 + i) + 1;
             }
             int a = rng.nextInt(7) + 1;
             if(rng.nextBoolean()) { a = -a; }
@@ -98,6 +101,6 @@ public class RationalRootsTest {
                 check.update(result.toString().getBytes("UTF-8"));
             } catch(UnsupportedEncodingException ignored) {}
         }
-        assertEquals(674569462L, check.getValue());
+        assertEquals(273735926L, check.getValue());
     }    
 }
