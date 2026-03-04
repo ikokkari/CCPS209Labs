@@ -488,7 +488,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 109: Soft interruptions
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 4, 2026
   </td>
   </tr>
    <tr>
