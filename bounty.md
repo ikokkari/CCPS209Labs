@@ -470,7 +470,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 106: Automatic for the peephole
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 4, 2026
   </td>
   </tr>
    <tr>
