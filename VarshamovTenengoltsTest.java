@@ -11,7 +11,7 @@ public class VarshamovTenengoltsTest {
         assertEquals("11100", VarshamovTenengolts.encode("10"));
         assertEquals("10001", VarshamovTenengolts.encode("01"));
         assertEquals("001011", VarshamovTenengolts.encode("111"));
-        assertEquals("001011", VarshamovTenengolts.encode("111"));
+        assertEquals("000000", VarshamovTenengolts.encode("000"));
         assertEquals("1010001000", VarshamovTenengolts.encode("100100"));
         assertEquals("110011001001100", VarshamovTenengolts.encode("01101001100"));
         assertEquals("0000001001000110111", VarshamovTenengolts.encode("00010100011111"));
@@ -66,5 +66,32 @@ public class VarshamovTenengoltsTest {
             }
         }
         assertEquals(expected, check.getValue());
+    }
+
+    // Systematic round trip test method supplied by Claude Opus 4.6.
+    @Test
+    public void testExhaustiveRoundTrip() {
+        for (int bits = 1; bits <= 12; bits++) {
+            for (int val = 0; val < (1 << bits); val++) {
+                String original = toBitString(val, bits);
+                String encoded = VarshamovTenengolts.encode(original);
+                for (int delPos = 0; delPos < encoded.length(); delPos++) {
+                    String received = encoded.substring(0, delPos) + encoded.substring(delPos + 1);
+                    String decoded = VarshamovTenengolts.decode(received);
+                    assertEquals(
+                            "Failed for original=\"" + original + "\" delPos=" + delPos,
+                            original, decoded
+                    );
+                }
+            }
+        }
+    }
+
+    private static String toBitString(int val, int bits) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = bits - 1; i >= 0; i--) {
+            sb.append((val >> i) & 1);
+        }
+        return sb.toString();
     }
 }
