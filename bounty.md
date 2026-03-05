@@ -416,7 +416,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>77. Generalized chaos game
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
@@ -434,7 +434,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 100: The Buddhabrot is silent
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
