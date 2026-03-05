@@ -26,13 +26,7 @@ Conversion notes:
 
 # Bounty List for CCPS 209 Lab Problems
 
-To ensure that the [CCPS 209 Lab Problems](https://github.com/ikokkari/CCPS209Labs) and their automated JUnit testers do not contain any errors that would make them impossible for any hard working students to solve, the author Ilkka Kokkarinen offers **a bounty of 100 CAD** to the first person to send me (ilkka.kokkarinen@gmail.com) a working solution in that your solution cleanly passes my JUnit test. This bounty is paid to Sick Kids Toronto, separately per each problem that does not have a bounty claimed so far, and one person can claim multiple bounties. If the person submitting the first solution is a student currently taking CCPS 209, he or she also gets **three extra lab marks**, in addition to the three labs marks normally awarded for that working lab solution. 
-
-And, for whatever it's worth, you get your name permanently displayed in the table below as long as this problem collection exists. (If you do not wish to see your name in this list, please mention that in your submission email, and I will credit your bounty below as "Anonymous".)
-
-The problems that are not listed in the table have already been successfully solved before this bounty list was created, and are not subject to any bounties.
-
-I will update this document as submissions arrive, so please check from this list if the bounty for the solution you would like to submit is still unclaimed. Finding errors in a specification for a lab is also worth a bounty between one and three lab marks for the first finder. Please submit any such error reports to this same email address.
+Here are the bounties for the problems in the collection [CCPS 209 Lab Problems](https://github.com/ikokkari/CCPS209Labs), to ensure that their automated JUnit testers do not contain any errors that would make them impossible for any hard working students to solve. The problems that are not listed in the table were already  successfully solved before this bounty list was created. With all the bounties claimed, the bounty list for this problem collection is now complete. The author thanks all students for their work, and their names will remain in this list as long as this repository exists.
 
 <table>
   <tr>
