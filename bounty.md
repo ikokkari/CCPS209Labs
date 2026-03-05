@@ -404,7 +404,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>75. Square coral
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
@@ -422,7 +422,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>78. Mind your P's and Q's
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
@@ -464,7 +464,7 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 105: Regex fractals
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
@@ -494,25 +494,25 @@ I will update this document as submissions arrive, so please check from this lis
    <tr>
   <td>Bonus problem 110: Twisty little passages, reversible
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
   <td>Bonus problem 111: Dig-through raster, naked
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
   <td>Bonus problem 112: Kruskal mazes
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
    <tr>
   <td>Bonus problem 113: Beautiful for having been broken
   </td>
-  <td>
+  <td>Claude Opus 4.6., Mar 5, 2026
   </td>
   </tr>
 </table>
