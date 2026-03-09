@@ -2,13 +2,16 @@ import org.junit.Test;
 import java.util.Random;
 import java.util.zip.CRC32;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class HammingCenterTest {
 
     private static String toBits(boolean[] bits) {
-        String result = ""; // Too small test cases to bother to use StringBuilder really
-        for(boolean b: bits) { result += b ? "1": "0"; }
-        return result;
+        StringBuilder sb = new StringBuilder(bits.length);
+        for(boolean b: bits) { sb.append(b ? '1' : '0'); }
+        return sb.toString();
     }
 
     private static boolean[] fromBits(String bits) {
@@ -20,27 +23,106 @@ public class HammingCenterTest {
         return result;
     }
 
-    private static boolean[][] fromBits(String[] bits) {
-        int n = bits.length;
-        boolean[][] result = new boolean[n][bits[0].length()];
-        for(int i = 0; i < n; i++) {
+    private static boolean[][] fromBits(String... bits) {
+        boolean[][] result = new boolean[bits.length][bits[0].length()];
+        for(int i = 0; i < bits.length; i++) {
             result[i] = fromBits(bits[i]);
         }
         return result;
     }
 
-    @Test public void testFindHammingCenterExplicit() {
-        String[] bitS0 = {"1010", "0000", "1011", "0101"};
-        boolean[][] bits0 = fromBits(bitS0);
-        assertEquals(null, HammingCenter.findHammingCenter(bits0, 1));
-        assertEquals("0011", toBits(HammingCenter.findHammingCenter(bits0, 2)));
-
-        String[] bitS1 = {"001011", "101100", "000001", "101010", "011010", "010111"};
-        boolean[][] bits1 = fromBits(bitS1);
-        assertEquals(null, HammingCenter.findHammingCenter(bits1, 1));
-        assertEquals(null, HammingCenter.findHammingCenter(bits1, 2));
-        assertEquals("000110", toBits(HammingCenter.findHammingCenter(bits1, 3)));
+    private static int hammingDistance(boolean[] a, boolean[] b) {
+        int d = 0;
+        for(int i = 0; i < a.length; i++) {
+            if(a[i] != b[i]) { d++; }
+        }
+        return d;
     }
+
+    // Verify that center is within radius r of every row, and is lex-lowest.
+    private static void verifyCenter(boolean[][] bits, int r, boolean[] center, String expectedStr) {
+        assertNotNull("Expected a center but got null", center);
+        assertEquals(expectedStr, toBits(center));
+        for(int i = 0; i < bits.length; i++) {
+            assertTrue("Center exceeds radius r=" + r + " for row " + i,
+                    hammingDistance(center, bits[i]) <= r);
+        }
+    }
+
+    // --- Explicit tests ---
+
+    @Test public void testSpecExampleFourBits() {
+        boolean[][] bits = fromBits("1010", "0000", "1011", "0101");
+        assertNull(HammingCenter.findHammingCenter(bits, 1));
+        verifyCenter(bits, 2, HammingCenter.findHammingCenter(bits, 2), "0011");
+    }
+
+    @Test public void testSpecExampleSixBits() {
+        boolean[][] bits = fromBits("001011", "101100", "000001", "101010", "011010", "010111");
+        assertNull(HammingCenter.findHammingCenter(bits, 1));
+        assertNull(HammingCenter.findHammingCenter(bits, 2));
+        verifyCenter(bits, 3, HammingCenter.findHammingCenter(bits, 3), "000110");
+    }
+
+    @Test public void testSingleRow() {
+        // One row: the center is exactly that row at r = 0.
+        boolean[][] bits = {fromBits("10110")};
+        verifyCenter(bits, 0, HammingCenter.findHammingCenter(bits, 0), "10110");
+    }
+
+    @Test public void testSingleBitArrays() {
+        // Two single-bit rows: {0} and {1}. r=0 impossible, r=1 gives "0" (lex lowest).
+        boolean[][] bits = fromBits("0", "1");
+        assertNull(HammingCenter.findHammingCenter(bits, 0));
+        verifyCenter(bits, 1, HammingCenter.findHammingCenter(bits, 1), "0");
+    }
+
+    @Test public void testTwoComplementaryRows() {
+        // "00" and "11": r=0 fails, r=1 gives "00" or "01" — lex lowest is "00".
+        boolean[][] bits = fromBits("00", "11");
+        assertNull(HammingCenter.findHammingCenter(bits, 0));
+        verifyCenter(bits, 1, HammingCenter.findHammingCenter(bits, 1), "01");
+    }
+
+    @Test public void testRadiusZeroNotAllIdentical() {
+        // Rows differ: no center at r = 0.
+        boolean[][] bits = fromBits("101", "100");
+        assertNull(HammingCenter.findHammingCenter(bits, 0));
+        verifyCenter(bits, 1, HammingCenter.findHammingCenter(bits, 1), "100");
+    }
+
+    @Test public void testLargerRadiusThanNeeded() {
+        // r is generous; should still return the lex-lowest center.
+        boolean[][] bits = fromBits("111", "000");
+        // Minimum radius is 2 (centers "001","010","011","100","101","110" all work at r≤2;
+        // lex lowest at r=2 is "001"). At r=3, lex lowest is "000".
+        verifyCenter(bits, 2, HammingCenter.findHammingCenter(bits, 2), "001");
+        verifyCenter(bits, 3, HammingCenter.findHammingCenter(bits, 3), "000");
+    }
+
+    @Test public void testThreeRowsNeedingBacktrack() {
+        // Setting false greedily at every position won't always work.
+        // "111", "110", "001": center at r=1 impossible, r=2 lex-lowest is "010".
+        boolean[][] bits = fromBits("111", "110", "001");
+        assertNull(HammingCenter.findHammingCenter(bits, 1));
+        verifyCenter(bits, 2, HammingCenter.findHammingCenter(bits, 2), "010");
+    }
+
+    @Test public void testFourRowsFiveBits() {
+        boolean[][] bits = fromBits("00000", "11111", "10101", "01010");
+        assertNull(HammingCenter.findHammingCenter(bits, 1));
+        assertNull(HammingCenter.findHammingCenter(bits, 2));
+        verifyCenter(bits, 3, HammingCenter.findHammingCenter(bits, 3), "00011");
+    }
+
+    @Test public void testAllZerosAndAllOnes() {
+        // "0000" and "1111": radius 2, lex lowest center is "0011".
+        boolean[][] bits = fromBits("0000", "1111");
+        assertNull(HammingCenter.findHammingCenter(bits, 1));
+        verifyCenter(bits, 2, HammingCenter.findHammingCenter(bits, 2), "0011");
+    }
+
+    // --- Mass / CRC tests ---
 
     @Test public void testFindHammingCenterOneHundred() {
         test(100, 2909231474L);
@@ -48,6 +130,10 @@ public class HammingCenterTest {
 
     @Test public void testFindHammingCenterTwoHundred() {
         test(200, 4124715625L);
+    }
+
+    @Test public void testFindHammingCenterThreeHundred() {
+        test(300, 1484491021L);
     }
 
     private void test(int trials, long expected) {
