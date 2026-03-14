@@ -9,6 +9,8 @@ import static org.junit.Assert.assertFalse;
 
 public class IntervalSetTest {
 
+    // --- add explicit tests ---
+
     @Test public void testAddExplicit() {
         IntervalSet is0 = new IntervalSet();
         assertEquals("[]", is0.toString());
@@ -50,6 +52,54 @@ public class IntervalSetTest {
         assertEquals("[0-110]", is1.toString());
     }
 
+    @Test public void testAddSubsetNoChange() {
+        // Adding an interval already fully contained should not change the set.
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        is.add(12, 18);
+        assertEquals("[10-20]", is.toString());
+        is.add(10, 20);
+        assertEquals("[10-20]", is.toString());
+        is.add(15);
+        assertEquals("[10-20]", is.toString());
+    }
+
+    @Test public void testAddAdjacentMerge() {
+        // Adjacent intervals (end+1 == start of next) should merge.
+        IntervalSet is = new IntervalSet();
+        is.add(1, 3);
+        assertEquals("[1-3]", is.toString());
+        is.add(4, 6);
+        assertEquals("[1-6]", is.toString()); // 3+1 == 4, so they merge
+        is.add(8, 10);
+        assertEquals("[1-6, 8-10]", is.toString());
+        is.add(7); // bridges the gap
+        assertEquals("[1-10]", is.toString());
+    }
+
+    @Test public void testAddAbsorbsMultiple() {
+        // One add that absorbs three separate intervals into one.
+        IntervalSet is = new IntervalSet();
+        is.add(1, 3);
+        is.add(7, 9);
+        is.add(13, 15);
+        assertEquals("[1-3, 7-9, 13-15]", is.toString());
+        is.add(4, 12); // absorbs all three
+        assertEquals("[1-15]", is.toString());
+    }
+
+    @Test public void testAddSingleton() {
+        IntervalSet is = new IntervalSet();
+        is.add(5);
+        assertEquals("[5]", is.toString());
+        is.add(3);
+        assertEquals("[3, 5]", is.toString());
+        is.add(4); // merges 3, 4, 5
+        assertEquals("[3-5]", is.toString());
+    }
+
+    // --- contains explicit tests ---
+
     @Test public void testContainsExplicit() {
         IntervalSet is = new IntervalSet();
         assertFalse(is.contains(1_000_000_000));
@@ -73,6 +123,49 @@ public class IntervalSetTest {
         assertTrue(is.contains(35, 99));
         assertTrue(is.contains(40, 98));
     }
+
+    @Test public void testContainsEmptySet() {
+        IntervalSet is = new IntervalSet();
+        assertFalse(is.contains(0));
+        assertFalse(is.contains(100));
+        assertFalse(is.contains(0, 100));
+    }
+
+    @Test public void testContainsBoundaries() {
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        // Inclusive boundaries
+        assertTrue(is.contains(10));
+        assertTrue(is.contains(20));
+        assertTrue(is.contains(10, 20));
+        // Just outside
+        assertFalse(is.contains(9));
+        assertFalse(is.contains(21));
+        assertFalse(is.contains(9, 20));
+        assertFalse(is.contains(10, 21));
+    }
+
+    @Test public void testContainsSpanningGap() {
+        // Interval that spans a gap between two stored intervals
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        is.add(30, 40);
+        assertFalse(is.contains(10, 40)); // gap at 21-29
+        assertFalse(is.contains(20, 30)); // gap at 21-29
+        assertTrue(is.contains(10, 20));
+        assertTrue(is.contains(30, 40));
+    }
+
+    @Test public void testContainsSingleton() {
+        IntervalSet is = new IntervalSet();
+        is.add(42);
+        assertTrue(is.contains(42));
+        assertFalse(is.contains(41));
+        assertFalse(is.contains(43));
+        assertFalse(is.contains(41, 43));
+    }
+
+    // --- remove explicit tests ---
 
     @Test public void testRemoveExplicit() {
         IntervalSet is = new IntervalSet();
@@ -113,6 +206,105 @@ public class IntervalSetTest {
         assertEquals("[]", is.toString());
     }
 
+    @Test public void testRemoveFromEmpty() {
+        IntervalSet is = new IntervalSet();
+        is.remove(1, 100);
+        assertEquals("[]", is.toString());
+        is.remove(42);
+        assertEquals("[]", is.toString());
+    }
+
+    @Test public void testRemoveNonOverlapping() {
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        is.remove(5, 8); // entirely before
+        assertEquals("[10-20]", is.toString());
+        is.remove(25, 30); // entirely after
+        assertEquals("[10-20]", is.toString());
+    }
+
+    @Test public void testRemoveExactInterval() {
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        is.remove(10, 20);
+        assertEquals("[]", is.toString());
+    }
+
+    @Test public void testRemoveSplitsInterval() {
+        // Removing the middle of an interval creates two intervals.
+        IntervalSet is = new IntervalSet();
+        is.add(1, 100);
+        is.remove(50);
+        assertEquals("[1-49, 51-100]", is.toString());
+    }
+
+    @Test public void testRemoveSingleton() {
+        IntervalSet is = new IntervalSet();
+        is.add(5);
+        is.remove(5);
+        assertEquals("[]", is.toString());
+    }
+
+    @Test public void testRemoveLeftOverlap() {
+        // Remove overlapping the left end of an interval
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        is.remove(5, 15);
+        assertEquals("[16-20]", is.toString());
+    }
+
+    @Test public void testRemoveRightOverlap() {
+        // Remove overlapping the right end
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        is.remove(15, 25);
+        assertEquals("[10-14]", is.toString());
+    }
+
+    @Test public void testRemoveMultipleIntervals() {
+        // Remove spanning across multiple intervals
+        IntervalSet is = new IntervalSet();
+        is.add(1, 10);
+        is.add(20, 30);
+        is.add(40, 50);
+        is.remove(5, 45);
+        assertEquals("[1-4, 46-50]", is.toString());
+    }
+
+    // --- Combined add/remove/contains sequences ---
+
+    @Test public void testAddRemoveAddSequence() {
+        IntervalSet is = new IntervalSet();
+        is.add(10, 20);
+        assertTrue(is.contains(15));
+        is.remove(15);
+        assertFalse(is.contains(15));
+        assertEquals("[10-14, 16-20]", is.toString());
+        is.add(15);
+        assertTrue(is.contains(15));
+        assertEquals("[10-20]", is.toString()); // re-merged
+    }
+
+    @Test public void testAddThenRemoveSameEqualsEmpty() {
+        IntervalSet is = new IntervalSet();
+        is.add(5, 15);
+        is.remove(5, 15);
+        assertEquals("[]", is.toString());
+        assertFalse(is.contains(5));
+        assertFalse(is.contains(10));
+        assertFalse(is.contains(15));
+    }
+
+    @Test public void testLargeValues() {
+        IntervalSet is = new IntervalSet();
+        is.add(1_000_000_000);
+        assertEquals("[1000000000]", is.toString());
+        assertTrue(is.contains(1_000_000_000));
+        assertFalse(is.contains(999_999_999));
+    }
+
+    // --- CRC mass tests ---
+
     @Test public void massTestOneHundred() {
         massTest(100, 1471632031L);
     }
@@ -151,11 +343,9 @@ public class IntervalSetTest {
             check.update(is.contains(end-10, end+10) ? 42: 99);
             if(rng.nextBoolean()) {
                 is.add(start, end);
-                //System.out.println("Adding " + start + "-" + end + ": " + is);
             }
             else {
                 is.remove(start, end);
-                //System.out.println("Remove " + start + "-" + end + ": " + is);
             }
             try {
                 check.update(is.toString().getBytes("UTF-8"));
