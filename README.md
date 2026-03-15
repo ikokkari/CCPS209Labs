@@ -4,7 +4,7 @@ This repository contains the problems and their JUnit test classes for the cours
 
 The specifications for the lab problems are given in the PDF document [CCPS 209 Labs](https://github.com/ikokkari/CCPS209Labs/blob/master/CCPS%20209%20Labs.pdf).
 
-See the file [bounty.md](https://github.com/ikokkari/CCPS209Labs/blob/main/bounty.md) for the list of bounties both claimed and still open.
+See the file [bounty.md](https://github.com/ikokkari/CCPS209Labs/blob/main/bounty.md) for the list of bounties collected for these problems.
 
 Text of `warandpeace.txt` taken from [Project Gutenberg](http://www.gutenberg.org/ebooks/2600).
 
