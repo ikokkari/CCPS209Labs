@@ -9,19 +9,47 @@ import static org.junit.Assert.assertFalse;
 
 public class MillerRabinTest {
 
+    // --- powerMod explicit tests ---
+
     @Test public void testPowerMod() {
-        // Explicit test cases
         assertEquals(10, MillerRabin.powerMod(11, 10, 13));
         assertEquals(1, MillerRabin.powerMod(15, 12, 7));
         assertEquals(0, MillerRabin.powerMod(2, 29, 8));
-        assertEquals(2, MillerRabin.powerMod(33, 541, 31));
         assertEquals(2, MillerRabin.powerMod(33, 541, 31));
         assertEquals(2, MillerRabin.powerMod(13, 347, 5));
         assertEquals(57, MillerRabin.powerMod(45, 2326, 64));
         assertEquals(33, MillerRabin.powerMod(44, 5958, 97));
         assertEquals(1, MillerRabin.powerMod(83, 3960, 106));
+    }
 
-        // Pseudorandom fuzz tests
+    @Test public void testPowerModEdgeCases() {
+        // Exponent 0: a^0 mod m = 1
+        assertEquals(1, MillerRabin.powerMod(5, 0, 3));
+        assertEquals(1, MillerRabin.powerMod(999, 0, 7));
+        // Exponent 1: a^1 mod m = a mod m
+        assertEquals(3, MillerRabin.powerMod(3, 1, 7));
+        assertEquals(2, MillerRabin.powerMod(9, 1, 7));
+        // a divisible by m: result is 0
+        assertEquals(0, MillerRabin.powerMod(6, 5, 3));
+        assertEquals(0, MillerRabin.powerMod(10, 100, 5));
+        // Power of 2
+        assertEquals(24, MillerRabin.powerMod(2, 10, 1000));
+        assertEquals(0, MillerRabin.powerMod(2, 10, 1024));
+    }
+
+    @Test public void testPowerModFermatLittleTheorem() {
+        // a^(p-1) mod p = 1 for prime p, a not divisible by p
+        assertEquals(1, MillerRabin.powerMod(2, 12, 13));
+        assertEquals(1, MillerRabin.powerMod(3, 96, 97));
+        assertEquals(1, MillerRabin.powerMod(7, 100, 101));
+        assertEquals(1, MillerRabin.powerMod(5, 1008, 1009));
+    }
+
+    @Test public void testPowerModLargeValues() {
+        assertEquals(147483634L, MillerRabin.powerMod(2, 31, 1000000007L));
+    }
+
+    @Test public void testPowerModFuzz() {
         CRC32 check = new CRC32();
         Random rng = new Random(1234567);
         for(int i = 0; i < 2000; i++) {
@@ -33,6 +61,34 @@ public class MillerRabinTest {
             check.update((int) (result >> 32));
         }
         assertEquals(1476090350L, check.getValue());
+    }
+
+    // --- isMillerRabinWitness explicit tests ---
+
+    @Test public void testWitnessPrimesPassAll() {
+        int[] primes = {7, 13, 97, 101, 1009};
+        int[] witnesses = {2, 3, 5, 7};
+        for (int p : primes) {
+            for (int a : witnesses) {
+                if (a < p) {
+                    assertTrue("Prime " + p + " should pass witness " + a,
+                            MillerRabin.isMillerRabinWitness(p, a));
+                }
+            }
+        }
+    }
+
+    @Test public void testWitnessCompositesDetected() {
+        assertFalse(MillerRabin.isMillerRabinWitness(15, 2));   // 3*5
+        assertFalse(MillerRabin.isMillerRabinWitness(21, 2));   // 3*7
+        assertFalse(MillerRabin.isMillerRabinWitness(561, 2));  // Carmichael
+        assertFalse(MillerRabin.isMillerRabinWitness(341, 2));  // Fermat pseudoprime base 2
+    }
+
+    @Test public void testWitnessPseudoprimeBase2CaughtByBase3() {
+        // 2047 = 23*89 passes base 2 but fails base 3
+        assertTrue(MillerRabin.isMillerRabinWitness(2047, 2));
+        assertFalse(MillerRabin.isMillerRabinWitness(2047, 3));
     }
 
     @Test public void testIsMillerRabinWitnessThousand() {
@@ -64,6 +120,61 @@ public class MillerRabinTest {
         assertEquals(expected, check.getValue());
     }
 
+    // --- isPrime explicit tests ---
+
+    @Test public void testIsPrimeSmallPrimes() {
+        int[] smallPrimes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 97, 101};
+        for (int p : smallPrimes) {
+            assertTrue("Should be prime: " + p, MillerRabin.isPrime(p));
+        }
+    }
+
+    @Test public void testIsPrimeSmallNonPrimes() {
+        long[] nonPrimes = {0, 1, 4, 6, 8, 9, 10, 15, 25, 49};
+        for (long n : nonPrimes) {
+            assertFalse("Should not be prime: " + n, MillerRabin.isPrime(n));
+        }
+    }
+
+    @Test public void testIsPrimePerfectSquaresOfPrimes() {
+        // Not caught by trial division with small primes when p > 37
+        assertFalse(MillerRabin.isPrime(121));    // 11^2
+        assertFalse(MillerRabin.isPrime(169));    // 13^2
+        assertFalse(MillerRabin.isPrime(289));    // 17^2
+        assertFalse(MillerRabin.isPrime(961));    // 31^2
+        assertFalse(MillerRabin.isPrime(1681));   // 41^2
+        assertFalse(MillerRabin.isPrime(10201));  // 101^2
+    }
+
+    @Test public void testIsPrimeCarmichaelNumbers() {
+        // Fool Fermat's test but not Miller-Rabin with 12 witnesses
+        assertFalse(MillerRabin.isPrime(561));    // 3*11*17
+        assertFalse(MillerRabin.isPrime(1105));   // 5*13*17
+        assertFalse(MillerRabin.isPrime(1729));   // 7*13*19 (Hardy-Ramanujan)
+    }
+
+    @Test public void testIsPrimeMersennePrimes() {
+        assertTrue(MillerRabin.isPrime(3));            // 2^2 - 1
+        assertTrue(MillerRabin.isPrime(7));            // 2^3 - 1
+        assertTrue(MillerRabin.isPrime(31));           // 2^5 - 1
+        assertTrue(MillerRabin.isPrime(127));          // 2^7 - 1
+        assertTrue(MillerRabin.isPrime(8191));         // 2^13 - 1
+        assertTrue(MillerRabin.isPrime(131071));       // 2^17 - 1
+        assertTrue(MillerRabin.isPrime(524287));       // 2^19 - 1
+        assertTrue(MillerRabin.isPrime(2147483647L));  // 2^31 - 1
+    }
+
+    @Test public void testIsPrimeLargerValues() {
+        assertTrue(MillerRabin.isPrime(1009));
+        assertTrue(MillerRabin.isPrime(10007));
+        assertTrue(MillerRabin.isPrime(100003));
+        assertTrue(MillerRabin.isPrime(1000003));
+        assertTrue(MillerRabin.isPrime(1234568837L));
+        assertTrue(MillerRabin.isPrime(2071119119L));
+    }
+
+    // --- Comprehensive isPrime with OEIS pseudoprime lists ---
+
     private static final long[] SOME_PRIMES = {
             47, 61, 67, 79, 89, 97,
             179, 223, 317, 467, 569, 601, 727, 757, 787, 919, 929, 967,
@@ -84,34 +195,27 @@ public class MillerRabinTest {
             148301 * 593, 1171 * 1867, 7001 * 967, 544897 * 201, 1451 * 787, 727 * 757 * 787,
             565559 * 137, 239 * 613 * 349, 1069 * 157 * 71, 1985713 * 47, 276047 * 97, 45347263,
             45347769,
-            // https://oeis.org/A014233, some Miller-Rabin pseudoprimes
             2047, 1373653, 25326001,
-            // https://oeis.org/A001567, some Fermat pseudoprimes
             341, 561, 645, 1105, 1387, 1729, 1905, 2047, 2465, 2701, 2821, 3277, 4033, 4369, 4371,
             4681, 5461, 6601, 7957, 8321, 8481, 8911, 10261, 10585, 11305, 12801, 13741, 13747,
             13981, 14491, 15709, 15841, 16705, 18705, 18721, 19951, 23001, 23377, 25761, 29341,
             2615977, 26634301, 69741001, 1693101241,
-            // https://oeis.org/A006972, some Lucas-Carmichael numbers
             399, 935, 2015, 2915, 4991, 5719, 7055, 8855, 12719, 18095, 20705, 20999, 22847, 29315,
             31535, 46079, 51359, 60059, 63503, 67199, 73535, 76751, 80189, 81719, 88559, 90287,
             104663, 117215, 120581, 147455, 152279, 155819, 162687, 191807, 194327, 196559, 214199,
             9868715, 11521439, 43383167, 126806399, 632309759, 1454412959,
-            // https://oeis.org/A257750, some quasi-Carmichael numbers
             77, 143, 165, 187, 209, 221, 231, 247, 273, 299, 323, 357, 391, 399, 437, 493, 527,
             561, 589, 598, 713, 715, 899, 935, 943, 989, 1015, 1073, 1105, 1147, 1189, 1247, 1271,
             1295, 1333, 1517, 1537, 1547, 1591, 1595, 1705, 1729, 1739, 1763, 1829, 1885, 1886, 1927,
             63169, 198547, 500039, 3534541, 5971357, 9445027, 13989667,
-            // https://oeis.org/A001262, some strong pseudoprimes, base 2
             2047, 3277, 4033, 4681, 8321, 15841, 29341, 42799, 49141, 52633, 65281, 74665, 80581,
             85489, 88357, 90751, 104653, 130561, 196093, 220729, 233017, 252601, 253241, 256999,
             271951, 280601, 314821, 357761, 390937, 458989, 476971, 486737, 3605429, 21417991,
             77812153, 82870517, 180497633, 327398009, 705351583, 1027744453,
-            // https://oeis.org/A020229, some strong pseudoprimes, base 3
             121, 703, 1891, 3281, 8401, 8911, 10585, 12403, 16531, 18721, 19345, 23521, 31621, 44287,
             47197, 55969, 63139, 74593, 79003, 82513, 87913, 88573, 97567, 105163, 111361, 112141,
             148417, 152551, 182527, 188191, 211411, 218791, 221761, 226801, 2226043, 35728129,
             69444841, 117987841, 220534651, 378682537, 487890703, 1095485821,
-            // https://oeis.org/A020231, some strong pseudoprimes, base 5
             781, 1541, 5461, 5611, 7813, 13021, 14981, 15751, 24211, 25351, 29539, 38081, 40501,
             44801, 53971, 79381, 100651, 102311, 104721, 112141, 121463, 133141, 141361, 146611,
             195313, 211951, 216457, 222301, 251521, 289081, 290629, 298271, 315121, 1197761,
