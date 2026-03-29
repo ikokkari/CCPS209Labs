@@ -4,10 +4,9 @@ import java.util.zip.CRC32;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class PrimeGensTest {
-
-    // Expected prefixes of the infinite sequences of twin primes, safe primes and strong primes.
 
     private static final int[] TWIN_PRIMES_PREFIX = {
             3, 5, 11, 17, 29, 41, 59, 71, 101, 107, 137, 149, 179, 191, 197, 227, 239, 269, 281, 311
@@ -21,52 +20,55 @@ public class PrimeGensTest {
             11, 17, 29, 37, 41, 59, 67, 71, 79, 97, 101, 107, 127, 137, 149, 163, 179, 191, 197, 223, 227, 239, 251
     };
 
-    @Test public void testTwinPrimes() {
-        Iterator<Integer> it = new PrimeGens.TwinPrimes();
-        int[] result = new int[TWIN_PRIMES_PREFIX.length];
-        for(int i = 0; i < TWIN_PRIMES_PREFIX.length; i++) {
+    // Helper to extract a prefix from an iterator.
+    private int[] extractPrefix(Iterator<Integer> it, int n) {
+        int[] result = new int[n];
+        for (int i = 0; i < n; i++) {
+            assertTrue("hasNext() should return true for infinite iterator", it.hasNext());
             result[i] = it.next();
         }
-        assertArrayEquals(TWIN_PRIMES_PREFIX, result);
-
-        CRC32 check = new CRC32();
-        it = new PrimeGens.TwinPrimes();
-        for(int i = 0; i < 3500; i++) {
-            check.update(it.next());            
-        }
-        assertEquals(2941193748L, check.getValue());
+        return result;
     }
-    
-    @Test public void testSafePrimes() {
-        Iterator<Integer> it = new PrimeGens.SafePrimes();
-        int[] result = new int[SAFE_PRIMES_PREFIX.length];
-        for(int i = 0; i < SAFE_PRIMES_PREFIX.length; i++) {
-            result[i] = it.next();
-        }
-        assertArrayEquals(SAFE_PRIMES_PREFIX, result);
 
+    // Helper for the CRC mass test over an iterator.
+    private void massTest(Iterator<Integer> it, int n, long expected) {
         CRC32 check = new CRC32();
-        it = new PrimeGens.SafePrimes();
-        for(int i = 0; i < 3000; i++) {
-            check.update(it.next());            
+        for (int i = 0; i < n; i++) {
+            check.update(it.next());
         }
-        assertEquals(3874618335L, check.getValue());
+        assertEquals(expected, check.getValue());
     }
-    
-    @Test public void testStrongPrimes() {
-        Iterator<Integer> it = new PrimeGens.StrongPrimes();
-        int[] result = new int[STRONG_PRIMES_PREFIX.length];
-        for(int i = 0; i < STRONG_PRIMES_PREFIX.length; i++) {
-            result[i] = it.next();
-        }
-        assertArrayEquals(STRONG_PRIMES_PREFIX, result);
 
-        CRC32 check = new CRC32();
-        it = new PrimeGens.StrongPrimes();
-        for(int i = 0; i < 15_000; i++) {
-            check.update(it.next());            
-        }
-        assertEquals(494629196L, check.getValue());
+    // --- Twin Primes ---
+
+    @Test public void testTwinPrimesPrefix() {
+        assertArrayEquals(TWIN_PRIMES_PREFIX,
+                extractPrefix(new PrimeGens.TwinPrimes(), TWIN_PRIMES_PREFIX.length));
     }
-    
+
+    @Test public void testTwinPrimesMass() {
+        massTest(new PrimeGens.TwinPrimes(), 3500, 2941193748L);
+    }
+
+    // --- Safe Primes ---
+
+    @Test public void testSafePrimesPrefix() {
+        assertArrayEquals(SAFE_PRIMES_PREFIX,
+                extractPrefix(new PrimeGens.SafePrimes(), SAFE_PRIMES_PREFIX.length));
+    }
+
+    @Test public void testSafePrimesMass() {
+        massTest(new PrimeGens.SafePrimes(), 3000, 3874618335L);
+    }
+
+    // --- Strong Primes ---
+
+    @Test public void testStrongPrimesPrefix() {
+        assertArrayEquals(STRONG_PRIMES_PREFIX,
+                extractPrefix(new PrimeGens.StrongPrimes(), STRONG_PRIMES_PREFIX.length));
+    }
+
+    @Test public void testStrongPrimesMass() {
+        massTest(new PrimeGens.StrongPrimes(), 15_000, 494629196L);
+    }
 }
