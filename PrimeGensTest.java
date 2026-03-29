@@ -47,7 +47,7 @@ public class PrimeGensTest {
     }
 
     @Test public void testTwinPrimesMass() {
-        massTest(new PrimeGens.TwinPrimes(), 3500, 2941193748L);
+        massTest(new PrimeGens.TwinPrimes(), 100_000, 3945513195L);
     }
 
     // --- Safe Primes ---
@@ -58,7 +58,7 @@ public class PrimeGensTest {
     }
 
     @Test public void testSafePrimesMass() {
-        massTest(new PrimeGens.SafePrimes(), 3000, 3874618335L);
+        massTest(new PrimeGens.SafePrimes(), 100_000, 1010837015L);
     }
 
     // --- Strong Primes ---
@@ -69,6 +69,6 @@ public class PrimeGensTest {
     }
 
     @Test public void testStrongPrimesMass() {
-        massTest(new PrimeGens.StrongPrimes(), 15_000, 494629196L);
+        massTest(new PrimeGens.StrongPrimes(), 100_000, 2102980973L);
     }
 }
